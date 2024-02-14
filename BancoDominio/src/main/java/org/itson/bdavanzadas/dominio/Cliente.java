@@ -4,7 +4,6 @@
  */
 package org.itson.bdavanzadas.dominio;
 
-import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -18,14 +17,13 @@ public class Cliente {
     private String nombres;
     private String apellido_paterno;
     private String apellido_materno;
-    private Date nacimiento;
+    private String nacimiento;
     private int edad;
-    private int id_domicilio;
 
     public Cliente() {
     }
 
-    public Cliente(int id, String contrasenia, String usuario, String nombres, String apellido_paterno, String apellido_materno, Date nacimiento, int edad, int id_domicilio) {
+    public Cliente(int id, String contrasenia, String usuario, String nombres, String apellido_paterno, String apellido_materno, String nacimiento, int edad, int id_domicilio) {
         this.id = id;
         this.contrasenia = contrasenia;
         this.usuario = usuario;
@@ -34,10 +32,9 @@ public class Cliente {
         this.apellido_materno = apellido_materno;
         this.nacimiento = nacimiento;
         this.edad = edad;
-        this.id_domicilio = id_domicilio;
     }
 
-    public Cliente(String contrasenia, String usuario, String nombres, String apellido_paterno, String apellido_materno, Date nacimiento, int edad, int id_domicilio) {
+    public Cliente(String contrasenia, String usuario, String nombres, String apellido_paterno, String apellido_materno, String nacimiento, int edad, int id_domicilio) {
         this.contrasenia = contrasenia;
         this.usuario = usuario;
         this.nombres = nombres;
@@ -45,7 +42,6 @@ public class Cliente {
         this.apellido_materno = apellido_materno;
         this.nacimiento = nacimiento;
         this.edad = edad;
-        this.id_domicilio = id_domicilio;
     }
 
     public int getId() {
@@ -96,11 +92,11 @@ public class Cliente {
         this.apellido_materno = apellido_materno;
     }
 
-    public Date getNacimiento() {
+    public String getNacimiento() {
         return nacimiento;
     }
 
-    public void setNacimiento(Date nacimiento) {
+    public void setNacimiento(String nacimiento) {
         this.nacimiento = nacimiento;
     }
 
@@ -112,13 +108,8 @@ public class Cliente {
         this.edad = edad;
     }
 
-    public int getId_domicilio() {
-        return id_domicilio;
-    }
 
-    public void setId_domicilio(int id_domicilio) {
-        this.id_domicilio = id_domicilio;
-    }
+
 
     @Override
     public int hashCode() {
@@ -154,7 +145,6 @@ public class Cliente {
         sb.append(", apellido_materno=").append(apellido_materno);
         sb.append(", nacimiento=").append(nacimiento);
         sb.append(", edad=").append(edad);
-        sb.append(", id_domicilio=").append(id_domicilio);
         sb.append('}');
         return sb.toString();
     }
