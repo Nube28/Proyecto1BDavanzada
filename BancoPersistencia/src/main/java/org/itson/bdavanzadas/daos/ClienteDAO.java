@@ -80,7 +80,7 @@ public class ClienteDAO implements IClienteDAO {
     @Override
     public Cliente consultarCliente(String usuario, String contrasenia) throws PersistenciaException {
         String setenciaSQL = """
-                             SELECT usuario,contrasenia,nombres,apellido_paterno,apellido_materno,fecha_nacimiento,edad FROM Cliente WHERE usuario=? and contrasenia=?;
+                             SELECT id,usuario,contrasenia,nombres,apellido_paterno,apellido_materno,fecha_nacimiento,edad FROM Clientes WHERE usuario=? and contrasenia=?;
                              """;
 
         try (
@@ -90,8 +90,6 @@ public class ClienteDAO implements IClienteDAO {
             comando.setString(2, contrasenia);
             ResultSet resultado = comando.executeQuery();
 
-            int numeroRegistrosInsertados = comando.executeUpdate();
-            logger.log(Level.INFO, "Se agrearon {0}", numeroRegistrosInsertados);
             Cliente cliente = null;
             if(resultado.next()){
                 cliente= new Cliente(
