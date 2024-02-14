@@ -5,7 +5,6 @@ import java.util.Objects;
 
 public class Cuenta {
     private int id_cuenta;
-    private asda;
     private String fecha_apertura;
     private int numero;
     private float saldo;
