@@ -8,14 +8,14 @@ package org.itson.bdavanzadas.dominio;
  *
  * @author Berry
  */
-public class Transeferencia {
+public class Transferencia {
     private int id_transaccion;
     private int cuenta_destino;
 
-    public Transeferencia() {
+    public Transferencia() {
     }
 
-    public Transeferencia(int id_transaccion, int cuenta_destino) {
+    public Transferencia(int id_transaccion, int cuenta_destino) {
         this.id_transaccion = id_transaccion;
         this.cuenta_destino = cuenta_destino;
     }
@@ -54,7 +54,7 @@ public class Transeferencia {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Transeferencia other = (Transeferencia) obj;
+        final Transferencia other = (Transferencia) obj;
         return this.id_transaccion == other.id_transaccion;
     }
 

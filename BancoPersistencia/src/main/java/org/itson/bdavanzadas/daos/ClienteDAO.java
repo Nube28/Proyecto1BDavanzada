@@ -107,8 +107,8 @@ public class ClienteDAO implements IClienteDAO {
             
             return cliente;
         } catch (SQLException ex) {
-            logger.log(Level.INFO, "No se ha podido agregar el cliente", ex);
-            throw new PersistenciaException("No se pudo agregar el cliente");
+            logger.log(Level.INFO, "No se pudo obtener el usuario", ex);
+            throw new PersistenciaException("Contraseña o usuario incorrecta");
         }
     }
 
