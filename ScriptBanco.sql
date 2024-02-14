@@ -11,8 +11,6 @@ CREATE TABLE IF NOT EXISTS Clientes (
     edad INT,
     contrasenia INT(50),
     usuario INT unique ,
-    id_domicilio INT,
-    FOREIGN KEY (id_domicilio) REFERENCES Domicilios(id)
 );
 
 CREATE TABLE IF NOT EXISTS Domicilios (
