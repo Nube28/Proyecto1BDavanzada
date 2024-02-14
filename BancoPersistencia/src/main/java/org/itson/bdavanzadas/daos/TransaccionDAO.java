@@ -9,11 +9,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.itson.bdavanzadas.conexion.IConexion;
+import static org.itson.bdavanzadas.daos.ClienteDAO.logger;
 import static org.itson.bdavanzadas.daos.TransferenciaDAO.logger;
+import org.itson.bdavanzadas.dominio.Cliente;
 import org.itson.bdavanzadas.dominio.Transaccion;
 import org.itson.bdavanzadas.dominio.Transferencia;
 import org.itson.bdavanzadas.dtos.TransaccionNuevaDTO;
@@ -26,13 +30,13 @@ import org.itson.bdavanzadas.excepciones.PersistenciaException;
  */
 public class TransaccionDAO implements ITransaccionDAO {
 
-        final IConexion conexionDB;
+    final IConexion conexionDB;
     static final Logger logger = Logger.getLogger(TransaccionDAO.class.getName());
 
     public TransaccionDAO(IConexion conexion) {
         this.conexionDB = conexion;
     }
-    
+
     @Override
     public Transaccion agregar(TransaccionNuevaDTO transaccionNueva) throws PersistenciaException {
         String setenciaSQL = """
@@ -49,16 +53,44 @@ public class TransaccionDAO implements ITransaccionDAO {
             int numeroRegistrosInsertados = comando.executeUpdate();
             logger.log(Level.INFO, "Se agrearon {0}", numeroRegistrosInsertados);
             ResultSet idsGenerados = comando.getGeneratedKeys();
-            comando.
             idsGenerados.next();
             Transaccion transaccion = new Transaccion(
-                    idsGenerados.getLong(1),
-                    transaccionNueva.g,
-                    socioNuevo.getTelefono());
+                    idsGenerados.getInt(1),
+                    transaccionNueva.getMonto(),
+                    transaccionNueva.getTipo(),
+                    this.consultarFecha(idsGenerados.getInt(1)).getFecha());
             return transaccion;
         } catch (SQLException ex) {
             logger.log(Level.INFO, "No se ha podido agregar el socio", ex);
             throw new PersistenciaException("No se pudo agregar el socio");
+        }
+    }
+
+    @Override
+    public Transaccion consultarFecha(int id) throws PersistenciaException {
+        String setenciaSQL = """
+                             SELECT fecha FROM Cliente WHERE id=?;
+                             """;
+
+        try (
+                Connection conexion = this.conexionDB.obtenerConexion(); PreparedStatement comando = conexion.prepareStatement(
+                setenciaSQL);) {
+            comando.setLong(1, id);
+            ResultSet resultado = comando.executeQuery();
+
+            int numeroRegistrosInsertados = comando.executeUpdate();
+            Transaccion transaccion = null;
+            if (resultado.next()) {
+                transaccion = new Transaccion();
+                Date fechaSQL = resultado.getDate("fecha");
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String fechaString = dateFormat.format(fechaSQL);
+                transaccion.setFecha(fechaString);
+            }
+            return transaccion;
+        } catch (SQLException ex) {
+            logger.log(Level.INFO, "No se pudo obtener el usuario", ex);
+            throw new PersistenciaException("Contraseña o usuario incorrecta");
         }
     }
 

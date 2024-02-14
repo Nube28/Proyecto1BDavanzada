@@ -79,7 +79,7 @@ public class ClienteDAO implements IClienteDAO {
     @Override
     public Cliente consultarCliente(String usuario, String contrasenia) throws PersistenciaException {
         String setenciaSQL = """
-                             SELECT usuario,contrasenia,nombres,apellido_paterno,apellido_materno,fecha_nacimiento,edad FROM Cliente WHERE usuario=? and contrasenia=?/;
+                             SELECT usuario,contrasenia,nombres,apellido_paterno,apellido_materno,fecha_nacimiento,edad FROM Cliente WHERE usuario=? and contrasenia=?;
                              """;
 
         try (

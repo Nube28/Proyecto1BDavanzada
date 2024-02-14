@@ -13,7 +13,7 @@ import java.util.Date;
 public class TransaccionNuevaDTO {
      private float monto;
     private String tipo;
-    private Date fecha;
+    private String fecha;
     private int id_cuenta;
 
     public float getMonto() {
@@ -32,11 +32,11 @@ public class TransaccionNuevaDTO {
         this.tipo = tipo;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 

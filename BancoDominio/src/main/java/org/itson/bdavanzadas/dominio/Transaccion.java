@@ -15,15 +15,13 @@ public class Transaccion {
     private int id;
     private float monto;
     private String tipo;
-    private Date fecha;
-    private int id_cuenta;
+    private String fecha;
 
-    public Transaccion(int id, float monto, String tipo, Date fecha, int id_cuenta) {
+    public Transaccion(int id, float monto, String tipo, String fecha) {
         this.id = id;
         this.monto = monto;
         this.tipo = tipo;
         this.fecha = fecha;
-        this.id_cuenta = id_cuenta;
     }
 
     public Transaccion() {
@@ -31,11 +29,10 @@ public class Transaccion {
 
     
 
-    public Transaccion(float monto, String tipo, Date fecha, int id_cuenta) {
+    public Transaccion(float monto, String tipo, String fecha) {
         this.monto = monto;
         this.tipo = tipo;
         this.fecha = fecha;
-        this.id_cuenta = id_cuenta;
     }
 
 
@@ -63,30 +60,18 @@ public class Transaccion {
         this.tipo = tipo;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
     
-    public int getId_cuenta() {
-        return id_cuenta;
-    }
-
-    public void setId_cuenta(int id_cuenta) {
-        this.id_cuenta = id_cuenta;
-    }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 97 * hash + this.id;
-        hash = 97 * hash + Float.floatToIntBits(this.monto);
-        hash = 97 * hash + Objects.hashCode(this.tipo);
-        hash = 97 * hash + Objects.hashCode(this.fecha);
-        hash = 97 * hash + this.id_cuenta;
+        int hash = 5;
         return hash;
     }
 
@@ -102,20 +87,10 @@ public class Transaccion {
             return false;
         }
         final Transaccion other = (Transaccion) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        if (Float.floatToIntBits(this.monto) != Float.floatToIntBits(other.monto)) {
-            return false;
-        }
-        if (this.id_cuenta != other.id_cuenta) {
-            return false;
-        }
-        if (!Objects.equals(this.tipo, other.tipo)) {
-            return false;
-        }
-        return Objects.equals(this.fecha, other.fecha);
+        return this.id == other.id;
     }
+
+ 
 
     @Override
     public String toString() {
@@ -125,7 +100,6 @@ public class Transaccion {
         sb.append(", monto=").append(monto);
         sb.append(", tipo=").append(tipo);
         sb.append(", fecha=").append(fecha);
-        sb.append(", id_cuenta=").append(id_cuenta);
         sb.append('}');
         return sb.toString();
     }

@@ -14,7 +14,10 @@ import org.itson.bdavanzadas.excepciones.PersistenciaException;
  * @author af_da
  */
 public interface ITransaccionDAO {
-        Transaccion agregar(TransaccionNuevaDTO TransaccionNueva) throws PersistenciaException;
+
+    Transaccion agregar(TransaccionNuevaDTO TransaccionNueva) throws PersistenciaException;
+
+    Transaccion consultarFecha(int id) throws PersistenciaException;
 
     List<Transaccion> consultar() throws PersistenciaException;
 }
