@@ -28,7 +28,9 @@ CREATE TABLE IF NOT EXISTS Transacciones (
     id INT AUTO_INCREMENT PRIMARY KEY,
     monto FLOAT,
     tipo VARCHAR(20),
-    fecha DATETIME
+    fecha DATETIME,
+    id_cuenta INT,
+    FOREIGN KEY (id_cuenta) REFERENCES Cuentas(id)
 );
 
 CREATE TABLE IF NOT EXISTS Transferencia (
@@ -50,9 +52,7 @@ CREATE TABLE IF NOT EXISTS Cuentas (
     fecha_apertura DATE,
     numero INT UNIQUE,
     saldo FLOAT,
-    id_transaccion INT,
     id_cliente INT,
-    FOREIGN KEY (id_transaccion) REFERENCES Transacciones(id),
     FOREIGN KEY (id_cliente) REFERENCES Clientes(id)
 );
 
