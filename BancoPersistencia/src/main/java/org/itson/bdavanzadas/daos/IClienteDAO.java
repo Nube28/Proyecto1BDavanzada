@@ -17,7 +17,8 @@ import org.itson.bdavanzadas.excepciones.PersistenciaException;
 public interface IClienteDAO {
     Cliente agregar(ClienteNuevoDTO clienteNuevo) throws PersistenciaException;
     List<ClienteDAO> consultar() throws PersistenciaException;
-    Cliente consultarSocio(int id)throws PersistenciaException;
+    Cliente consultarCliente(int id)throws PersistenciaException;
+    Cliente consultarCliente(String usuario,String contrasenia) throws PersistenciaException;
     Cliente actualizar(ClienteActualizadoDTO socioActualizado) throws PersistenciaException;
     public Cliente eliminar(int id) throws PersistenciaException;
 }

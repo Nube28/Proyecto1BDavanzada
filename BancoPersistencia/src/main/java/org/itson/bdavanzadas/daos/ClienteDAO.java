@@ -72,8 +72,44 @@ public class ClienteDAO implements IClienteDAO {
     }
 
     @Override
-    public Cliente consultarSocio(int id) throws PersistenciaException {
+    public Cliente consultarCliente(int id) throws PersistenciaException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public Cliente consultarCliente(String usuario, String contrasenia) throws PersistenciaException {
+        String setenciaSQL = """
+                             SELECT usuario,contrasenia,nombres,apellido_paterno,apellido_materno,fecha_nacimiento,edad FROM Cliente WHERE usuario=? and contrasenia=?/;
+                             """;
+
+        try (
+                Connection conexion = this.conexionDB.obtenerConexion(); PreparedStatement comando = conexion.prepareStatement(
+                setenciaSQL);) {
+            comando.setString(1, usuario);
+            comando.setString(2, contrasenia);
+            ResultSet resultado = comando.executeQuery();
+
+            int numeroRegistrosInsertados = comando.executeUpdate();
+            logger.log(Level.INFO, "Se agrearon {0}", numeroRegistrosInsertados);
+            Cliente cliente = null;
+            if(resultado.next()){
+                cliente= new Cliente(
+                    resultado.getInt("id"),
+                    resultado.getString("contrasenia"),
+                    resultado.getString("usuario"),
+                    resultado.getString("nombres"),
+                    resultado.getString("apellido_paterno"),
+                    resultado.getString("apellido_materno"),
+                    resultado.getString("fecha_nacimiento"),
+                    resultado.getInt("edad")
+            );
+            }
+            
+            return cliente;
+        } catch (SQLException ex) {
+            logger.log(Level.INFO, "No se ha podido agregar el cliente", ex);
+            throw new PersistenciaException("No se pudo agregar el cliente");
+        }
     }
 
     @Override
