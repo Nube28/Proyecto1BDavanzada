@@ -8,22 +8,19 @@ public class Cuenta {
     private Date fecha_apertura;
     private int numero;
     private float saldo;
-    private int id_transaccion;
     private int id_cliente;
 
-    public Cuenta(int id_cuenta, Date fecha_apertura, int numero, float saldo, int id_transaccion, int id_cliente) {
+    public Cuenta(int id_cuenta, Date fecha_apertura, int numero, float saldo, int id_cliente) {
         this.id_cuenta = id_cuenta;
         this.fecha_apertura = fecha_apertura;
         this.numero = numero;
         this.saldo = saldo;
-        this.id_transaccion = id_transaccion;
         this.id_cliente = id_cliente;
     }
 
     public Cuenta( int numero, float saldo, int id_transaccion, int id_cliente) {
         this.numero = numero;
         this.saldo = saldo;
-        this.id_transaccion = id_transaccion;
         this.id_cliente = id_cliente;
     }
 
@@ -62,14 +59,6 @@ public class Cuenta {
         this.saldo = saldo;
     }
 
-    public int getId_transaccion() {
-        return id_transaccion;
-    }
-
-    public void setId_transaccion(int id_transaccion) {
-        this.id_transaccion = id_transaccion;
-    }
-
     public int getId_cliente() {
         return id_cliente;
     }
@@ -85,7 +74,6 @@ public class Cuenta {
         hash = 67 * hash + Objects.hashCode(this.fecha_apertura);
         hash = 67 * hash + this.numero;
         hash = 67 * hash + Float.floatToIntBits(this.saldo);
-        hash = 67 * hash + this.id_transaccion;
         hash = 67 * hash + this.id_cliente;
         return hash;
     }
@@ -111,9 +99,6 @@ public class Cuenta {
         if (Float.floatToIntBits(this.saldo) != Float.floatToIntBits(other.saldo)) {
             return false;
         }
-        if (this.id_transaccion != other.id_transaccion) {
-            return false;
-        }
         if (this.id_cliente != other.id_cliente) {
             return false;
         }
@@ -128,7 +113,6 @@ public class Cuenta {
         sb.append(", fecha_apertura=").append(fecha_apertura);
         sb.append(", numero=").append(numero);
         sb.append(", saldo=").append(saldo);
-        sb.append(", id_transaccion=").append(id_transaccion);
         sb.append(", id_cliente=").append(id_cliente);
         sb.append('}');
         return sb.toString();

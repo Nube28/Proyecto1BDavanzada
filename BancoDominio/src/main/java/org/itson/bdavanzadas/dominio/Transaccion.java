@@ -5,6 +5,7 @@
 package org.itson.bdavanzadas.dominio;
 
 import java.util.Date;
+import java.util.Objects;
 
 /**
  *
@@ -15,22 +16,28 @@ public class Transaccion {
     private float monto;
     private String tipo;
     private Date fecha;
+    private int id_cuenta;
 
-    public Transaccion() {
-    }
-
-    public Transaccion(int id, float monto, String tipo, Date fecha) {
+    public Transaccion(int id, float monto, String tipo, Date fecha, int id_cuenta) {
         this.id = id;
         this.monto = monto;
         this.tipo = tipo;
         this.fecha = fecha;
+        this.id_cuenta = id_cuenta;
     }
 
-    public Transaccion(float monto, String tipo, Date fecha) {
+    public Transaccion() {
+    }
+
+    
+
+    public Transaccion(float monto, String tipo, Date fecha, int id_cuenta) {
         this.monto = monto;
         this.tipo = tipo;
         this.fecha = fecha;
+        this.id_cuenta = id_cuenta;
     }
+
 
     public int getId() {
         return id;
@@ -63,11 +70,23 @@ public class Transaccion {
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
+    
+    public int getId_cuenta() {
+        return id_cuenta;
+    }
+
+    public void setId_cuenta(int id_cuenta) {
+        this.id_cuenta = id_cuenta;
+    }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 41 * hash + this.id;
+        hash = 97 * hash + this.id;
+        hash = 97 * hash + Float.floatToIntBits(this.monto);
+        hash = 97 * hash + Objects.hashCode(this.tipo);
+        hash = 97 * hash + Objects.hashCode(this.fecha);
+        hash = 97 * hash + this.id_cuenta;
         return hash;
     }
 
@@ -83,7 +102,19 @@ public class Transaccion {
             return false;
         }
         final Transaccion other = (Transaccion) obj;
-        return this.id == other.id;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (Float.floatToIntBits(this.monto) != Float.floatToIntBits(other.monto)) {
+            return false;
+        }
+        if (this.id_cuenta != other.id_cuenta) {
+            return false;
+        }
+        if (!Objects.equals(this.tipo, other.tipo)) {
+            return false;
+        }
+        return Objects.equals(this.fecha, other.fecha);
     }
 
     @Override
@@ -94,9 +125,12 @@ public class Transaccion {
         sb.append(", monto=").append(monto);
         sb.append(", tipo=").append(tipo);
         sb.append(", fecha=").append(fecha);
+        sb.append(", id_cuenta=").append(id_cuenta);
         sb.append('}');
         return sb.toString();
     }
+
+    
     
     
 }
