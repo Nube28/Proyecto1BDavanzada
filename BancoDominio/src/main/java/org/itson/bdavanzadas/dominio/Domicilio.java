@@ -8,6 +8,6 @@ package org.itson.bdavanzadas.dominio;
  *
  * @author Berry
  */
-public class Cliente {
+public class Domicilio {
     
 }
