@@ -5,6 +5,7 @@
 package org.itson.bdavanzadas.daos;
 
 import java.util.List;
+import org.itson.bdavanzadas.dominio.Cuenta;
 import org.itson.bdavanzadas.dtos.CuentaNuevaDTO;
 import org.itson.bdavanzadas.excepciones.PersistenciaException;
 
@@ -15,6 +16,7 @@ import org.itson.bdavanzadas.excepciones.PersistenciaException;
 public interface ICuentaDAO {
     Cuenta agregar(CuentaNuevaDTO socioNuevo) throws PersistenciaException;
     List<Cuenta> consultar() throws PersistenciaException;
+    Cuenta consultarCuenta(int Id) throws PersistenciaException;
     void eliminar(String ID) throws PersistenciaException;
     Cuenta actualizar(String ID, CuentaNuevaDTO cuentaNueva) throws PersistenciaException;
 }

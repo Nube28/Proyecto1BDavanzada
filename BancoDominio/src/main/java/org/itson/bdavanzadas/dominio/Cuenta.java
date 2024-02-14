@@ -20,8 +20,7 @@ public class Cuenta {
         this.id_cliente = id_cliente;
     }
 
-    public Cuenta(Date fecha_apertura, int numero, float saldo, int id_transaccion, int id_cliente) {
-        this.fecha_apertura = fecha_apertura;
+    public Cuenta( int numero, float saldo, int id_transaccion, int id_cliente) {
         this.numero = numero;
         this.saldo = saldo;
         this.id_transaccion = id_transaccion;

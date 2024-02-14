@@ -1,26 +1,60 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package org.itson.bdavanzadas.daos;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.itson.bdavanzadas.conexion.IConexion;
+import static org.itson.bdavanzadas.daos.ClienteDAO.logger;
+import org.itson.bdavanzadas.dominio.Cliente;
+import org.itson.bdavanzadas.dominio.Cuenta;
 import org.itson.bdavanzadas.dtos.CuentaNuevaDTO;
 import org.itson.bdavanzadas.excepciones.PersistenciaException;
 
-/**
- *
- * @author Berry
- */
 public class CuentaDAO implements ICuentaDAO{
+    
+    final IConexion conexionDB;
+    static final Logger logger = Logger.getLogger(ClienteDAO.class.getName());
 
+    public CuentaDAO(IConexion conexion) {
+        this.conexionDB = conexion;
+    }
+    
     @Override
-    public Object agregar(CuentaNuevaDTO socioNuevo) throws PersistenciaException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Cuenta agregar(CuentaNuevaDTO cuentaNueva) throws PersistenciaException {
+        String setenciaSQL = 
+            """
+                INSERT INTO cuenta(numero, saldo, id_cliente)
+                VALUES(?, ?, ?);
+            """;
+        try (Connection conexion = this.conexionDB.obtenerConexion(); PreparedStatement comando = conexion.prepareStatement( setenciaSQL,Statement.RETURN_GENERATED_KEYS);){
+            comando.setInt(1, cuentaNueva.getNumero());
+            comando.setInt(2, cuentaNueva.getSaldo());
+            comando.setInt(3, cuentaNueva.getId_cliente());
+            int numeroRegistrosInsertados = comando.executeUpdate();
+            logger.log(Level.INFO, "Se agrearon {0}", numeroRegistrosInsertados);
+            ResultSet idsGenerados = comando.getGeneratedKeys();
+            idsGenerados.next();
+            Cuenta cuenta = new Cuenta(
+                    idsGenerados.getInt(1),
+                    cuentaNueva.getNumero(),
+                    cuentaNueva.getSaldo(),
+                    cuentaNueva.getId_cliente()
+            );
+            return cuenta;
+        } catch (SQLException ex) {
+            logger.log(Level.INFO, "No se ha podido agregar la cuenta", ex);
+            throw new PersistenciaException("No se pudo agregar la cuenta");
+        }
     }
 
     @Override
-    public List<Object> consultar() throws PersistenciaException {
+    public List<Cuenta> consultar() throws PersistenciaException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -30,8 +64,14 @@ public class CuentaDAO implements ICuentaDAO{
     }
 
     @Override
-    public Object actualizar(String ID, CuentaNuevaDTO cuentaNueva) throws PersistenciaException {
+    public Cuenta actualizar(String ID, CuentaNuevaDTO cuentaNueva) throws PersistenciaException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    @Override
+    public Cuenta consultarCuenta(int Id) throws PersistenciaException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     
 }
