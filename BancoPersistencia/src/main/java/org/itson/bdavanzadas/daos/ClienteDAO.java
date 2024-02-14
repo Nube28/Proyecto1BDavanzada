@@ -49,7 +49,14 @@ public class ClienteDAO implements IClienteDAO {
             ResultSet idsGenerados = comando.getGeneratedKeys();
             idsGenerados.next();
             Cliente cliente = new Cliente(
-                    idsGenerados.getLong(1),
+                    idsGenerados.getInt(1),
+                    clienteNuevo.getContrasenia(),
+                    clienteNuevo.getUsuario(),
+                    clienteNuevo.getNombres(),
+                    clienteNuevo.getApellido_paterno(),
+                    clienteNuevo.getApellido_materno(),
+                    clienteNuevo.getNacimiento(),
+                    clienteNuevo.getEdad()
             );
             return cliente;
         } catch (SQLException ex) {

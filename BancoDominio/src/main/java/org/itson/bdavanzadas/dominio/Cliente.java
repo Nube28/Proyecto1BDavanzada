@@ -23,7 +23,7 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(int id, String contrasenia, String usuario, String nombres, String apellido_paterno, String apellido_materno, String nacimiento, int edad, int id_domicilio) {
+    public Cliente(int id, String contrasenia, String usuario, String nombres, String apellido_paterno, String apellido_materno, String nacimiento, int edad) {
         this.id = id;
         this.contrasenia = contrasenia;
         this.usuario = usuario;
@@ -34,7 +34,7 @@ public class Cliente {
         this.edad = edad;
     }
 
-    public Cliente(String contrasenia, String usuario, String nombres, String apellido_paterno, String apellido_materno, String nacimiento, int edad, int id_domicilio) {
+    public Cliente(String contrasenia, String usuario, String nombres, String apellido_paterno, String apellido_materno, String nacimiento, int edad) {
         this.contrasenia = contrasenia;
         this.usuario = usuario;
         this.nombres = nombres;
@@ -107,9 +107,6 @@ public class Cliente {
     public void setEdad(int edad) {
         this.edad = edad;
     }
-
-
-
 
     @Override
     public int hashCode() {
