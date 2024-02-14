@@ -5,6 +5,7 @@
 package org.itson.bdavanzadas.daos;
 
 import java.util.List;
+import org.itson.bdavanzadas.dominio.Cliente;
 import org.itson.bdavanzadas.dtos.ClienteActualizadoDTO;
 import org.itson.bdavanzadas.dtos.ClienteNuevoDTO;
 import org.itson.bdavanzadas.excepciones.PersistenciaException;
@@ -14,9 +15,9 @@ import org.itson.bdavanzadas.excepciones.PersistenciaException;
  * @author af_da
  */
 public interface IClienteDAO {
-    ClienteDAO agregar(ClienteNuevoDTO clienteNuevo) throws PersistenciaException;
+    Cliente agregar(ClienteNuevoDTO clienteNuevo) throws PersistenciaException;
     List<ClienteDAO> consultar() throws PersistenciaException;
-    ClienteDAO consultarSocio(Long id)throws PersistenciaException;
-    ClienteDAO actualizar(ClienteActualizadoDTO socioActualizado) throws PersistenciaException;
-    public ClienteDAO eliminar(Long id) throws PersistenciaException;
+    Cliente consultarSocio(int id)throws PersistenciaException;
+    Cliente actualizar(ClienteActualizadoDTO socioActualizado) throws PersistenciaException;
+    public Cliente eliminar(int id) throws PersistenciaException;
 }
