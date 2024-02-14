@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -54,6 +55,37 @@ public class CuentaDAO implements ICuentaDAO{
     }
     
     @Override
+    public List<Cuenta> consultar(int Id_cuenta) throws PersistenciaException {
+        String setenciaSQL = 
+            """
+                SELECT * FROM cuentas
+                WHERE id_cliente = "?";
+            """;
+        List<Cuenta> listaCuenta = new LinkedList<>();
+        
+        try(Connection conexion = this.conexionDB.obtenerConexion(); PreparedStatement comando = conexion.prepareStatement( setenciaSQL,Statement.RETURN_GENERATED_KEYS);){
+            comando.setInt(1, Id_cuenta);
+            ResultSet resultados = comando.executeQuery();
+            
+             while (resultados.next()) {
+                Cuenta cuenta = new Cuenta(
+                    resultados.getInt("id"),
+                    resultados.getString("fecha_apertura"),
+                    resultados.getInt("numero"),
+                    resultados.getFloat("saldo"),
+                    resultados.getInt("id_cliente")
+                );
+                listaCuenta.add(cuenta);
+            }
+            logger.log(Level.INFO, "Se consulataros {0} socios", listaCuenta.size());
+            return listaCuenta;
+        }catch (SQLException ex) {
+            logger.log(Level.INFO, "No se ha podido encontrar las cuentas la cuenta", ex);
+            throw new PersistenciaException("No se ha podido encontrar las cuentas la cuenta");
+        }
+    }
+    
+    @Override
     public Cuenta consultarCuenta(int Id_cuenta) throws PersistenciaException {
         String setenciaSQL = 
             """
@@ -80,8 +112,8 @@ public class CuentaDAO implements ICuentaDAO{
             
             return cuenta;
         }catch (SQLException ex) {
-            logger.log(Level.INFO, "No se ha podido agregar la cuenta", ex);
-            throw new PersistenciaException("No se pudo agregar la cuenta");
+            logger.log(Level.INFO, "No se ha podido encontrar la cuenta", ex);
+            throw new PersistenciaException("No se ha podido encontrar la cuenta");
         }
     }
     
@@ -92,11 +124,6 @@ public class CuentaDAO implements ICuentaDAO{
 
     @Override
     public Cuenta actualizar(String ID, CuentaNuevaDTO cuentaNueva) throws PersistenciaException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public List<Cuenta> consultar() throws PersistenciaException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     

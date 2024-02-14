@@ -15,8 +15,8 @@ import org.itson.bdavanzadas.excepciones.PersistenciaException;
  */
 public interface ICuentaDAO {
     Cuenta agregar(CuentaNuevaDTO socioNuevo) throws PersistenciaException;
-    List<Cuenta> consultar() throws PersistenciaException;
-    Cuenta consultarCuenta(int Id) throws PersistenciaException;
+    List<Cuenta> consultar(int Id_cuenta) throws PersistenciaException;
+    Cuenta consultarCuenta(int Id_cuenta) throws PersistenciaException;
     void eliminar(String ID) throws PersistenciaException;
     Cuenta actualizar(String ID, CuentaNuevaDTO cuentaNueva) throws PersistenciaException;
 }
