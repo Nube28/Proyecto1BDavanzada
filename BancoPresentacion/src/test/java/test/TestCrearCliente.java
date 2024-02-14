@@ -25,7 +25,7 @@ public class TestCrearCliente {
     IClienteDAO clienteDAO = new ClienteDAO(conexion);
     ClienteNuevoDTO clienteNuevo = new ClienteNuevoDTO();
     Cliente cliente = new Cliente("123", "123", "Juan", "Perez", "Gomez", "1990-05-15", 32);
-    //clienteNuevo 
+    
 //        try {
             //
             //            Socio socioAgregado = sociosDAO.agregar(socioNuevo);
