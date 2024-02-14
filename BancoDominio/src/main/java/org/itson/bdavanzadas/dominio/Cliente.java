@@ -22,6 +22,9 @@ public class Cliente {
     private int edad;
     private int id_domicilio;
 
+    public Cliente() {
+    }
+
     public Cliente(int id, String contrasenia, String usuario, String nombres, String apellido_paterno, String apellido_materno, Date nacimiento, int edad, int id_domicilio) {
         this.id = id;
         this.contrasenia = contrasenia;
