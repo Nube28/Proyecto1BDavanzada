@@ -30,7 +30,7 @@ public class CuentaDAO implements ICuentaDAO{
     public Cuenta agregar(CuentaNuevaDTO cuentaNueva) throws PersistenciaException {
         String setenciaSQL = 
             """
-                INSERT INTO cuenta(numero, saldo, id_cliente)
+                INSERT INTO cuentas(numero, saldo, id_cliente)
                 VALUES(?, ?, ?);
             """;
         try (Connection conexion = this.conexionDB.obtenerConexion(); PreparedStatement comando = conexion.prepareStatement( setenciaSQL,Statement.RETURN_GENERATED_KEYS);){

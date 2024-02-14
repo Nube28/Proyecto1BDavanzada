@@ -18,7 +18,7 @@ public class Cuenta {
         this.id_cliente = id_cliente;
     }
 
-    public Cuenta( int numero, float saldo, int id_transaccion, int id_cliente) {
+    public Cuenta( int numero, float saldo, int id_cliente) {
         this.numero = numero;
         this.saldo = saldo;
         this.id_cliente = id_cliente;
@@ -69,12 +69,8 @@ public class Cuenta {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 67 * hash + this.id_cuenta;
-        hash = 67 * hash + Objects.hashCode(this.fecha_apertura);
-        hash = 67 * hash + this.numero;
-        hash = 67 * hash + Float.floatToIntBits(this.saldo);
-        hash = 67 * hash + this.id_cliente;
+        int hash = 3;
+        hash = 97 * hash + this.id_cuenta;
         return hash;
     }
 
@@ -90,20 +86,10 @@ public class Cuenta {
             return false;
         }
         final Cuenta other = (Cuenta) obj;
-        if (this.id_cuenta != other.id_cuenta) {
-            return false;
-        }
-        if (this.numero != other.numero) {
-            return false;
-        }
-        if (Float.floatToIntBits(this.saldo) != Float.floatToIntBits(other.saldo)) {
-            return false;
-        }
-        if (this.id_cliente != other.id_cliente) {
-            return false;
-        }
-        return Objects.equals(this.fecha_apertura, other.fecha_apertura);
+        return this.id_cuenta == other.id_cuenta;
     }
+
+
 
     @Override
     public String toString() {
