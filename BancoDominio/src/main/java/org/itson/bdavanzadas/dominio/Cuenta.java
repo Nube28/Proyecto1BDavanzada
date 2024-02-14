@@ -5,12 +5,12 @@ import java.util.Objects;
 
 public class Cuenta {
     private int id_cuenta;
-    private Date fecha_apertura;
+    private String fecha_apertura;
     private int numero;
     private float saldo;
     private int id_cliente;
 
-    public Cuenta(int id_cuenta, Date fecha_apertura, int numero, float saldo, int id_cliente) {
+    public Cuenta(int id_cuenta, String fecha_apertura, int numero, float saldo, int id_cliente) {
         this.id_cuenta = id_cuenta;
         this.fecha_apertura = fecha_apertura;
         this.numero = numero;
@@ -35,11 +35,11 @@ public class Cuenta {
         this.id_cuenta = id_cuenta;
     }
 
-    public Date getFecha_apertura() {
+    public String getFecha_apertura() {
         return fecha_apertura;
     }
 
-    public void setFecha_apertura(Date fecha_apertura) {
+    public void setFecha_apertura(String fecha_apertura) {
         this.fecha_apertura = fecha_apertura;
     }
 
