@@ -54,11 +54,13 @@ public class TransaccionDAO implements ITransaccionDAO {
             logger.log(Level.INFO, "Se agrearon {0}", numeroRegistrosInsertados);
             ResultSet idsGenerados = comando.getGeneratedKeys();
             idsGenerados.next();
+            int idGenerada = idsGenerados.getInt(1);
             Transaccion transaccion = new Transaccion(
-                    idsGenerados.getInt(1),
+                    idGenerada,
                     transaccionNueva.getMonto(),
                     transaccionNueva.getTipo(),
-                    this.consultarFecha(idsGenerados.getInt(1)).getFecha());
+                    this.consultarFecha(idGenerada).getFecha()
+            );
             return transaccion;
         } catch (SQLException ex) {
             logger.log(Level.INFO, "No se ha podido agregar el socio", ex);
