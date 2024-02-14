@@ -15,7 +15,12 @@
     <dependencies>
         <dependency>
             <groupId>org.itson.bdavanzadas</groupId>
-            <artifactId>ClubNauticoPersistencia</artifactId>
+            <artifactId>BancoDominio</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.itson.bdavanzadas</groupId>
+            <artifactId>BancoPersistencia</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>

@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS Clientes (
     fecha_nacimiento DATE,
     edad INT,
     contrasenia INT(50),
-    usuario INT unique ,
+    usuario INT unique
 );
 
 CREATE TABLE IF NOT EXISTS Domicilios (
@@ -22,6 +22,15 @@ CREATE TABLE IF NOT EXISTS Domicilios (
     colonia VARCHAR(100),
     id_cliente int,
     FOREIGN KEY (id_cliente) REFERENCES Domicilios(id)
+);
+
+CREATE TABLE IF NOT EXISTS Cuentas (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    fecha_apertura DATE,
+    numero INT UNIQUE,
+    saldo FLOAT,
+    id_cliente INT,
+    FOREIGN KEY (id_cliente) REFERENCES Clientes(id)
 );
 
 CREATE TABLE IF NOT EXISTS Transacciones (
@@ -47,14 +56,7 @@ CREATE TABLE IF NOT EXISTS SinCuenta (
     contrasenia CHAR(8),
     FOREIGN KEY (id_transaccion) REFERENCES Transacciones(id)
 );
-CREATE TABLE IF NOT EXISTS Cuentas (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    fecha_apertura DATE,
-    numero INT UNIQUE,
-    saldo FLOAT,
-    id_cliente INT,
-    FOREIGN KEY (id_cliente) REFERENCES Clientes(id)
-);
+
 
 
 
