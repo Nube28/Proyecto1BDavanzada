@@ -12,4 +12,11 @@
         <exec.mainClass>com.mycompany.bancoprestacion.BancoPrestacion</exec.mainClass>
     </properties>
     <name>BancoPresentacion</name>
+    <dependencies>
+        <dependency>
+            <groupId>org.itson.bdavanzadas</groupId>
+            <artifactId>ClubNauticoPersistencia</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 </project>
