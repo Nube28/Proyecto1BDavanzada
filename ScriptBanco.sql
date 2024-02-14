@@ -33,8 +33,9 @@ CREATE TABLE IF NOT EXISTS Transacciones (
 
 CREATE TABLE IF NOT EXISTS Transferencia (
     id_transaccion INT,
-    cuenta_destino INT,
-    FOREIGN KEY (id_transaccion) REFERENCES Transacciones(id)
+    id_cuenta_destino INT,
+    FOREIGN KEY (id_transaccion) REFERENCES Transacciones(id),
+    FOREIGN KEY (id_cuenta_destino) REFERENCES Cuentas(id)
 );
 
 CREATE TABLE IF NOT EXISTS SinCuenta (
