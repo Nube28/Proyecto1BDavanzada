@@ -278,20 +278,21 @@ public class Tarjeta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        // TODO add your handling code here:
+        MenuPrincipal mp = new MenuPrincipal(cliente,cuentaDAO,conexion);
+        mp.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnCancelarCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarCuentaActionPerformed
         //MenuPrincipal mp = new MenuPrincipal(cliente);
         //mp.setVisible(true);
-        this.dispose();
+        //this.dispose();
     }//GEN-LAST:event_btnCancelarCuentaActionPerformed
 
     private void btnTransferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransferenciaActionPerformed
-
-        //FormTransferencia tr = new FormTransferencia(cliente, cuenta, cuentaDAO, conexion);
-        //tr.setVisible(true);
-        //this.dispose();
+        FormTransferencia tr = new FormTransferencia(cliente, cuenta, cuentaDAO, conexion);
+        tr.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnTransferenciaActionPerformed
 
     private void btnRetirarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetirarActionPerformed
