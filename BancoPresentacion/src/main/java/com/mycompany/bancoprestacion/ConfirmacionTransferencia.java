@@ -6,6 +6,7 @@ package com.mycompany.bancoprestacion;
 
 import org.itson.bdavanzadas.dominio.Cliente;
 import org.itson.bdavanzadas.dominio.Cuenta;
+import org.itson.bdavanzadas.dominio.Transaccion;
 
 /**
  *
@@ -16,12 +17,15 @@ public class ConfirmacionTransferencia extends javax.swing.JFrame {
     /**
      * Creates new form Confirmacion
      */
-    public ConfirmacionTransferencia(Cliente cliente, Cuenta cuenta) {
+    public ConfirmacionTransferencia(Cliente cliente, Cuenta cuenta, Transaccion transacccion, String cuentaDestino) {
         initComponents();
         String saludo = txtSaludo.getText().replaceAll("Usuario", cliente.getNombres());
         txtSaludo.setText(saludo);
-        
-        txtIDeTarjeta.setText("Tarjeta "+ cuenta.getNumero());
+
+        txtIDeTarjeta.setText("Tarjeta " + cuenta.getNumero());
+        txtCantidad.setText("Cantidad: " + transacccion.getMonto());
+        txtNumeroCuentaDestino.setText("Numero de cuenta: " + cuentaDestino);
+        txtFechaHora.setText("Fecha y Hora: " + transacccion.getFecha());
     }
 
     /**
@@ -182,7 +186,7 @@ public class ConfirmacionTransferencia extends javax.swing.JFrame {
                 .addComponent(txtIDeTarjeta)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addComponent(btnCrearTarjetas)
                 .addGap(14, 14, 14))
         );
@@ -212,7 +216,7 @@ public class ConfirmacionTransferencia extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panAzulObscuro, javax.swing.GroupLayout.DEFAULT_SIZE, 413, Short.MAX_VALUE)
+            .addComponent(panAzulObscuro, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
         );
 
         pack();

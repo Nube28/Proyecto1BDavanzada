@@ -73,7 +73,7 @@ public class FormTransferencia extends javax.swing.JFrame {
         txtCantidad = new javax.swing.JLabel();
         tfiCantidad = new javax.swing.JTextField();
         tfiNumCuenDestino = new javax.swing.JTextField();
-        btnCrearTarjetas = new javax.swing.JButton();
+        btnTransferirTarjetas = new javax.swing.JButton();
         btnVolver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -164,12 +164,12 @@ public class FormTransferencia extends javax.swing.JFrame {
                 .addContainerGap(34, Short.MAX_VALUE))
         );
 
-        btnCrearTarjetas.setBackground(new java.awt.Color(252, 191, 73));
-        btnCrearTarjetas.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
-        btnCrearTarjetas.setText("Transferir");
-        btnCrearTarjetas.addActionListener(new java.awt.event.ActionListener() {
+        btnTransferirTarjetas.setBackground(new java.awt.Color(252, 191, 73));
+        btnTransferirTarjetas.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        btnTransferirTarjetas.setText("Transferir");
+        btnTransferirTarjetas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCrearTarjetasActionPerformed(evt);
+                btnTransferirTarjetasActionPerformed(evt);
             }
         });
 
@@ -202,7 +202,7 @@ public class FormTransferencia extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnVolver)
                 .addGap(31, 31, 31)
-                .addComponent(btnCrearTarjetas)
+                .addComponent(btnTransferirTarjetas)
                 .addGap(30, 30, 30))
             .addComponent(panMensaje, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -225,7 +225,7 @@ public class FormTransferencia extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(panAzulClaroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVolver)
-                    .addComponent(btnCrearTarjetas))
+                    .addComponent(btnTransferirTarjetas))
                 .addGap(14, 14, 14))
         );
 
@@ -274,7 +274,7 @@ public class FormTransferencia extends javax.swing.JFrame {
         }
         return cuenta;
     }
-    private void btnCrearTarjetasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearTarjetasActionPerformed
+    private void btnTransferirTarjetasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransferirTarjetasActionPerformed
         //Creamos la transaccion
         if (validarSaldo() == false) {
             return;
@@ -289,12 +289,13 @@ public class FormTransferencia extends javax.swing.JFrame {
         trasanccionNueva.setTipo(cuentaNum);
         trasanccionNueva.setId_cuenta(cliente.getId());
         Transaccion transaccionNueva = crearTransaccion(trasanccionNueva);
+
         //Creamos la transferencia
         TransferenciaNuevaDTO transferenciaNueva = new TransferenciaNuevaDTO();
 
         try {
             int cuentaDestino = Integer.valueOf(tfiNumCuenDestino.getText());
-            
+
             transferenciaNueva.setCuenta_destino(cuentaDAO.consultarCuenta(cuentaDestino).getId_cliente());
 
         } catch (PersistenciaException pe) {
@@ -304,14 +305,15 @@ public class FormTransferencia extends javax.swing.JFrame {
 
         Transferencia trasferenciaNueva = crearTransferencia(transferenciaNueva);
         try {
-            System.out.println("transnueva"+transferenciaNueva.getId_transaccion());
             Cuenta cuentaTransmisor = obtenerCuenta(cuenta.getId_cliente());
-            System.out.println(cuentaTransmisor+"dadsddads");
             cuentaDAO.actualizarMontroTransaccion(cuentaTransmisor, transferenciaNueva.getCuenta_destino(), Float.parseFloat(tfiCantidad.getText()));
         } catch (PersistenciaException pe) {
             System.out.println(pe);
         }
-    }//GEN-LAST:event_btnCrearTarjetasActionPerformed
+        ConfirmacionTransferencia ct = new ConfirmacionTransferencia(cliente, cuenta, transaccionNueva, tfiNumCuenDestino.getText());
+        ct.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnTransferirTarjetasActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
 
@@ -347,7 +349,7 @@ public class FormTransferencia extends javax.swing.JFrame {
         return cuenta;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCrearTarjetas;
+    private javax.swing.JButton btnTransferirTarjetas;
     private javax.swing.JButton btnVolver;
     private javax.swing.JPanel panAzulClaro;
     private javax.swing.JPanel panAzulObscuro;
