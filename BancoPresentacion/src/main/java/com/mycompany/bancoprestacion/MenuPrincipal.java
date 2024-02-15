@@ -20,53 +20,71 @@ import javax.swing.JScrollPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import org.itson.bdavanzadas.conexion.IConexion;
+import org.itson.bdavanzadas.daos.ICuentaDAO;
 import org.itson.bdavanzadas.dominio.Cliente;
+import org.itson.bdavanzadas.dominio.Cuenta;
+import org.itson.bdavanzadas.excepciones.PersistenciaException;
 
 /**
  *
  * @author Laboratorios
  */
 public class MenuPrincipal extends javax.swing.JFrame {
-
+    
     private DefaultListModel<String> modeloLista = new DefaultListModel<>();
+    private Cliente cliente;
+    private ICuentaDAO cuentaDAO;
+    private final IConexion conexion;
 
     /**
      * Creates new form MenuPrincipal
      */
-    public MenuPrincipal(Cliente cliente) {
+    public MenuPrincipal(Cliente cliente, ICuentaDAO cuentaDAO, IConexion conexion) {
         initComponents();
+        this.cliente = cliente;
+        this.cuentaDAO = cuentaDAO;
         String saludo = txtSaludo.getText().replaceAll("Usuario", cliente.getNombres());
         txtSaludo.setText(saludo);
-        cargarCuentas();
+        this.conexion = conexion;
+        System.out.println(cliente.getId());
+        listarCuentas();
     }
-
-    private void cargarCuentas() {
+    
+    private void listarCuentas() {
 // Crear un modelo de lista para la JList
 
 // Agregar elementos al modelo de lista (pueden ser los nombres de los botones)
-        modeloLista.addElement("Botón 1");
-        modeloLista.addElement("Botón 2");
-        modeloLista.addElement("Botón 3");
-
+        List<Cuenta> cuentas = null;
+//        modeloLista.addElement("Botón 1");
+//        modeloLista.addElement("Botón 2");
+//        modeloLista.addElement("Botón 3");
+        
+        try {
+            cuentas = cuentaDAO.consultar(cliente.getId());
+        } catch (PersistenciaException pe) {
+            pe.printStackTrace();
+            // Manejar la excepción aquí
+        }
+        for (Cuenta cuenta : cuentas) {
+            modeloLista.addElement(String.valueOf(cuenta.getNumero()));
+        }
 // Asignar el modelo de lista a la JList
         ListTarjetas.setModel(modeloLista);
 
 // Agregar la JList al JScrollPane
         jScrollPane1.setViewportView(ListTarjetas);
-
-        ListTarjetas.addListSelectionListener(new ListSelectionListener() {
-            public void valueChanged(ListSelectionEvent e) {
-                if (!e.getValueIsAdjusting()) {
-                    // Obtener el índice del elemento seleccionado
-                    int index = ListTarjetas.getSelectedIndex();
-                    // Verificar si se seleccionó algún elemento
-                    if (index != -1) {
-                        // Obtener el elemento seleccionado del modelo de lista
-                        String item = modeloLista.getElementAt(index);
-                        // Mostrar un mensaje con el elemento seleccionado
-                        JOptionPane.showMessageDialog(null, "Se hizo clic en: " + item);
-                        System.out.println("adsd");
-                    }
+        
+        ListTarjetas.addListSelectionListener((ListSelectionEvent e) -> {
+            if (!e.getValueIsAdjusting()) {
+                // Obtener el índice del elemento seleccionado
+                int index = ListTarjetas.getSelectedIndex();
+                // Verificar si se seleccionó algún elemento
+                if (index != -1) {
+                    // Obtener el elemento seleccionado del modelo de lista
+                    String item = modeloLista.getElementAt(index);
+                    // Mostrar un mensaje con el elemento seleccionado
+                    JOptionPane.showMessageDialog(null, "Se hizo clic en: " + item);
                 }
             }
         });

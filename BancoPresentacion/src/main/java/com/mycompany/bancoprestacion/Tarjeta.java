@@ -274,8 +274,8 @@ public class Tarjeta extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnCancelarCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarCuentaActionPerformed
-        MenuPrincipal mp = new MenuPrincipal(cliente);
-        mp.setVisible(true);
+        //MenuPrincipal mp = new MenuPrincipal(cliente);
+        //mp.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnCancelarCuentaActionPerformed
 

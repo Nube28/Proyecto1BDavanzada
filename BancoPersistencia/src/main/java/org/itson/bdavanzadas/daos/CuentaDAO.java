@@ -59,7 +59,7 @@ public class CuentaDAO implements ICuentaDAO{
         String setenciaSQL = 
             """
                 SELECT * FROM cuentas
-                WHERE id_cliente = "?";
+                WHERE id_cliente = ?;
             """;
         List<Cuenta> listaCuenta = new LinkedList<>();
         

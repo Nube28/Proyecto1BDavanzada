@@ -6,7 +6,10 @@ package com.mycompany.bancoprestacion;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.itson.bdavanzadas.conexion.IConexion;
+import org.itson.bdavanzadas.daos.CuentaDAO;
 import org.itson.bdavanzadas.daos.IClienteDAO;
+import org.itson.bdavanzadas.daos.ICuentaDAO;
 import org.itson.bdavanzadas.dominio.Cliente;
 import org.itson.bdavanzadas.excepciones.PersistenciaException;
 
@@ -16,13 +19,14 @@ import org.itson.bdavanzadas.excepciones.PersistenciaException;
 public class PantallaInicial extends javax.swing.JFrame {
 
     private final IClienteDAO clienteDAO;
-
+    private final IConexion conexion;
     /**
      * Creates new form PantallaInicial
      */
-    public PantallaInicial(IClienteDAO clienteDAO) {
+    public PantallaInicial(IClienteDAO clienteDAO,IConexion conexion) {
         initComponents();
         this.clienteDAO = clienteDAO;
+        this.conexion = conexion;
     }
 
     /**
@@ -211,11 +215,10 @@ public class PantallaInicial extends javax.swing.JFrame {
         Cliente cliente = login();
         if (cliente == null) {
             System.out.println(cliente);
-
             return;
         }
-        MenuPrincipal mp = new MenuPrincipal(cliente);
-        System.out.println(cliente);
+        ICuentaDAO cuentaDAO = new CuentaDAO(conexion);
+        MenuPrincipal mp = new MenuPrincipal(cliente,cuentaDAO,conexion);
         mp.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnAccederActionPerformed
