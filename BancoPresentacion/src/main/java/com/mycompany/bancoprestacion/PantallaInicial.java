@@ -5,7 +5,6 @@
 package com.mycompany.bancoprestacion;
 
 /**
- *
  * @author Berry
  */
 public class PantallaInicial extends javax.swing.JFrame {
@@ -195,7 +194,10 @@ public class PantallaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegistrarseActionPerformed
 
     private void btnAccederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccederActionPerformed
-        // TODO add your handling code here:
+        MenuPrincipal mp = new MenuPrincipal();
+        
+        mp.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnAccederActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
