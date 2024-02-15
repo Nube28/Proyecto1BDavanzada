@@ -30,21 +30,19 @@ public class ClienteDAO implements IClienteDAO {
     @Override
     public Cliente agregar(ClienteNuevoDTO clienteNuevo) throws PersistenciaException {
         String setenciaSQL = """
-                             INSERT INTO Clientes(usuario,contrasenia,nombres,apellido_paterno,apellido_materno,fecha_nacimiento,edad)
-                                         VALUES(?,?,?,?,?,?,?);
+                             INSERT INTO Clientes(contrasenia,nombres,apellido_paterno,apellido_materno,fecha_nacimiento)
+                                         VALUES(?,?,?,?,?);
                              """;
         try (
                 Connection conexion = this.conexionDB.obtenerConexion();
                 PreparedStatement comando = conexion.prepareStatement(
                 setenciaSQL,
                 Statement.RETURN_GENERATED_KEYS);) {
-            comando.setString(1, clienteNuevo.getUsuario());
-            comando.setString(2, clienteNuevo.getContrasenia());
-            comando.setString(3, clienteNuevo.getNombres());
-            comando.setString(4, clienteNuevo.getApellido_materno());
-            comando.setString(5, clienteNuevo.getApellido_paterno());
-            comando.setString(6, clienteNuevo.getNacimiento());
-            comando.setInt(7, clienteNuevo.getEdad());
+            comando.setString(1, clienteNuevo.getContrasenia());
+            comando.setString(2, clienteNuevo.getNombres());
+            comando.setString(3, clienteNuevo.getApellido_materno());
+            comando.setString(4, clienteNuevo.getApellido_paterno());
+            comando.setString(5, clienteNuevo.getNacimiento());
             int numeroRegistrosInsertados = comando.executeUpdate();
             logger.log(Level.INFO, "Se agrearon {0}", numeroRegistrosInsertados);
             ResultSet idsGenerados = comando.getGeneratedKeys();
@@ -52,12 +50,10 @@ public class ClienteDAO implements IClienteDAO {
             Cliente cliente = new Cliente(
                     idsGenerados.getInt(1),
                     clienteNuevo.getContrasenia(),
-                    clienteNuevo.getUsuario(),
                     clienteNuevo.getNombres(),
                     clienteNuevo.getApellido_paterno(),
                     clienteNuevo.getApellido_materno(),
-                    clienteNuevo.getNacimiento(),
-                    clienteNuevo.getEdad()
+                    clienteNuevo.getNacimiento()
             );
             return cliente;
         } catch (SQLException ex) {

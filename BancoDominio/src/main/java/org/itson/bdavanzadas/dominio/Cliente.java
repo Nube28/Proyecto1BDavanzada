@@ -34,6 +34,15 @@ public class Cliente {
         this.edad = edad;
     }
 
+    public Cliente(int id, String contrasenia, String nombres, String apellido_paterno, String apellido_materno, String nacimiento) {
+        this.id = id;
+        this.contrasenia = contrasenia;
+        this.nombres = nombres;
+        this.apellido_paterno = apellido_paterno;
+        this.apellido_materno = apellido_materno;
+        this.nacimiento = nacimiento;
+    }
+
     public Cliente(String contrasenia, String usuario, String nombres, String apellido_paterno, String apellido_materno, String nacimiento, int edad) {
         this.contrasenia = contrasenia;
         this.usuario = usuario;

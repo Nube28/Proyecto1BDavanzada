@@ -7,6 +7,7 @@ package com.mycompany.bancoprestacion;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.itson.bdavanzadas.conexion.IConexion;
+import org.itson.bdavanzadas.daos.ClienteDAO;
 import org.itson.bdavanzadas.daos.CuentaDAO;
 import org.itson.bdavanzadas.daos.IClienteDAO;
 import org.itson.bdavanzadas.daos.ICuentaDAO;
@@ -206,10 +207,9 @@ public class PantallaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRetiroSinCuentaActionPerformed
 
     private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarseActionPerformed
-        // Validacion de q si existe
-
-        //inicio.setVisible(true);
-        //this.dispose();
+        RegistroCliente rc = new RegistroCliente((ClienteDAO) clienteDAO, conexion);
+        rc.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnRegistrarseActionPerformed
 
     private void btnAccederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccederActionPerformed
@@ -225,7 +225,7 @@ public class PantallaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAccederActionPerformed
  
     private void pasContraseñaUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pasContraseñaUsuarioActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_pasContraseñaUsuarioActionPerformed
     private Cliente login() {
         Cliente cliente = null;
