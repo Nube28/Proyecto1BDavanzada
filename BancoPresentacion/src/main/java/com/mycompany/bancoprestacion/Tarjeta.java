@@ -38,8 +38,8 @@ public class Tarjeta extends javax.swing.JFrame {
         txtTitulo = new javax.swing.JLabel();
         txtIDeTarjeta = new javax.swing.JLabel();
         panMensaje = new javax.swing.JPanel();
-        txtNumCuenDestino = new javax.swing.JLabel();
-        txtNumCuenDestino1 = new javax.swing.JLabel();
+        txtSaldo = new javax.swing.JLabel();
+        txtSaldoModificar = new javax.swing.JLabel();
         btnCerrarSesion = new javax.swing.JButton();
         btnCrearTarjetas = new javax.swing.JButton();
         btnCerrarSesion1 = new javax.swing.JButton();
@@ -95,11 +95,11 @@ public class Tarjeta extends javax.swing.JFrame {
 
         panMensaje.setBackground(new java.awt.Color(142, 202, 230));
 
-        txtNumCuenDestino.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
-        txtNumCuenDestino.setText("Saldo:");
+        txtSaldo.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
+        txtSaldo.setText("Saldo:");
 
-        txtNumCuenDestino1.setFont(new java.awt.Font("Comic Sans MS", 0, 36)); // NOI18N
-        txtNumCuenDestino1.setText("$");
+        txtSaldoModificar.setFont(new java.awt.Font("Comic Sans MS", 0, 36)); // NOI18N
+        txtSaldoModificar.setText("$");
 
         javax.swing.GroupLayout panMensajeLayout = new javax.swing.GroupLayout(panMensaje);
         panMensaje.setLayout(panMensajeLayout);
@@ -107,9 +107,9 @@ public class Tarjeta extends javax.swing.JFrame {
             panMensajeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panMensajeLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addComponent(txtNumCuenDestino)
+                .addComponent(txtSaldo)
                 .addGap(173, 173, 173)
-                .addComponent(txtNumCuenDestino1)
+                .addComponent(txtSaldoModificar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panMensajeLayout.setVerticalGroup(
@@ -117,8 +117,8 @@ public class Tarjeta extends javax.swing.JFrame {
             .addGroup(panMensajeLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addGroup(panMensajeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNumCuenDestino)
-                    .addComponent(txtNumCuenDestino1))
+                    .addComponent(txtSaldo)
+                    .addComponent(txtSaldoModificar))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
@@ -289,8 +289,8 @@ public class Tarjeta extends javax.swing.JFrame {
     private javax.swing.JPanel panMensaje;
     private javax.swing.JPanel panSaludo;
     private javax.swing.JLabel txtIDeTarjeta;
-    private javax.swing.JLabel txtNumCuenDestino;
-    private javax.swing.JLabel txtNumCuenDestino1;
+    private javax.swing.JLabel txtSaldo;
+    private javax.swing.JLabel txtSaldoModificar;
     private javax.swing.JLabel txtSaludo;
     private javax.swing.JLabel txtTitulo;
     // End of variables declaration//GEN-END:variables

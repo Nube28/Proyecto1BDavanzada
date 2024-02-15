@@ -230,9 +230,9 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-                          <Component id="txtNumCuenDestino" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtSaldo" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="173" max="-2" attributes="0"/>
-                          <Component id="txtNumCuenDestino1" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtSaldoModificar" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -242,8 +242,8 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="txtNumCuenDestino" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtNumCuenDestino1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtSaldo" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtSaldoModificar" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="23" max="32767" attributes="0"/>
                       </Group>
@@ -251,7 +251,7 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JLabel" name="txtNumCuenDestino">
+                <Component class="javax.swing.JLabel" name="txtSaldo">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Comic Sans MS" size="24" style="0"/>
@@ -259,7 +259,7 @@
                     <Property name="text" type="java.lang.String" value="Saldo:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="txtNumCuenDestino1">
+                <Component class="javax.swing.JLabel" name="txtSaldoModificar">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Comic Sans MS" size="36" style="0"/>
