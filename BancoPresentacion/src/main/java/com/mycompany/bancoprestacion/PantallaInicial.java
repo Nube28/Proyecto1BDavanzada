@@ -41,7 +41,7 @@ public class PantallaInicial extends javax.swing.JFrame {
         txtContraseña = new javax.swing.JLabel();
         txtIDdeUsuario = new javax.swing.JLabel();
         pasContraseñaUsuario = new javax.swing.JPasswordField();
-        jTextField1 = new javax.swing.JTextField();
+        txtUsuario = new javax.swing.JTextField();
         btnAcceder = new javax.swing.JButton();
         btnRetiroSinCuenta = new javax.swing.JButton();
         btnRegistrarse = new javax.swing.JButton();
@@ -75,8 +75,13 @@ public class PantallaInicial extends javax.swing.JFrame {
         txtIDdeUsuario.setText("ID de usuario:");
 
         pasContraseñaUsuario.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        pasContraseñaUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pasContraseñaUsuarioActionPerformed(evt);
+            }
+        });
 
-        jTextField1.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        txtUsuario.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
 
         btnAcceder.setBackground(new java.awt.Color(252, 191, 73));
         btnAcceder.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
@@ -123,7 +128,7 @@ public class PantallaInicial extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(panAzulClaroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(pasContraseñaUsuario)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(145, 145, 145))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panAzulClaroLayout.createSequentialGroup()
                 .addGap(34, 34, 34)
@@ -146,7 +151,7 @@ public class PantallaInicial extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addGroup(panAzulClaroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtIDdeUsuario)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panAzulClaroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtContraseña)
@@ -205,19 +210,26 @@ public class PantallaInicial extends javax.swing.JFrame {
     private void btnAccederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccederActionPerformed
         Cliente cliente = login();
         if (cliente == null) {
+            System.out.println(cliente);
+
             return;
         }
         MenuPrincipal mp = new MenuPrincipal(cliente);
-
+        System.out.println(cliente);
         mp.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnAccederActionPerformed
+
+    private void pasContraseñaUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pasContraseñaUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pasContraseñaUsuarioActionPerformed
     private Cliente login() {
         Cliente cliente = null;
         try {
-            String usuario = this.txtIDdeUsuario.getText();
-            String contrasenia = this.txtContraseña.getText();
-            cliente = this.clienteDAO.consultarCliente(usuario, contrasenia);
+            String usuario = this.txtUsuario.getText();
+            char[] contrasenia = this.pasContraseñaUsuario.getPassword();
+            cliente = this.clienteDAO.consultarCliente(usuario, String.valueOf(contrasenia));
+            System.out.println(contrasenia);
         } catch (PersistenciaException ex) {
             Logger.getLogger(PantallaInicial.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -228,7 +240,6 @@ public class PantallaInicial extends javax.swing.JFrame {
     private javax.swing.JButton btnAcceder;
     private javax.swing.JButton btnRegistrarse;
     private javax.swing.JButton btnRetiroSinCuenta;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JPanel panAzulClaro;
     private javax.swing.JPanel panAzulObscuro;
     private javax.swing.JPanel panLogo;
@@ -236,5 +247,6 @@ public class PantallaInicial extends javax.swing.JFrame {
     private javax.swing.JLabel txtContraseña;
     private javax.swing.JLabel txtIDdeUsuario;
     private javax.swing.JLabel txtTitulo;
+    private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }
