@@ -4,6 +4,8 @@
  */
 package com.mycompany.bancoprestacion;
 
+import org.itson.bdavanzadas.dominio.Cliente;
+
 /**
  *
  * @author natas
@@ -13,8 +15,10 @@ public class Tarjeta extends javax.swing.JFrame {
     /**
      * Creates new form Tarjeta
      */
-    public Tarjeta() {
+    public Tarjeta(Cliente cliente) {
         initComponents();
+        String saludo = txtSaludo.getText().replaceAll("Usuario", cliente.getNombres());
+        txtSaludo.setText(saludo);
     }
 
     /**

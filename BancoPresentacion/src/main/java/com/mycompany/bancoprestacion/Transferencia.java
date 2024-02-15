@@ -4,6 +4,8 @@
  */
 package com.mycompany.bancoprestacion;
 
+
+import org.itson.bdavanzadas.dominio.Cliente;
 /**
  *
  * @author natas
@@ -13,8 +15,10 @@ public class Transferencia extends javax.swing.JFrame {
     /**
      * Creates new form Transferencia
      */
-    public Transferencia() {
+    public Transferencia(Cliente cliente) {
         initComponents();
+        String saludo = txtSaludo.getText().replaceAll("Usuario", cliente.getNombres());
+        txtSaludo.setText(saludo);
     }
 
     /**
