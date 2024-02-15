@@ -30,20 +30,18 @@ public class CuentaDAO implements ICuentaDAO {
     public Cuenta agregar(CuentaNuevaDTO cuentaNueva) throws PersistenciaException {
         String setenciaSQL
                 = """
-                INSERT INTO cuentas(numero, saldo, id_cliente)
-                VALUES(?, ?, ?);
+                INSERT INTO cuentas(saldo, id_cliente)
+                VALUES(?, ?);
             """;
         try (Connection conexion = this.conexionDB.obtenerConexion(); PreparedStatement comando = conexion.prepareStatement(setenciaSQL, Statement.RETURN_GENERATED_KEYS);) {
-            comando.setInt(1, cuentaNueva.getNumero());
-            comando.setInt(2, cuentaNueva.getSaldo());
-            comando.setInt(3, cuentaNueva.getId_cliente());
+            comando.setInt(1, cuentaNueva.getSaldo());
+            comando.setInt(2, cuentaNueva.getId_cliente());
             int numeroRegistrosInsertados = comando.executeUpdate();
             logger.log(Level.INFO, "Se agrearon {0}", numeroRegistrosInsertados);
             ResultSet idsGenerados = comando.getGeneratedKeys();
             idsGenerados.next();
             Cuenta cuenta = new Cuenta(
                     idsGenerados.getInt(1),
-                    cuentaNueva.getNumero(),
                     cuentaNueva.getSaldo(),
                     cuentaNueva.getId_cliente()
             );

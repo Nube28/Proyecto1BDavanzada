@@ -23,10 +23,12 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import org.itson.bdavanzadas.conexion.IConexion;
+import org.itson.bdavanzadas.daos.CuentaDAO;
 import org.itson.bdavanzadas.daos.ICuentaDAO;
 import org.itson.bdavanzadas.dominio.Cliente;
 import org.itson.bdavanzadas.dominio.Cuenta;
 import org.itson.bdavanzadas.dominio.Transaccion;
+import org.itson.bdavanzadas.dtos.CuentaNuevaDTO;
 import org.itson.bdavanzadas.excepciones.PersistenciaException;
 
 /**
@@ -294,7 +296,20 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
 
     private void btnCrearTarjetasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearTarjetasActionPerformed
-
+        CuentaNuevaDTO cuentaNDTO = new CuentaNuevaDTO();
+        cuentaNDTO.setSaldo(0);
+        cuentaNDTO.setId_cliente(cliente.getId());
+        
+        try {
+            Cuenta cuenta = cuentaDAO.agregar(cuentaNDTO);
+            JOptionPane.showMessageDialog(this, "Tarjeta agregada!\nTu numero de Tarjeta es: "+cuenta.getId_cuenta());
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                
+        
+        modeloLista.removeAllElements();
+        listarCuentas();
     }//GEN-LAST:event_btnCrearTarjetasActionPerformed
 
     private void btnOpcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpcionesActionPerformed

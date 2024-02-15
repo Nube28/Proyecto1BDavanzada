@@ -73,6 +73,20 @@ END;
 
 DELIMITER ;
 
+DELIMITER //
+
+CREATE TRIGGER generar_numero_aleatorio
+BEFORE INSERT ON Cuentas
+FOR EACH ROW
+BEGIN
+    DECLARE nuevo_numero INT;
+    SET nuevo_numero = FLOOR(RAND() * 900000) + 100000;
+    SET NEW.numero = nuevo_numero;
+END;
+//
+
+DELIMITER ;
+
 CREATE TABLE IF NOT EXISTS Transacciones (
     id INT AUTO_INCREMENT PRIMARY KEY,
     monto FLOAT,

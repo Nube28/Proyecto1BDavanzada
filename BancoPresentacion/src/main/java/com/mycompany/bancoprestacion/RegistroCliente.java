@@ -333,11 +333,16 @@ public class RegistroCliente extends javax.swing.JFrame {
         DireccionNuevaDTO direccionNuevaDTO = crearDireccion();
         
         try{
-            clienteDAO.agregar(clienteNuevoDTO);
-            JOptionPane.showMessageDialog(this, "Cliente registrado exitosamente.");
+            Cliente cliente = clienteDAO.agregar(clienteNuevoDTO);
+            
+            JOptionPane.showMessageDialog(this, "Cliente registrado!\nTu numero de cliente es: "+cliente.getId());
         }catch(PersistenciaException ex){
             JOptionPane.showMessageDialog(this, "No se puede agregar al cliente.");
         }
+        
+        PantallaInicial pi = new PantallaInicial(clienteDAO,conexion);
+        pi.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnCrearActionPerformed
     
     
