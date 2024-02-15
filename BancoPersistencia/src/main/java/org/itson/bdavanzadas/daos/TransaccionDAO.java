@@ -40,8 +40,8 @@ public class TransaccionDAO implements ITransaccionDAO {
     @Override
     public Transaccion agregar(TransaccionNuevaDTO transaccionNueva) throws PersistenciaException {
         String setenciaSQL = """
-                             INSERT INTO transacciones(monto,tipo)
-                                         VALUES(?,?);
+                             INSERT INTO transacciones(monto,tipo,id_cuenta)
+                                         VALUES(?,?,?);
                              """;
 
         try (
@@ -50,6 +50,8 @@ public class TransaccionDAO implements ITransaccionDAO {
                 Statement.RETURN_GENERATED_KEYS);) {
             comando.setFloat(1, transaccionNueva.getMonto());
             comando.setString(2, transaccionNueva.getTipo());
+            comando.setInt(3, transaccionNueva.getId_cuenta());
+
             int numeroRegistrosInsertados = comando.executeUpdate();
             logger.log(Level.INFO, "Se agrearon {0}", numeroRegistrosInsertados);
             ResultSet idsGenerados = comando.getGeneratedKeys();

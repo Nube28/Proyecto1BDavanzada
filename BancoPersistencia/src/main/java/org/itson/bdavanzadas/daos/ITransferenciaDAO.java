@@ -14,7 +14,7 @@ import org.itson.bdavanzadas.excepciones.PersistenciaException;
  * @author af_da
  */
 public interface ITransferenciaDAO {
-    
 
+    Transferencia agregar(TransferenciaNuevaDTO TransferenciaNueva) throws PersistenciaException;
 
 }

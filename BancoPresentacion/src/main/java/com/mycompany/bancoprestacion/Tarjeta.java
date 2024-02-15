@@ -7,6 +7,7 @@ package com.mycompany.bancoprestacion;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.itson.bdavanzadas.conexion.IConexion;
+import org.itson.bdavanzadas.daos.ICuentaDAO;
 import org.itson.bdavanzadas.dominio.Cliente;
 import org.itson.bdavanzadas.dominio.Cuenta;
 import org.itson.bdavanzadas.excepciones.PersistenciaException;
@@ -20,11 +21,12 @@ public class Tarjeta extends javax.swing.JFrame {
     private Cliente cliente;
     private Cuenta cuenta;
     private final IConexion conexion;
+    private ICuentaDAO cuentaDAO;
 
     /**
      * Creates new form Tarjeta
      */
-    public Tarjeta(Cliente cliente, Cuenta cuenta, IConexion conexion) {
+    public Tarjeta(Cliente cliente, Cuenta cuenta, IConexion conexion, ICuentaDAO cuentaDAO) {
         initComponents();
 
         this.cliente = cliente;
@@ -286,7 +288,7 @@ public class Tarjeta extends javax.swing.JFrame {
 
     private void btnTransferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransferenciaActionPerformed
 
-        Transferencia tr = new Transferencia(cliente, cuenta);
+        Transferencia tr = new Transferencia(cliente, cuenta,cuentaDAO,conexion);
         tr.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnTransferenciaActionPerformed

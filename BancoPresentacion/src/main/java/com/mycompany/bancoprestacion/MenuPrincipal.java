@@ -82,7 +82,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                     // Obtener el elemento seleccionado del modelo de lista
                     String cuenta = modeloLista.getElementAt(index);
                     // Mostrar un mensaje con el elemento seleccionado
-                    Tarjeta tarjeta = new Tarjeta(cliente, consultarCuenta(Integer.valueOf(cuenta)), conexion);
+                    Tarjeta tarjeta = new Tarjeta(cliente, consultarCuenta(Integer.valueOf(cuenta)), conexion,cuentaDAO);
                     tarjeta.setVisible(true);
                     this.dispose();
                 }

@@ -4,24 +4,39 @@
  */
 package com.mycompany.bancoprestacion;
 
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.itson.bdavanzadas.conexion.IConexion;
+import org.itson.bdavanzadas.daos.ICuentaDAO;
 import org.itson.bdavanzadas.dominio.Cliente;
 import org.itson.bdavanzadas.dominio.Cuenta;
+import org.itson.bdavanzadas.excepciones.PersistenciaException;
+
 /**
  *
  * @author natas
  */
 public class Transferencia extends javax.swing.JFrame {
+    
+    private Cliente cliente;
+    private ICuentaDAO cuentaDAO;
+    private final IConexion conexion;
+    private Cuenta cuenta;
 
     /**
      * Creates new form Transferencia
      */
-    public Transferencia(Cliente cliente, Cuenta cuenta) {
+    public Transferencia(Cliente cliente, Cuenta cuenta, ICuentaDAO cuentaDAO, IConexion conexion) {
         initComponents();
+        this.conexion = conexion;
+        this.cuentaDAO = cuentaDAO;
+        this.cliente = cliente;
+        this.cuenta = cuenta;
         String saludo = txtSaludo.getText().replaceAll("Usuario", cliente.getNombres());
         txtSaludo.setText(saludo);
         
-        txtIDeTarjeta.setText("Tarjeta "+ cuenta.getNumero());
+        txtIDeTarjeta.setText("Tarjeta " + cuenta.getNumero());
+        
     }
 
     /**
@@ -232,12 +247,35 @@ public class Transferencia extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    private boolean validarSaldo() {
+        float saldoDisponible = cuenta.getSaldo();
+        String saldoTransferir = tfiCantidad.getText();
+        return saldoDisponible > Integer.valueOf(saldoTransferir);
+    }
+    
+    private Cuenta existenciaCuenta(int cuentaNum) {
+        Cuenta cuenta = null;
+        try {
+            cuenta = this.cuentaDAO.consultarCuenta(cuentaNum);
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(PantallaInicial.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return cuenta;
+    }
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
 
     private void btnCrearTarjetasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearTarjetasActionPerformed
+        if (validarSaldo() == false) {
+            return;
+        }
+        String cuentaNum = tfiNumCuenDestino.getText();
+        Cuenta cuenta = existenciaCuenta(Integer.valueOf(cuentaNum));
+        if (cuenta == null) {
+            return;
+        }
+        
 
     }//GEN-LAST:event_btnCrearTarjetasActionPerformed
 
