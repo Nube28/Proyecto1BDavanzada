@@ -20,4 +20,6 @@ public interface ITransaccionDAO {
     Transaccion consultarFecha(int id) throws PersistenciaException;
 
     List<Transaccion> consultar() throws PersistenciaException;
+    
+    
 }

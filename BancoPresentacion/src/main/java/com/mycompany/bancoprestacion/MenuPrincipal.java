@@ -50,7 +50,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         String saludo = txtSaludo.getText().replaceAll("Usuario", cliente.getNombres());
         txtSaludo.setText(saludo);
         this.conexion = conexion;
-        System.out.println(cliente.getId());
         listarCuentas();
     }
 

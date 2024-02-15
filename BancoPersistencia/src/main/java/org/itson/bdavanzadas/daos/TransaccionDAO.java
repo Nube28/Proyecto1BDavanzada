@@ -73,7 +73,7 @@ public class TransaccionDAO implements ITransaccionDAO {
     @Override
     public Transaccion consultarFecha(int id) throws PersistenciaException {
         String setenciaSQL = """
-                             SELECT fecha FROM Cliente WHERE id=?;
+                             SELECT fecha FROM transacciones WHERE id=?;
                              """;
 
         try (
@@ -82,7 +82,6 @@ public class TransaccionDAO implements ITransaccionDAO {
             comando.setLong(1, id);
             ResultSet resultado = comando.executeQuery();
 
-            int numeroRegistrosInsertados = comando.executeUpdate();
             Transaccion transaccion = null;
             if (resultado.next()) {
                 transaccion = new Transaccion();

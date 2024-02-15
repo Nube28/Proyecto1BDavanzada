@@ -32,6 +32,7 @@ public class Tarjeta extends javax.swing.JFrame {
         this.cliente = cliente;
         this.cuenta = cuenta;
         this.conexion = conexion;
+        this.cuentaDAO = cuentaDAO;
         String saludo = txtSaludo.getText().replaceAll("Usuario", this.cliente.getNombres());
         txtSaludo.setText(saludo);
 
@@ -288,7 +289,7 @@ public class Tarjeta extends javax.swing.JFrame {
 
     private void btnTransferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransferenciaActionPerformed
 
-        Transferencia tr = new Transferencia(cliente, cuenta,cuentaDAO,conexion);
+        FormTransferencia tr = new FormTransferencia(cliente, cuenta, cuentaDAO, conexion);
         tr.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnTransferenciaActionPerformed
