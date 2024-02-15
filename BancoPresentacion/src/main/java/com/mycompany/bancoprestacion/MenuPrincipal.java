@@ -17,6 +17,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
      */
     public MenuPrincipal(Cliente cliente) {
         initComponents();
+        String saludo = txtSaludo.getText().replaceAll("Usuario", cliente.getNombres());
+        txtSaludo.setText(saludo);
     }
 
     /**
