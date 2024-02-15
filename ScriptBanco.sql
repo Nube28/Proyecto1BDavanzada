@@ -10,8 +10,20 @@ CREATE TABLE IF NOT EXISTS Clientes (
     fecha_nacimiento DATE,
     edad INT,
     contrasenia INT(50),
-    usuario INT unique
+    usuario INT unique AUTO_INCREMENT
 );
+
+DELIMITER //
+
+CREATE TRIGGER calcular_edad_cliente
+BEFORE INSERT ON Clientes
+FOR EACH ROW
+BEGIN
+    SET NEW.edad = TIMESTAMPDIFF(YEAR, NEW.fecha_nacimiento, CURDATE());
+END;
+//
+
+DELIMITER ;
 
 CREATE TABLE IF NOT EXISTS Domicilios (
     id INT PRIMARY KEY auto_increment,
@@ -32,6 +44,17 @@ CREATE TABLE IF NOT EXISTS Cuentas (
     id_cliente INT,
     FOREIGN KEY (id_cliente) REFERENCES Clientes(id)
 );
+DELIMITER //
+
+CREATE TRIGGER generar_fecha_hora_apertura
+BEFORE INSERT ON Cuentas
+FOR EACH ROW
+BEGIN
+    SET NEW.fecha_apertura = NOW();
+END;
+//
+
+DELIMITER ;
 
 CREATE TABLE IF NOT EXISTS Transacciones (
     id INT AUTO_INCREMENT PRIMARY KEY,

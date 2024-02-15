@@ -7,19 +7,17 @@ public class Domicilio {
     private String calle;
     private int numero_exterior;
     private int numero_interioro;
-    private int contrasenia;
     private String codigo_postal;
     private String colonia;
 
     public Domicilio() {
     }
 
-    public Domicilio(int id_domicilio, String calle, int numero_exterior, int numero_interioro, int contrasenia, String codigo_postal, String colonia) {
+    public Domicilio(int id_domicilio, String calle, int numero_exterior, int numero_interioro, String codigo_postal, String colonia) {
         this.id_domicilio = id_domicilio;
         this.calle = calle;
         this.numero_exterior = numero_exterior;
         this.numero_interioro = numero_interioro;
-        this.contrasenia = contrasenia;
         this.codigo_postal = codigo_postal;
         this.colonia = colonia;
     }
@@ -28,7 +26,6 @@ public class Domicilio {
         this.calle = calle;
         this.numero_exterior = numero_exterior;
         this.numero_interioro = numero_interioro;
-        this.contrasenia = contrasenia;
         this.codigo_postal = codigo_postal;
         this.colonia = colonia;
     }
@@ -65,14 +62,6 @@ public class Domicilio {
         this.numero_interioro = numero_interioro;
     }
 
-    public int getContrasenia() {
-        return contrasenia;
-    }
-
-    public void setContrasenia(int contrasenia) {
-        this.contrasenia = contrasenia;
-    }
-
     public String getCodigo_postal() {
         return codigo_postal;
     }
@@ -96,7 +85,6 @@ public class Domicilio {
         hash = 29 * hash + Objects.hashCode(this.calle);
         hash = 29 * hash + this.numero_exterior;
         hash = 29 * hash + this.numero_interioro;
-        hash = 29 * hash + this.contrasenia;
         hash = 29 * hash + Objects.hashCode(this.codigo_postal);
         hash = 29 * hash + Objects.hashCode(this.colonia);
         return hash;
@@ -123,9 +111,6 @@ public class Domicilio {
         if (this.numero_interioro != other.numero_interioro) {
             return false;
         }
-        if (this.contrasenia != other.contrasenia) {
-            return false;
-        }
         if (!Objects.equals(this.calle, other.calle)) {
             return false;
         }
@@ -143,7 +128,6 @@ public class Domicilio {
         sb.append(", calle=").append(calle);
         sb.append(", numero_exterior=").append(numero_exterior);
         sb.append(", numero_interioro=").append(numero_interioro);
-        sb.append(", contrasenia=").append(contrasenia);
         sb.append(", codigo_postal=").append(codigo_postal);
         sb.append(", colonia=").append(colonia);
         sb.append('}');

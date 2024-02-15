@@ -12,12 +12,10 @@ package org.itson.bdavanzadas.dtos;
 public class ClienteNuevoDTO {
 
     private String contrasenia;
-    private String usuario;
     private String nombres;
     private String apellido_paterno;
     private String apellido_materno;
     private String nacimiento;
-    private int edad;
 
     public String getContrasenia() {
         return contrasenia;
@@ -25,14 +23,6 @@ public class ClienteNuevoDTO {
 
     public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
-    }
-
-    public String getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
     }
 
     public String getNombres() {
@@ -67,13 +57,6 @@ public class ClienteNuevoDTO {
         this.nacimiento = nacimiento;
     }
 
-    public int getEdad() {
-        return edad;
-    }
-
-    public void setEdad(int edad) {
-        this.edad = edad;
-    }
     
     
 }
