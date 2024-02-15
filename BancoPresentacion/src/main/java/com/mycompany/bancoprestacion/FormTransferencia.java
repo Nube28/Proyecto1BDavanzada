@@ -25,7 +25,7 @@ import org.itson.bdavanzadas.excepciones.PersistenciaException;
  * @author natas
  */
 public class FormTransferencia extends javax.swing.JFrame {
-
+    
     private Cliente cliente;
     private ICuentaDAO cuentaDAO;
     private final IConexion conexion;
@@ -47,9 +47,9 @@ public class FormTransferencia extends javax.swing.JFrame {
         String saludo = txtSaludo.getText().replaceAll("Usuario", cliente.getNombres());
         txtSaludo.setText(saludo);
         txtIDeTarjeta.setText("Tarjeta " + cuenta.getNumero());
-
+        
         txtIDeTarjeta.setText("Tarjeta " + cuenta.getNumero() + " Saldo disp. $" + cuenta.getSaldo());
-
+        
     }
 
     /**
@@ -134,6 +134,11 @@ public class FormTransferencia extends javax.swing.JFrame {
         tfiCantidad.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
 
         tfiNumCuenDestino.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        tfiNumCuenDestino.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfiNumCuenDestinoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panMensajeLayout = new javax.swing.GroupLayout(panMensaje);
         panMensaje.setLayout(panMensajeLayout);
@@ -264,7 +269,7 @@ public class FormTransferencia extends javax.swing.JFrame {
         String saldoTransferir = tfiCantidad.getText();
         return saldoDisponible > Integer.valueOf(saldoTransferir);
     }
-
+    
     private Cuenta existenciaCuenta(int cuentaNum) {
         Cuenta cuenta = null;
         try {
@@ -292,21 +297,21 @@ public class FormTransferencia extends javax.swing.JFrame {
 
         //Creamos la transferencia
         TransferenciaNuevaDTO transferenciaNueva = new TransferenciaNuevaDTO();
-
+        
         try {
             int cuentaDestino = Integer.valueOf(tfiNumCuenDestino.getText());
-
-            transferenciaNueva.setCuenta_destino(cuentaDAO.consultarCuenta(cuentaDestino).getId_cliente());
-
+            
+            transferenciaNueva.setCuenta_destino(cuentaDAO.consultarCuenta(cuentaDestino).getId_cuenta());
+            
         } catch (PersistenciaException pe) {
-
+            
         }
         transferenciaNueva.setId_transaccion(transaccionNueva.getId());
-
+        
         Transferencia trasferenciaNueva = crearTransferencia(transferenciaNueva);
         try {
             Cuenta cuentaTransmisor = obtenerCuenta(cuenta.getId_cliente());
-            cuentaDAO.actualizarMontroTransaccion(cuentaTransmisor, transferenciaNueva.getCuenta_destino(), Float.parseFloat(tfiCantidad.getText()));
+            cuentaDAO.actualizarMontroTransaccion(cuentaTransmisor, Integer.parseInt(tfiNumCuenDestino.getText()), Float.parseFloat(tfiCantidad.getText()));
         } catch (PersistenciaException pe) {
             System.out.println(pe);
         }
@@ -318,17 +323,21 @@ public class FormTransferencia extends javax.swing.JFrame {
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
 
     }//GEN-LAST:event_btnVolverActionPerformed
+
+    private void tfiNumCuenDestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfiNumCuenDestinoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfiNumCuenDestinoActionPerformed
     private Transaccion crearTransaccion(TransaccionNuevaDTO trasanccionNueva) {
         Transaccion transaccion = null;
         try {
-
+            
             transaccion = this.transaccionDAO.agregar(trasanccionNueva);
         } catch (PersistenciaException ex) {
             Logger.getLogger(FormTransferencia.class.getName()).log(Level.SEVERE, null, ex);
         }
         return transaccion;
     }
-
+    
     private Transferencia crearTransferencia(TransferenciaNuevaDTO trasferenciaNueva) {
         Transferencia transferencia = null;
         try {
@@ -338,7 +347,7 @@ public class FormTransferencia extends javax.swing.JFrame {
         }
         return transferencia;
     }
-
+    
     private Cuenta obtenerCuenta(int id) {
         Cuenta cuenta = null;
         try {
