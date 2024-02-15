@@ -5,20 +5,30 @@
 package com.mycompany.bancoprestacion;
 
 import org.itson.bdavanzadas.dominio.Cliente;
+import org.itson.bdavanzadas.dominio.Cuenta;
 
 /**
  *
  * @author natas
  */
 public class Tarjeta extends javax.swing.JFrame {
-
+    
+    private Cliente cliente;
+    private Cuenta cuenta;
+    
     /**
      * Creates new form Tarjeta
      */
-    public Tarjeta(Cliente cliente) {
+    public Tarjeta(Cliente cliente, Cuenta cuenta) {
         initComponents();
-        String saludo = txtSaludo.getText().replaceAll("Usuario", cliente.getNombres());
+        
+        this.cliente = cliente;
+        this.cuenta = cuenta;
+        
+        String saludo = txtSaludo.getText().replaceAll("Usuario", this.cliente.getNombres());
         txtSaludo.setText(saludo);
+        
+        txtSaldoModificar.setText("$"+cuenta.getSaldo());
     }
 
     /**
@@ -40,11 +50,11 @@ public class Tarjeta extends javax.swing.JFrame {
         panMensaje = new javax.swing.JPanel();
         txtSaldo = new javax.swing.JLabel();
         txtSaldoModificar = new javax.swing.JLabel();
-        btnCerrarSesion = new javax.swing.JButton();
-        btnCrearTarjetas = new javax.swing.JButton();
-        btnCerrarSesion1 = new javax.swing.JButton();
-        btnCerrarSesion2 = new javax.swing.JButton();
-        btnCerrarSesion3 = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
+        btnCancelarCuenta = new javax.swing.JButton();
+        btnTransferencia = new javax.swing.JButton();
+        btnRetirar = new javax.swing.JButton();
+        btnMovimineto = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -122,48 +132,48 @@ public class Tarjeta extends javax.swing.JFrame {
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
-        btnCerrarSesion.setBackground(new java.awt.Color(252, 191, 73));
-        btnCerrarSesion.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
-        btnCerrarSesion.setText("Salir");
-        btnCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+        btnSalir.setBackground(new java.awt.Color(252, 191, 73));
+        btnSalir.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCerrarSesionActionPerformed(evt);
+                btnSalirActionPerformed(evt);
             }
         });
 
-        btnCrearTarjetas.setBackground(new java.awt.Color(252, 191, 73));
-        btnCrearTarjetas.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
-        btnCrearTarjetas.setText("Cancelar Cuenta");
-        btnCrearTarjetas.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelarCuenta.setBackground(new java.awt.Color(252, 191, 73));
+        btnCancelarCuenta.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        btnCancelarCuenta.setText("Cancelar Cuenta");
+        btnCancelarCuenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCrearTarjetasActionPerformed(evt);
+                btnCancelarCuentaActionPerformed(evt);
             }
         });
 
-        btnCerrarSesion1.setBackground(new java.awt.Color(252, 191, 73));
-        btnCerrarSesion1.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
-        btnCerrarSesion1.setText("Transferencia");
-        btnCerrarSesion1.addActionListener(new java.awt.event.ActionListener() {
+        btnTransferencia.setBackground(new java.awt.Color(252, 191, 73));
+        btnTransferencia.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        btnTransferencia.setText("Transferencia");
+        btnTransferencia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCerrarSesion1ActionPerformed(evt);
+                btnTransferenciaActionPerformed(evt);
             }
         });
 
-        btnCerrarSesion2.setBackground(new java.awt.Color(252, 191, 73));
-        btnCerrarSesion2.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
-        btnCerrarSesion2.setText("Retirar");
-        btnCerrarSesion2.addActionListener(new java.awt.event.ActionListener() {
+        btnRetirar.setBackground(new java.awt.Color(252, 191, 73));
+        btnRetirar.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        btnRetirar.setText("Retirar");
+        btnRetirar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCerrarSesion2ActionPerformed(evt);
+                btnRetirarActionPerformed(evt);
             }
         });
 
-        btnCerrarSesion3.setBackground(new java.awt.Color(252, 191, 73));
-        btnCerrarSesion3.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
-        btnCerrarSesion3.setText("Movimientos");
-        btnCerrarSesion3.addActionListener(new java.awt.event.ActionListener() {
+        btnMovimineto.setBackground(new java.awt.Color(252, 191, 73));
+        btnMovimineto.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        btnMovimineto.setText("Movimientos");
+        btnMovimineto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCerrarSesion3ActionPerformed(evt);
+                btnMoviminetoActionPerformed(evt);
             }
         });
 
@@ -185,16 +195,16 @@ public class Tarjeta extends javax.swing.JFrame {
                         .addGroup(panAzulClaroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtIDeTarjeta)
                             .addGroup(panAzulClaroLayout.createSequentialGroup()
-                                .addComponent(btnCrearTarjetas)
+                                .addComponent(btnCancelarCuenta)
                                 .addGap(154, 154, 154)
-                                .addComponent(btnCerrarSesion)))
+                                .addComponent(btnSalir)))
                         .addContainerGap())))
             .addGroup(panAzulClaroLayout.createSequentialGroup()
                 .addContainerGap(240, Short.MAX_VALUE)
                 .addGroup(panAzulClaroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnCerrarSesion1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                    .addComponent(btnCerrarSesion2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnCerrarSesion3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnTransferencia, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(btnRetirar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnMovimineto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 240, Short.MAX_VALUE))
         );
         panAzulClaroLayout.setVerticalGroup(
@@ -214,15 +224,15 @@ public class Tarjeta extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCerrarSesion1)
+                .addComponent(btnTransferencia)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCerrarSesion2)
+                .addComponent(btnRetirar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCerrarSesion3)
+                .addComponent(btnMovimineto)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addGroup(panAzulClaroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCrearTarjetas)
-                    .addComponent(btnCerrarSesion))
+                    .addComponent(btnCancelarCuenta)
+                    .addComponent(btnSalir))
                 .addGap(14, 14, 14))
         );
 
@@ -257,32 +267,37 @@ public class Tarjeta extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnCerrarSesionActionPerformed
+    }//GEN-LAST:event_btnSalirActionPerformed
 
-    private void btnCrearTarjetasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearTarjetasActionPerformed
+    private void btnCancelarCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarCuentaActionPerformed
+        MenuPrincipal mp = new MenuPrincipal(cliente);
+        mp.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnCancelarCuentaActionPerformed
 
-    }//GEN-LAST:event_btnCrearTarjetasActionPerformed
+    private void btnTransferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransferenciaActionPerformed
+        
+        Transferencia tr = new Transferencia(cliente, cuenta);
+        tr.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnTransferenciaActionPerformed
 
-    private void btnCerrarSesion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesion1ActionPerformed
+    private void btnRetirarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetirarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnCerrarSesion1ActionPerformed
+    }//GEN-LAST:event_btnRetirarActionPerformed
 
-    private void btnCerrarSesion2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesion2ActionPerformed
+    private void btnMoviminetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoviminetoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnCerrarSesion2ActionPerformed
-
-    private void btnCerrarSesion3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesion3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnCerrarSesion3ActionPerformed
+    }//GEN-LAST:event_btnMoviminetoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCerrarSesion;
-    private javax.swing.JButton btnCerrarSesion1;
-    private javax.swing.JButton btnCerrarSesion2;
-    private javax.swing.JButton btnCerrarSesion3;
-    private javax.swing.JButton btnCrearTarjetas;
+    private javax.swing.JButton btnCancelarCuenta;
+    private javax.swing.JButton btnMovimineto;
+    private javax.swing.JButton btnRetirar;
+    private javax.swing.JButton btnSalir;
+    private javax.swing.JButton btnTransferencia;
     private javax.swing.JPanel panAzulClaro;
     private javax.swing.JPanel panAzulObscuro;
     private javax.swing.JPanel panLogo;
