@@ -175,48 +175,58 @@
                           </Group>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtINombre" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txfNombre" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                               <Component id="txtCalle" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="txfCalle" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="txtINombre" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txfNombre" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtApellidoPaterno" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txfApellidoPaterno" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                               <Component id="txtCodigoPostal" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="txfCodigoPostal" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="txtApellidoPaterno" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txfApellidoPaterno" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtApellidoMaterno" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txfApellidoMaterno" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                               <Component id="txtColonia" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="txfColonia" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtNacimiento" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txfNacimiento" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" alignment="3" groupAlignment="3" attributes="0">
-                              <Component id="txtNumExterior" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txfNumExterior" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="txtApellidoMaterno" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txfApellidoMaterno" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtContraseña" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txfContraseña" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                              <Component id="txtNumExterior" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txfNumExterior" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="txtNacimiento" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txfNacimiento" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                               <Component id="txtNumInterior" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="txfNumInterior" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="txtContraseña" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txfContraseña" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>

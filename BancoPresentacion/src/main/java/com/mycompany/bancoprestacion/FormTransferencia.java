@@ -267,7 +267,7 @@ public class FormTransferencia extends javax.swing.JFrame {
     private boolean validarSaldo() {
         float saldoDisponible = cuenta.getSaldo();
         String saldoTransferir = tfiCantidad.getText();
-        return saldoDisponible > Integer.valueOf(saldoTransferir);
+        return saldoDisponible > Integer.valueOf(saldoTransferir) && Integer.valueOf(saldoTransferir) > 0;
     }
     
     private Cuenta existenciaCuenta(int cuentaNum) {

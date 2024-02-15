@@ -70,21 +70,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         for (Cuenta cuenta : cuentas) {
             modeloLista.addElement(String.valueOf(cuenta.getNumero()));
         }
-// Asignar el modelo de lista a la JList
         ListTarjetas.setModel(modeloLista);
-
-// Agregar la JList al JScrollPane
         jScrollPane1.setViewportView(ListTarjetas);
 
         ListTarjetas.addListSelectionListener((ListSelectionEvent e) -> {
             if (!e.getValueIsAdjusting()) {
-                // Obtener el índice del elemento seleccionado
                 int index = ListTarjetas.getSelectedIndex();
-                // Verificar si se seleccionó algún elemento
                 if (index != -1) {
-                    // Obtener el elemento seleccionado del modelo de lista
                     String cuenta = modeloLista.getElementAt(index);
-                    // Mostrar un mensaje con el elemento seleccionado
                     Tarjeta tarjeta = new Tarjeta(cliente, consultarCuenta(Integer.valueOf(cuenta)), conexion,cuentaDAO);
                     tarjeta.setVisible(true);
                     this.dispose();
