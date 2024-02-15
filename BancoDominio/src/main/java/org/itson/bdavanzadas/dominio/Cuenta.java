@@ -18,6 +18,13 @@ public class Cuenta {
         this.id_cliente = id_cliente;
     }
 
+    public Cuenta(int id_cuenta, int numero, float saldo, int id_cliente) {
+        this.id_cuenta = id_cuenta;
+        this.numero = numero;
+        this.saldo = saldo;
+        this.id_cliente = id_cliente;
+    }
+    
     public Cuenta( int numero, float saldo, int id_cliente) {
         this.numero = numero;
         this.saldo = saldo;

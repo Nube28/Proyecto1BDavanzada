@@ -4,6 +4,8 @@
  */
 package com.mycompany.bancoprestacion;
 
+import org.itson.bdavanzadas.dominio.Cliente;
+
 /**
  *
  * @author Laboratorios
@@ -13,7 +15,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form MenuPrincipal
      */
-    public MenuPrincipal() {
+    public MenuPrincipal(Cliente cliente) {
         initComponents();
     }
 

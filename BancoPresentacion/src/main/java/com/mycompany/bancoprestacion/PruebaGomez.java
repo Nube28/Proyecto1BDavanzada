@@ -52,8 +52,8 @@ public class PruebaGomez {
         try {
             Cliente consultado = clienteDAO.consultarCliente(clienteNuevo.getUsuario(), clienteNuevo.getContrasenia());
             cuentaNueva.setId_cliente(consultado.getId());
-            Cuenta cuentaCreada = cuentaDAO.agregar(cuentaNueva);
-            System.out.println(cuentaCreada);
+            //Cuenta cuentaCreada = cuentaDAO.agregar(cuentaNueva);
+            //System.out.println(cuentaCreada);
             //Cliente clienteAgregado = clienteDAO.agregar(clienteNuevo);
             //logger.log(Level.INFO, clienteAgregado.toString());
         } catch (PersistenciaException pe) {
