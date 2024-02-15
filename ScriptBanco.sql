@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS Clientes (
     fecha_nacimiento DATE,
     edad INT,
     contrasenia INT(50),
-    usuario INT unique AUTO_INCREMENT
+    usuario INT 
 );
 
 DELIMITER //
@@ -22,6 +22,23 @@ BEGIN
     SET NEW.edad = TIMESTAMPDIFF(YEAR, NEW.fecha_nacimiento, CURDATE());
 END;
 //
+
+DELIMITER //
+CREATE TRIGGER incrementar_usuario
+BEFORE INSERT ON Clientes
+FOR EACH ROW
+BEGIN
+    DECLARE max_usuario INT;
+    SELECT MAX(usuario) INTO max_usuario FROM Clientes;
+    
+    IF max_usuario IS NULL THEN
+        SET NEW.usuario = 1;
+    ELSE
+        SET NEW.usuario = max_usuario + 1;
+    END IF;
+END;
+//
+DELIMITER ;
 
 DELIMITER ;
 
@@ -67,7 +84,11 @@ CREATE TABLE IF NOT EXISTS Transacciones (
 
 DELIMITER //
 CREATE TRIGGER generar_fecha_hora
+<<<<<<< Updated upstream
 BEFORE INSERT ON Transacciones
+=======
+Before INSERT ON Transacciones
+>>>>>>> Stashed changes
 FOR EACH ROW
 BEGIN
     SET NEW.fecha = NOW();

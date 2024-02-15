@@ -10,6 +10,8 @@ import org.itson.bdavanzadas.daos.ClienteDAO;
 import org.itson.bdavanzadas.daos.IClienteDAO;
 import org.itson.bdavanzadas.dominio.Cliente;
 import org.itson.bdavanzadas.dtos.ClienteNuevoDTO;
+import org.itson.bdavanzadas.dtos.DireccionNuevaDTO;
+import org.itson.bdavanzadas.excepciones.PersistenciaException;
 
 /**
  *
@@ -327,8 +329,18 @@ public class RegistroCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
-        // TODO add your handling code here:
+        ClienteNuevoDTO clienteNuevoDTO = crearCliente();
+        DireccionNuevaDTO direccionNuevaDTO = crearDireccion();
+        
+        try{
+            clienteDAO.agregar(clienteNuevoDTO);
+            JOptionPane.showMessageDialog(this, "Cliente registrado exitosamente.");
+        }catch(PersistenciaException ex){
+            JOptionPane.showMessageDialog(this, "No se puede agregar al cliente.");
+        }
     }//GEN-LAST:event_btnCrearActionPerformed
+    
+    
     
     private ClienteNuevoDTO crearCliente(){
         ClienteNuevoDTO clienteNuevoDTO = new ClienteNuevoDTO();
@@ -343,7 +355,16 @@ public class RegistroCliente extends javax.swing.JFrame {
         return clienteNuevoDTO;
     }
 
-    private
+    private DireccionNuevaDTO crearDireccion(){
+        DireccionNuevaDTO dn = new DireccionNuevaDTO();
+        dn.setCalle(txfCalle.getText());
+        dn.setCodigo_postal(txfCodigoPostal.getText());
+        dn.setColonia(txfColonia.getText());
+        dn.setNumero_exterior(Integer.valueOf(txfNumExterior.getText()));
+        dn.setNumero_interior(Integer.valueOf(txfNumInterior.getText()));
+        
+        return dn;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCrear;
     private javax.swing.JButton btnVolver;
