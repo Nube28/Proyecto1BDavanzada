@@ -4,16 +4,25 @@
  */
 package com.mycompany.bancoprestacion;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.itson.bdavanzadas.daos.IClienteDAO;
+import org.itson.bdavanzadas.dominio.Cliente;
+import org.itson.bdavanzadas.excepciones.PersistenciaException;
+
 /**
  * @author Berry
  */
 public class PantallaInicial extends javax.swing.JFrame {
 
+    private final IClienteDAO clienteDAO;
+
     /**
      * Creates new form PantallaInicial
      */
-    public PantallaInicial() {
+    public PantallaInicial(IClienteDAO clienteDAO) {
         initComponents();
+        this.clienteDAO = clienteDAO;
     }
 
     /**
@@ -188,18 +197,33 @@ public class PantallaInicial extends javax.swing.JFrame {
 
     private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarseActionPerformed
         // Validacion de q si existe
-        
+
         //inicio.setVisible(true);
         //this.dispose();
     }//GEN-LAST:event_btnRegistrarseActionPerformed
 
     private void btnAccederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccederActionPerformed
-        MenuPrincipal mp = new MenuPrincipal();
-        
+        Cliente cliente = login();
+        if (cliente == null) {
+            return;
+        }
+        MenuPrincipal mp = new MenuPrincipal(cliente);
+
         mp.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnAccederActionPerformed
+    private Cliente login() {
+        Cliente cliente = null;
+        try {
+            String usuario = this.txtIDdeUsuario.getText();
+            String contrasenia = this.txtContraseña.getText();
+            cliente = this.clienteDAO.consultarCliente(usuario, contrasenia);
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(PantallaInicial.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return cliente;
 
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAcceder;
     private javax.swing.JButton btnRegistrarse;
