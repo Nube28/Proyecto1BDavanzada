@@ -84,7 +84,7 @@ public class Transferencia extends javax.swing.JFrame {
 
         txtTitulo.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
         txtTitulo.setForeground(new java.awt.Color(255, 255, 255));
-        txtTitulo.setText("Banco muy importante");
+        txtTitulo.setText("Transferencia");
 
         txtIDeTarjeta.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
         txtIDeTarjeta.setText("Tarjeta ");
@@ -162,7 +162,7 @@ public class Transferencia extends javax.swing.JFrame {
                         .addComponent(panLogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(txtTitulo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 206, Short.MAX_VALUE)
                         .addComponent(panSaludo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panAzulClaroLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
