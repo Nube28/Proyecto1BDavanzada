@@ -4,6 +4,8 @@
  */
 package com.mycompany.bancoprestacion;
 
+import org.itson.bdavanzadas.conexion.IConexion;
+import org.itson.bdavanzadas.daos.ICuentaDAO;
 import org.itson.bdavanzadas.dominio.Cliente;
 import org.itson.bdavanzadas.dominio.Cuenta;
 import org.itson.bdavanzadas.dominio.Transaccion;
@@ -13,12 +15,20 @@ import org.itson.bdavanzadas.dominio.Transaccion;
  * @author natas
  */
 public class ConfirmacionTransferencia extends javax.swing.JFrame {
-
+    private Cliente cliente;
+    private Cuenta cuenta;
+    private ICuentaDAO cuentaDAO;
+    private final IConexion conexion;
     /**
      * Creates new form Confirmacion
      */
-    public ConfirmacionTransferencia(Cliente cliente, Cuenta cuenta, Transaccion transacccion, String cuentaDestino) {
+    public ConfirmacionTransferencia(Cliente cliente, Cuenta cuenta, Transaccion transacccion, String cuentaDestino, ICuentaDAO cuentaDAO, IConexion conexion) {
         initComponents();
+        this.cuentaDAO = cuentaDAO;
+        this.conexion = conexion;
+        this.cuenta = cuenta;
+        this.cliente = cliente;
+        
         String saludo = txtSaludo.getText().replaceAll("Usuario", cliente.getNombres());
         txtSaludo.setText(saludo);
 
@@ -223,8 +233,8 @@ public class ConfirmacionTransferencia extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCrearTarjetasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearTarjetasActionPerformed
-        PantallaInicial pi = new PantallaInicial(clienteDAO,conexion);
-        pi.setVisible(true);
+        Tarjeta tarjeta = new Tarjeta(cliente, cuenta, conexion, cuentaDAO);
+        tarjeta.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnCrearTarjetasActionPerformed
 
