@@ -9,6 +9,8 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -24,6 +26,7 @@ import org.itson.bdavanzadas.conexion.IConexion;
 import org.itson.bdavanzadas.daos.ICuentaDAO;
 import org.itson.bdavanzadas.dominio.Cliente;
 import org.itson.bdavanzadas.dominio.Cuenta;
+import org.itson.bdavanzadas.dominio.Transaccion;
 import org.itson.bdavanzadas.excepciones.PersistenciaException;
 
 /**
@@ -31,7 +34,7 @@ import org.itson.bdavanzadas.excepciones.PersistenciaException;
  * @author Laboratorios
  */
 public class MenuPrincipal extends javax.swing.JFrame {
-    
+
     private DefaultListModel<String> modeloLista = new DefaultListModel<>();
     private Cliente cliente;
     private ICuentaDAO cuentaDAO;
@@ -50,16 +53,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         System.out.println(cliente.getId());
         listarCuentas();
     }
-    
-    private void listarCuentas() {
-// Crear un modelo de lista para la JList
 
-// Agregar elementos al modelo de lista (pueden ser los nombres de los botones)
+    private void listarCuentas() {
+
         List<Cuenta> cuentas = null;
-//        modeloLista.addElement("Botón 1");
-//        modeloLista.addElement("Botón 2");
-//        modeloLista.addElement("Botón 3");
-        
+
         try {
             cuentas = cuentaDAO.consultar(cliente.getId());
         } catch (PersistenciaException pe) {
@@ -74,7 +72,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
 // Agregar la JList al JScrollPane
         jScrollPane1.setViewportView(ListTarjetas);
-        
+
         ListTarjetas.addListSelectionListener((ListSelectionEvent e) -> {
             if (!e.getValueIsAdjusting()) {
                 // Obtener el índice del elemento seleccionado
@@ -82,14 +80,26 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 // Verificar si se seleccionó algún elemento
                 if (index != -1) {
                     // Obtener el elemento seleccionado del modelo de lista
-                    String item = modeloLista.getElementAt(index);
+                    String cuenta = modeloLista.getElementAt(index);
                     // Mostrar un mensaje con el elemento seleccionado
-                    JOptionPane.showMessageDialog(null, "Se hizo clic en: " + item);
+                    Tarjeta tarjeta = new Tarjeta(cliente, consultarCuenta(Integer.valueOf(cuenta)), conexion);
+                    tarjeta.setVisible(true);
+                    this.dispose();
                 }
             }
         });
     }
+
     // Agregar un ActionListener a la JList
+    private Cuenta consultarCuenta(int cuentaNum) {
+        Cuenta cuenta = null;
+        try {
+            cuenta = this.cuentaDAO.consultarCuenta(cuentaNum);
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(PantallaInicial.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return cuenta;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

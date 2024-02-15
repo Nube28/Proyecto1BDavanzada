@@ -89,15 +89,13 @@ public class CuentaDAO implements ICuentaDAO{
     public Cuenta consultarCuenta(int Id_cuenta) throws PersistenciaException {
         String setenciaSQL = 
             """
-                SELECT * FROM cuentas
-                WHERE id = "?";
+                SELECT id,fecha_apertura,numero,saldo,id_cliente FROM cuentas
+                WHERE numero = ?;
             """;
         try(Connection conexion = this.conexionDB.obtenerConexion(); PreparedStatement comando = conexion.prepareStatement( setenciaSQL,Statement.RETURN_GENERATED_KEYS);){
             comando.setInt(1, Id_cuenta);
             ResultSet resultado = comando.executeQuery();
             
-            int numeroRegistrosInsertados = comando.executeUpdate();
-            logger.log(Level.INFO, "Se agrearon {0}", numeroRegistrosInsertados);
             
             Cuenta cuenta = null;
             if(resultado.next()){

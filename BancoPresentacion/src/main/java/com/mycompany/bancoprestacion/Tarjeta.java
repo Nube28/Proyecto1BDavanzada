@@ -4,33 +4,38 @@
  */
 package com.mycompany.bancoprestacion;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.itson.bdavanzadas.conexion.IConexion;
 import org.itson.bdavanzadas.dominio.Cliente;
 import org.itson.bdavanzadas.dominio.Cuenta;
+import org.itson.bdavanzadas.excepciones.PersistenciaException;
 
 /**
  *
  * @author natas
  */
 public class Tarjeta extends javax.swing.JFrame {
-    
+
     private Cliente cliente;
     private Cuenta cuenta;
-    
+    private final IConexion conexion;
+
     /**
      * Creates new form Tarjeta
      */
-    public Tarjeta(Cliente cliente, Cuenta cuenta) {
+    public Tarjeta(Cliente cliente, Cuenta cuenta, IConexion conexion) {
         initComponents();
-        
+
         this.cliente = cliente;
         this.cuenta = cuenta;
-        
+        this.conexion = conexion;
         String saludo = txtSaludo.getText().replaceAll("Usuario", this.cliente.getNombres());
         txtSaludo.setText(saludo);
-        
-        txtSaldoModificar.setText("$"+cuenta.getSaldo());
-        
-        txtIDeTarjeta.setText("Tarjeta "+ cuenta.getNumero());
+
+        txtSaldoModificar.setText("$" + cuenta.getSaldo());
+
+        txtIDeTarjeta.setText("Tarjeta " + cuenta.getNumero());
     }
 
     /**
@@ -280,7 +285,7 @@ public class Tarjeta extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarCuentaActionPerformed
 
     private void btnTransferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransferenciaActionPerformed
-        
+
         Transferencia tr = new Transferencia(cliente, cuenta);
         tr.setVisible(true);
         this.dispose();

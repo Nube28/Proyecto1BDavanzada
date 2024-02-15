@@ -11,6 +11,7 @@ import org.itson.bdavanzadas.daos.CuentaDAO;
 import org.itson.bdavanzadas.daos.IClienteDAO;
 import org.itson.bdavanzadas.daos.ICuentaDAO;
 import org.itson.bdavanzadas.dominio.Cliente;
+import org.itson.bdavanzadas.dominio.Cuenta;
 import org.itson.bdavanzadas.excepciones.PersistenciaException;
 
 /**
@@ -222,7 +223,7 @@ public class PantallaInicial extends javax.swing.JFrame {
         mp.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnAccederActionPerformed
-
+ 
     private void pasContraseñaUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pasContraseñaUsuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_pasContraseñaUsuarioActionPerformed
