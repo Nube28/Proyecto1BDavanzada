@@ -29,6 +29,8 @@ public class Tarjeta extends javax.swing.JFrame {
         txtSaludo.setText(saludo);
         
         txtSaldoModificar.setText("$"+cuenta.getSaldo());
+        
+        txtIDeTarjeta.setText("Tarjeta "+ cuenta.getNumero());
     }
 
     /**

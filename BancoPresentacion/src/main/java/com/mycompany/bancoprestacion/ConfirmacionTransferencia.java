@@ -5,6 +5,7 @@
 package com.mycompany.bancoprestacion;
 
 import org.itson.bdavanzadas.dominio.Cliente;
+import org.itson.bdavanzadas.dominio.Cuenta;
 
 /**
  *
@@ -15,10 +16,12 @@ public class ConfirmacionTransferencia extends javax.swing.JFrame {
     /**
      * Creates new form Confirmacion
      */
-    public ConfirmacionTransferencia(Cliente cliente) {
+    public ConfirmacionTransferencia(Cliente cliente, Cuenta cuenta) {
         initComponents();
         String saludo = txtSaludo.getText().replaceAll("Usuario", cliente.getNombres());
         txtSaludo.setText(saludo);
+        
+        txtIDeTarjeta.setText("Tarjeta "+ cuenta.getNumero());
     }
 
     /**
