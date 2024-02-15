@@ -42,6 +42,18 @@ CREATE TABLE IF NOT EXISTS Transacciones (
     FOREIGN KEY (id_cuenta) REFERENCES Cuentas(id)
 );
 
+DELIMITER //
+
+CREATE TRIGGER generar_fecha_hora
+AFTER INSERT ON Transacciones
+FOR EACH ROW
+BEGIN
+    SET NEW.fecha = NOW();
+END;
+//
+
+DELIMITER ;
+
 CREATE TABLE IF NOT EXISTS Transferencia (
     id_transaccion INT,
     id_cuenta_destino INT,
