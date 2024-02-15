@@ -127,7 +127,6 @@ public class CuentaDAO implements ICuentaDAO {
 
             // Acreditar el monto en la cuenta destino
             String sqlAcreditar = "UPDATE cuentas SET saldo = saldo + ? WHERE numero = ?";
-            System.out.println(numeroReceptor+"asdd");
             try (PreparedStatement resultadoReceptor = conn.prepareStatement(sqlAcreditar)) {
                 resultadoReceptor.setFloat(1, cantidad);
                 resultadoReceptor.setInt(2, numeroReceptor);
