@@ -5,6 +5,7 @@
 package com.mycompany.bancoprestacion;
 
 import org.itson.bdavanzadas.conexion.IConexion;
+import org.itson.bdavanzadas.daos.ICuentaDAO;
 import org.itson.bdavanzadas.dominio.Cliente;
 import org.itson.bdavanzadas.dominio.Cuenta;
 
@@ -17,11 +18,12 @@ public class Movimientos extends javax.swing.JFrame {
     private Cliente cliente;
     private Cuenta cuenta;
     private final IConexion conexion;
+    private ICuentaDAO cuentaDAO;
 
     /**
      * Creates new form Movimientos
      */
-    public Movimientos(Cliente cliente, Cuenta cuenta,IConexion conexion) {
+    public Movimientos(Cliente cliente, Cuenta cuenta, IConexion conexion, ICuentaDAO cuentaDAO) {
         initComponents();
         
         this.cliente = cliente;
@@ -235,8 +237,8 @@ public class Movimientos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        //Tarjeta ta = new Tarjeta(cliente, cuenta);
-        //ta.setVisible(true);
+        Tarjeta ta = new Tarjeta(cliente, cuenta, conexion, cuentaDAO);
+        ta.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
 
