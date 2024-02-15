@@ -4,6 +4,22 @@
  */
 package com.mycompany.bancoprestacion;
 
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 import org.itson.bdavanzadas.dominio.Cliente;
 
 /**
@@ -12,6 +28,8 @@ import org.itson.bdavanzadas.dominio.Cliente;
  */
 public class MenuPrincipal extends javax.swing.JFrame {
 
+    private DefaultListModel<String> modeloLista = new DefaultListModel<>();
+
     /**
      * Creates new form MenuPrincipal
      */
@@ -19,7 +37,41 @@ public class MenuPrincipal extends javax.swing.JFrame {
         initComponents();
         String saludo = txtSaludo.getText().replaceAll("Usuario", cliente.getNombres());
         txtSaludo.setText(saludo);
+        cargarCuentas();
     }
+
+    private void cargarCuentas() {
+// Crear un modelo de lista para la JList
+
+// Agregar elementos al modelo de lista (pueden ser los nombres de los botones)
+        modeloLista.addElement("Botón 1");
+        modeloLista.addElement("Botón 2");
+        modeloLista.addElement("Botón 3");
+
+// Asignar el modelo de lista a la JList
+        ListTarjetas.setModel(modeloLista);
+
+// Agregar la JList al JScrollPane
+        jScrollPane1.setViewportView(ListTarjetas);
+
+        ListTarjetas.addListSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()) {
+                    // Obtener el índice del elemento seleccionado
+                    int index = ListTarjetas.getSelectedIndex();
+                    // Verificar si se seleccionó algún elemento
+                    if (index != -1) {
+                        // Obtener el elemento seleccionado del modelo de lista
+                        String item = modeloLista.getElementAt(index);
+                        // Mostrar un mensaje con el elemento seleccionado
+                        JOptionPane.showMessageDialog(null, "Se hizo clic en: " + item);
+                        System.out.println("adsd");
+                    }
+                }
+            }
+        });
+    }
+    // Agregar un ActionListener a la JList
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -118,11 +170,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         ListTarjetas.setBackground(new java.awt.Color(252, 191, 73));
         ListTarjetas.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
-        ListTarjetas.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "as", "as" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         ListTarjetas.setSelectionBackground(new java.awt.Color(252, 191, 73));
         jScrollPane1.setViewportView(ListTarjetas);
 
@@ -142,18 +189,19 @@ public class MenuPrincipal extends javax.swing.JFrame {
                         .addComponent(panLogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(txtTitulo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 129, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 135, Short.MAX_VALUE)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panAzulClaroLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnCrearTarjetas, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(110, 110, 110)
-                .addComponent(btnCerrarSesion)
-                .addGap(30, 30, 30))
-            .addGroup(panAzulClaroLayout.createSequentialGroup()
-                .addGap(234, 234, 234)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(panAzulClaroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panAzulClaroLayout.createSequentialGroup()
+                        .addComponent(btnCrearTarjetas, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(110, 110, 110)
+                        .addComponent(btnCerrarSesion)
+                        .addGap(30, 30, 30))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panAzulClaroLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(237, 237, 237))))
         );
         panAzulClaroLayout.setVerticalGroup(
             panAzulClaroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
