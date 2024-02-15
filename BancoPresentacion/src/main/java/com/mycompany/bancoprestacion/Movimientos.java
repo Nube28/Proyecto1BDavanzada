@@ -13,11 +13,16 @@ import org.itson.bdavanzadas.dominio.Cuenta;
  */
 public class Movimientos extends javax.swing.JFrame {
 
+    private Cliente cliente;
+    private Cuenta cuenta;
     /**
      * Creates new form Movimientos
      */
     public Movimientos(Cliente cliente, Cuenta cuenta) {
         initComponents();
+        
+        this.cliente = cliente;
+        this.cuenta = cuenta;
         
         String saludo = txtSaludo.getText().replaceAll("Usuario", cliente.getNombres());
         txtSaludo.setText(saludo);
@@ -42,7 +47,10 @@ public class Movimientos extends javax.swing.JFrame {
         txtTitulo = new javax.swing.JLabel();
         txtIDeTarjeta = new javax.swing.JLabel();
         panMensaje = new javax.swing.JPanel();
-        btnSalir = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        btnVolver = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -86,30 +94,58 @@ public class Movimientos extends javax.swing.JFrame {
 
         txtTitulo.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
         txtTitulo.setForeground(new java.awt.Color(255, 255, 255));
-        txtTitulo.setText("Transferencia");
+        txtTitulo.setText("Movimientos");
 
         txtIDeTarjeta.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
         txtIDeTarjeta.setText("Tarjeta ");
 
         panMensaje.setBackground(new java.awt.Color(142, 202, 230));
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Movimientos", "Fecha", "Hora", "Cantidad"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
         javax.swing.GroupLayout panMensajeLayout = new javax.swing.GroupLayout(panMensaje);
         panMensaje.setLayout(panMensajeLayout);
         panMensajeLayout.setHorizontalGroup(
             panMensajeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 680, Short.MAX_VALUE)
+            .addGroup(panMensajeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
+                .addContainerGap())
         );
         panMensajeLayout.setVerticalGroup(
             panMensajeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 90, Short.MAX_VALUE)
+            .addGroup(panMensajeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        btnSalir.setBackground(new java.awt.Color(252, 191, 73));
-        btnSalir.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
-        btnSalir.setText("Salir");
-        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+        btnVolver.setBackground(new java.awt.Color(252, 191, 73));
+        btnVolver.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        btnVolver.setText("Volver");
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalirActionPerformed(evt);
+                btnVolverActionPerformed(evt);
+            }
+        });
+
+        btnBuscar.setBackground(new java.awt.Color(252, 191, 73));
+        btnBuscar.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
             }
         });
 
@@ -117,7 +153,6 @@ public class Movimientos extends javax.swing.JFrame {
         panAzulClaro.setLayout(panAzulClaroLayout);
         panAzulClaroLayout.setHorizontalGroup(
             panAzulClaroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panMensaje, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(panAzulClaroLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addGroup(panAzulClaroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -128,12 +163,15 @@ public class Movimientos extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(panSaludo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panAzulClaroLayout.createSequentialGroup()
-                        .addComponent(txtIDeTarjeta)
-                        .addContainerGap(571, Short.MAX_VALUE))
-                    .addGroup(panAzulClaroLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnSalir)
-                        .addGap(39, 39, 39))))
+                        .addGroup(panAzulClaroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtIDeTarjeta)
+                            .addGroup(panAzulClaroLayout.createSequentialGroup()
+                                .addComponent(panMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(33, 33, 33)
+                                .addGroup(panAzulClaroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnVolver)
+                                    .addComponent(btnBuscar))))
+                        .addContainerGap(24, Short.MAX_VALUE))))
         );
         panAzulClaroLayout.setVerticalGroup(
             panAzulClaroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,11 +187,17 @@ public class Movimientos extends javax.swing.JFrame {
                             .addComponent(panLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(18, 18, 18)
                 .addComponent(txtIDeTarjeta)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
-                .addComponent(btnSalir)
-                .addGap(14, 14, 14))
+                .addGroup(panAzulClaroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panAzulClaroLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnBuscar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnVolver)
+                        .addGap(14, 14, 14))
+                    .addGroup(panAzulClaroLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(panMensaje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
 
         javax.swing.GroupLayout panAzulObscuroLayout = new javax.swing.GroupLayout(panAzulObscuro);
@@ -177,22 +221,31 @@ public class Movimientos extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panAzulObscuro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panAzulObscuro, javax.swing.GroupLayout.DEFAULT_SIZE, 716, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panAzulObscuro, javax.swing.GroupLayout.DEFAULT_SIZE, 413, Short.MAX_VALUE)
+            .addComponent(panAzulObscuro, javax.swing.GroupLayout.DEFAULT_SIZE, 615, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSalirActionPerformed
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        Tarjeta ta = new Tarjeta(cliente, cuenta);
+        ta.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnVolverActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // TODO add your handling code he:
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnSalir;
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnVolver;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JPanel panAzulClaro;
     private javax.swing.JPanel panAzulObscuro;
     private javax.swing.JPanel panLogo;
