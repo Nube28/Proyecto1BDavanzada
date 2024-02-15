@@ -46,7 +46,6 @@ public class FormTransferencia extends javax.swing.JFrame {
         transferenciaDAO = new TransferenciaDAO(conexion);
         String saludo = txtSaludo.getText().replaceAll("Usuario", cliente.getNombres());
         txtSaludo.setText(saludo);
-        System.out.println(cuentaDAO + "dad");
         txtIDeTarjeta.setText("Tarjeta " + cuenta.getNumero());
 
         txtIDeTarjeta.setText("Tarjeta " + cuenta.getNumero() + " Saldo disp. $" + cuenta.getSaldo());
@@ -292,11 +291,23 @@ public class FormTransferencia extends javax.swing.JFrame {
         Transaccion transaccionNueva = crearTransaccion(trasanccionNueva);
         //Creamos la transferencia
         TransferenciaNuevaDTO transferenciaNueva = new TransferenciaNuevaDTO();
-        transferenciaNueva.setCuenta_destino(Integer.valueOf(tfiNumCuenDestino.getText()));
+
+        try {
+            int cuentaDestino = Integer.valueOf(tfiNumCuenDestino.getText());
+            
+            transferenciaNueva.setCuenta_destino(cuentaDAO.consultarCuenta(cuentaDestino).getId_cliente());
+
+        } catch (PersistenciaException pe) {
+
+        }
         transferenciaNueva.setId_transaccion(transaccionNueva.getId());
+
         Transferencia trasferenciaNueva = crearTransferencia(transferenciaNueva);
         try {
-            cuentaDAO.actualizarMontroTransaccion(obtenerCuenta(transferenciaNueva.getId_transaccion()), transferenciaNueva.getCuenta_destino(), Float.parseFloat(tfiCantidad.getText()));
+            System.out.println("transnueva"+transferenciaNueva.getId_transaccion());
+            Cuenta cuentaTransmisor = obtenerCuenta(cuenta.getId_cliente());
+            System.out.println(cuentaTransmisor+"dadsddads");
+            cuentaDAO.actualizarMontroTransaccion(cuentaTransmisor, transferenciaNueva.getCuenta_destino(), Float.parseFloat(tfiCantidad.getText()));
         } catch (PersistenciaException pe) {
             System.out.println(pe);
         }

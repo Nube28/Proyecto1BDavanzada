@@ -37,7 +37,7 @@ public class TransferenciaDAO implements ITransferenciaDAO {
     public Transferencia agregar(TransferenciaNuevaDTO TransferenciaNueva) throws PersistenciaException {
         String setenciaSQL
                 = """
-                INSERT INTO Transferencia(id_transacicon, id_cuenta_destino)
+                INSERT INTO Transferencia(id_transaccion, id_cuenta_destino)
                 VALUES(?, ?);
             """;
         try (Connection conexion = this.conexionDB.obtenerConexion(); PreparedStatement comando = conexion.prepareStatement(setenciaSQL, Statement.RETURN_GENERATED_KEYS);) {
@@ -56,6 +56,11 @@ public class TransferenciaDAO implements ITransferenciaDAO {
             logger.log(Level.INFO, "No se ha podido agregar la transferencia", ex);
             throw new PersistenciaException("No se pudo agregar la transferencia");
         }
+    }
+
+    @Override
+    public Transferencia consultarTransferencia(int cuenta) throws PersistenciaException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

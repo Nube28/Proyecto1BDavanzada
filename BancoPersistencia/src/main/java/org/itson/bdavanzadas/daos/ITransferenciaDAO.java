@@ -17,4 +17,6 @@ public interface ITransferenciaDAO {
 
     Transferencia agregar(TransferenciaNuevaDTO TransferenciaNueva) throws PersistenciaException;
 
+    Transferencia consultarTransferencia(int cuenta) throws PersistenciaException;
+    
 }

@@ -43,9 +43,8 @@ CREATE TABLE IF NOT EXISTS Transacciones (
 );
 
 DELIMITER //
-
 CREATE TRIGGER generar_fecha_hora
-AFTER INSERT ON Transacciones
+BEFORE INSERT ON Transacciones
 FOR EACH ROW
 BEGIN
     SET NEW.fecha = NOW();
