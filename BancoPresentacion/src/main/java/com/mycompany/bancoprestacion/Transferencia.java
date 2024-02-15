@@ -35,8 +35,12 @@ public class Transferencia extends javax.swing.JFrame {
         String saludo = txtSaludo.getText().replaceAll("Usuario", cliente.getNombres());
         txtSaludo.setText(saludo);
         
-        txtIDeTarjeta.setText("Tarjeta " + cuenta.getNumero());
+
+        //txtIDeTarjeta.setText("Tarjeta " + cuenta.getNumero());
         
+
+        //txtIDeTarjeta.setText("Tarjeta "+ cuenta.getNumero()+ " Saldo disp. $" +cuenta.getSaldo());
+
     }
 
     /**
