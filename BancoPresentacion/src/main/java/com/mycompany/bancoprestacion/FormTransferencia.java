@@ -321,7 +321,7 @@ public class FormTransferencia extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTransferirTarjetasActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        Tarjeta tarjeta = new Tarjeta(cliente, cuenta, conexion,cuentaDAO);
+        Tarjeta tarjeta = new Tarjeta(cliente, this.cuenta, conexion,cuentaDAO);
         tarjeta.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed

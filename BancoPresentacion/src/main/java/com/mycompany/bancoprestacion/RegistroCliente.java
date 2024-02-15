@@ -379,7 +379,9 @@ public class RegistroCliente extends javax.swing.JFrame {
         dn.setCodigo_postal(txfCodigoPostal.getText());
         dn.setColonia(txfColonia.getText());
         dn.setNumero_exterior(Integer.valueOf(txfNumExterior.getText()));
-        dn.setNumero_interior(Integer.valueOf(txfNumInterior.getText()));
+        if(!txfNumInterior.getText().equals("")){
+            dn.setNumero_interior(Integer.valueOf(txfNumInterior.getText()));
+        }
         
         return dn;
     }
