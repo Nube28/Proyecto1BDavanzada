@@ -297,12 +297,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void btnCrearTarjetasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearTarjetasActionPerformed
         CuentaNuevaDTO cuentaNDTO = new CuentaNuevaDTO();
-        cuentaNDTO.setSaldo(0);
+        cuentaNDTO.setSaldo(500);
         cuentaNDTO.setId_cliente(cliente.getId());
         
         try {
             Cuenta cuenta = cuentaDAO.agregar(cuentaNDTO);
-            JOptionPane.showMessageDialog(this, "Tarjeta agregada!\nTu numero de Tarjeta es: "+cuenta.getId_cuenta());
+            JOptionPane.showMessageDialog(this, "Tarjeta agregada!");
         } catch (PersistenciaException ex) {
             Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }

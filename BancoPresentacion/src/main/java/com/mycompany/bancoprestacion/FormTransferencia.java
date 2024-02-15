@@ -315,7 +315,7 @@ public class FormTransferencia extends javax.swing.JFrame {
         } catch (PersistenciaException pe) {
             System.out.println(pe);
         }
-        ConfirmacionTransferencia ct = new ConfirmacionTransferencia(cliente, cuenta, transaccionNueva, tfiNumCuenDestino.getText());
+        ConfirmacionTransferencia ct = new ConfirmacionTransferencia(cliente, cuenta, transaccionNueva, tfiNumCuenDestino.getText(), cuentaDAO, conexion);
         ct.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnTransferirTarjetasActionPerformed

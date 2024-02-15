@@ -40,7 +40,6 @@ END;
 //
 DELIMITER ;
 
-DELIMITER ;
 
 CREATE TABLE IF NOT EXISTS Domicilios (
     id INT PRIMARY KEY auto_increment,
@@ -75,17 +74,25 @@ DELIMITER ;
 
 DELIMITER //
 
-CREATE TRIGGER generar_numero_aleatorio
+CREATE TRIGGER incrementar_numero_cuetna
 BEFORE INSERT ON Cuentas
 FOR EACH ROW
 BEGIN
-    DECLARE nuevo_numero INT;
-    SET nuevo_numero = FLOOR(RAND() * 900000) + 100000;
-    SET NEW.numero = nuevo_numero;
+    DECLARE max_numero INT;
+
+    SELECT MAX(numero) INTO max_numero FROM Cuentas;
+
+    IF max_numero IS NULL THEN
+        SET NEW.numero = 1;
+    ELSE
+        SET NEW.numero = max_numero + 1;
+    END IF;
 END;
 //
 
 DELIMITER ;
+
+
 
 CREATE TABLE IF NOT EXISTS Transacciones (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -98,11 +105,7 @@ CREATE TABLE IF NOT EXISTS Transacciones (
 
 DELIMITER //
 CREATE TRIGGER generar_fecha_hora
-<<<<<<< Updated upstream
 BEFORE INSERT ON Transacciones
-=======
-Before INSERT ON Transacciones
->>>>>>> Stashed changes
 FOR EACH ROW
 BEGIN
     SET NEW.fecha = NOW();
