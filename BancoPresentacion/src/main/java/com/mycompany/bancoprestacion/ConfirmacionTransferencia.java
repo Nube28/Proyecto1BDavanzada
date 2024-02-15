@@ -223,7 +223,9 @@ public class ConfirmacionTransferencia extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCrearTarjetasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearTarjetasActionPerformed
-
+        PantallaInicial pi = new PantallaInicial(clienteDAO,conexion);
+        pi.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnCrearTarjetasActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
