@@ -202,8 +202,9 @@ public class PantallaInicial extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRetiroSinCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetiroSinCuentaActionPerformed
-        //.setVisible(true);
-        //this.dispose();
+        FormRetiroSinCuenta rsc = new FormRetiroSinCuenta(clienteDAO, conexion);
+        rsc.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnRetiroSinCuentaActionPerformed
 
     private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarseActionPerformed
