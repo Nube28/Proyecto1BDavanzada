@@ -55,6 +55,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
         txtSaludo.setText(saludo);
         this.conexion = conexion;
         listarCuentas();
+        
+        ListTarjetas.addListSelectionListener((ListSelectionEvent e) -> {
+            if (!e.getValueIsAdjusting()) {
+                int index = ListTarjetas.getSelectedIndex();
+                if (index != -1) {
+                    String cuenta = modeloLista.getElementAt(index);
+                    Tarjeta tarjeta = new Tarjeta(cliente, consultarCuenta(Integer.valueOf(cuenta)), conexion,cuentaDAO);
+                    tarjeta.setVisible(true);
+                    this.dispose();
+                }
+            }
+        });
     }
 
     private void listarCuentas() {
@@ -72,21 +84,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         }
         ListTarjetas.setModel(modeloLista);
         jScrollPane1.setViewportView(ListTarjetas);
-
-        ListTarjetas.addListSelectionListener((ListSelectionEvent e) -> {
-            if (!e.getValueIsAdjusting()) {
-                int index = ListTarjetas.getSelectedIndex();
-                if (index != -1) {
-                    String cuenta = modeloLista.getElementAt(index);
-                    Tarjeta tarjeta = new Tarjeta(cliente, consultarCuenta(Integer.valueOf(cuenta)), conexion,cuentaDAO);
-                    tarjeta.setVisible(true);
-                    this.dispose();
-                }
-            }
-        });
     }
 
-    // Agregar un ActionListener a la JList
     private Cuenta consultarCuenta(int cuentaNum) {
         Cuenta cuenta = null;
         try {
