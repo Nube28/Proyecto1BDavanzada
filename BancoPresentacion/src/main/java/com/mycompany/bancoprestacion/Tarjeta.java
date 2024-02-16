@@ -284,24 +284,24 @@ public class Tarjeta extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnCancelarCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarCuentaActionPerformed
-        //MenuPrincipal mp = new MenuPrincipal(cliente);
-        //mp.setVisible(true);
-        //this.dispose();
+        CancelarCuenta cc = new CancelarCuenta(cliente, cuenta, conexion, cuentaDAO);
+        cc.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnCancelarCuentaActionPerformed
+
+    private void btnMoviminetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoviminetoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnMoviminetoActionPerformed
+
+    private void btnRetirarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetirarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRetirarActionPerformed
 
     private void btnTransferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransferenciaActionPerformed
         FormTransferencia tr = new FormTransferencia(cliente, cuenta, cuentaDAO, conexion);
         tr.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnTransferenciaActionPerformed
-
-    private void btnRetirarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetirarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnRetirarActionPerformed
-
-    private void btnMoviminetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoviminetoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnMoviminetoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelarCuenta;
