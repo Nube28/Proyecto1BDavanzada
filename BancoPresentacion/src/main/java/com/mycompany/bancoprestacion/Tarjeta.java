@@ -290,11 +290,15 @@ public class Tarjeta extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarCuentaActionPerformed
 
     private void btnMoviminetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoviminetoActionPerformed
-        // TODO add your handling code here:
+        Movimientos mov = new Movimientos(cliente, cuenta, conexion, cuentaDAO);
+        mov.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnMoviminetoActionPerformed
 
     private void btnRetirarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetirarActionPerformed
-        // TODO add your handling code here:
+        MontoRetiroSinTarjeta mrst = new MontoRetiroSinTarjeta(cliente, cuenta, conexion, cuentaDAO);
+        mrst.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnRetirarActionPerformed
 
     private void btnTransferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransferenciaActionPerformed
