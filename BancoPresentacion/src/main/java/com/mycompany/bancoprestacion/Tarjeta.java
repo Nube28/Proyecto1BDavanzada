@@ -39,6 +39,8 @@ public class Tarjeta extends javax.swing.JFrame {
         txtSaldoModificar.setText("$" + cuenta.getSaldo());
 
         txtIDeTarjeta.setText("Tarjeta " + cuenta.getNumero());
+        
+        actualizarSaldo();
     }
 
     /**
@@ -306,7 +308,11 @@ public class Tarjeta extends javax.swing.JFrame {
         tr.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnTransferenciaActionPerformed
-
+    
+    private void actualizarSaldo(){
+        txtSaldoModificar.setText("$" + cuenta.getSaldo());
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelarCuenta;
     private javax.swing.JButton btnMovimineto;
