@@ -4,6 +4,10 @@
  */
 package org.itson.bdavanzadas.dtos;
 
+import org.itson.bdavanzadas.utileria.EncriptarContrasenia;
+import org.mindrot.jbcrypt.BCrypt;
+
+
 
 /**
  *
@@ -22,7 +26,8 @@ public class ClienteNuevoDTO {
     }
 
     public void setContrasenia(String contrasenia) {
-        this.contrasenia = contrasenia;
+        this.contrasenia = EncriptarContrasenia.encriptar(contrasenia);
+
     }
 
     public String getNombres() {

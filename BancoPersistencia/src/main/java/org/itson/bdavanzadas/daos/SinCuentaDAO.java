@@ -37,16 +37,16 @@ public class SinCuentaDAO implements ISinCuentaDAO {
                 VALUES(?, ?); 
             """;
         try (Connection conexion = this.conexionDB.obtenerConexion(); PreparedStatement comando = conexion.prepareStatement(setenciaSQL, Statement.RETURN_GENERATED_KEYS);) {
+            comando.setInt(1, sinCuentanNueva.getId_transaccion());
+            comando.setString(2, sinCuentanNueva.getEstado());
 
             int numeroRegistrosInsertados = comando.executeUpdate();
             logger.log(Level.INFO, "Se agrearon {0}", numeroRegistrosInsertados);
-            ResultSet idsGenerados = comando.getGeneratedKeys();
-            int idGenerada = idsGenerados.getInt(1);
             SinCuenta sinCuenta = new SinCuenta(
                     sinCuentanNueva.getId_transaccion(),
                     sinCuentanNueva.getEstado(),
-                    this.consultar(idGenerada).getFolio(),
-                    this.consultar(idGenerada).getContrasenia()
+                    this.consultar(sinCuentanNueva.getId_transaccion()).getFolio(),
+                    this.consultar(sinCuentanNueva.getId_transaccion()).getContrasenia()
             );
 
             return sinCuenta;
@@ -59,7 +59,7 @@ public class SinCuentaDAO implements ISinCuentaDAO {
     @Override
     public SinCuenta consultar(int id_transaccion) throws PersistenciaException {
         String setenciaSQL = """
-                             SELECT folio,contrasenia FROM SinConsulta WHERE id_transaccion=?;
+                             SELECT folio,contrasenia FROM SinCuenta WHERE id_transaccion=?;
                              """;
 
         try (

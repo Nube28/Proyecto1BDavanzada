@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS Clientes (
     apellido_materno VARCHAR(50),
     fecha_nacimiento DATE,
     edad INT,
-    contrasenia INT(50),
+    contrasenia varchar(60),
     usuario INT 
 );
 
