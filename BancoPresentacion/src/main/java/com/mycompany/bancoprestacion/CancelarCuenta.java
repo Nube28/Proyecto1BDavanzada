@@ -12,6 +12,7 @@ import org.itson.bdavanzadas.daos.ICuentaDAO;
 import org.itson.bdavanzadas.dominio.Cliente;
 import org.itson.bdavanzadas.dominio.Cuenta;
 import org.itson.bdavanzadas.excepciones.PersistenciaException;
+import org.itson.bdavanzadas.utileria.EncriptarContrasenia;
 
 /**
  *
@@ -270,7 +271,7 @@ public class CancelarCuenta extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        if(pasContraseñaUsuario.getText().equals(cliente.getContrasenia())){
+        if(EncriptarContrasenia.comprobarContrasenia(pasContraseñaUsuario.getText(), cliente.getContrasenia())){
             try {
                 cuentaDAO.CancelarCuenta(cuenta.getId_cuenta());
             } catch (PersistenciaException ex) {
