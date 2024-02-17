@@ -173,8 +173,18 @@ public class CuentaDAO implements ICuentaDAO {
     }
 
     @Override
-    public void eliminar(String ID) throws PersistenciaException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void CancelarCuenta(int ID) throws PersistenciaException {
+        String setenciaSQL = """
+                UPDATE cuentas 
+                SET activo = false 
+                WHERE id = ?;
+            """;
+        try (Connection conexion = this.conexionDB.obtenerConexion(); PreparedStatement comando = conexion.prepareStatement(setenciaSQL, Statement.RETURN_GENERATED_KEYS);) {
+            comando.setInt(1, ID);
+        } catch (SQLException ex) {
+            logger.log(Level.INFO, "No se pudo cancelar la cuenta", ex);
+            throw new PersistenciaException("No se pudo cancelar la cuenta");
+        }
     }
 
     @Override

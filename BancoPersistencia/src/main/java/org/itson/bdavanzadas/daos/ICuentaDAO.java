@@ -21,7 +21,7 @@ public interface ICuentaDAO {
 
     Cuenta consultarCuenta(int Id_cuenta) throws PersistenciaException;
 
-    void eliminar(String ID) throws PersistenciaException;
+    void CancelarCuenta(int ID) throws PersistenciaException;
 
     Cuenta actualizar(String ID, CuentaNuevaDTO cuentaNueva) throws PersistenciaException;
 

@@ -57,6 +57,7 @@ CREATE TABLE IF NOT EXISTS Cuentas (
     fecha_apertura DATE,
     numero INT UNIQUE,
     saldo FLOAT,
+    activo boolean,
     id_cliente INT,
     FOREIGN KEY (id_cliente) REFERENCES Clientes(id)
 );
@@ -67,6 +68,18 @@ BEFORE INSERT ON Cuentas
 FOR EACH ROW
 BEGIN
     SET NEW.fecha_apertura = NOW();
+END;
+//
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE TRIGGER activar_cuentas
+BEFORE INSERT ON Cuentas
+FOR EACH ROW
+BEGIN
+    SET NEW.activo = true;
 END;
 //
 
