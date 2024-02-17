@@ -130,6 +130,21 @@ CREATE TABLE IF NOT EXISTS SinCuenta (
 );
 
 
-
+DELIMITER $$
+CREATE TRIGGER generar_folio_y_contrasenia
+BEFORE INSERT ON SinCuenta
+FOR EACH ROW
+BEGIN
+    DECLARE nuevo_folio INT;
+    DECLARE nueva_contrasenia CHAR(8);
+    
+    SET nuevo_folio = FLOOR(RAND() * 900000) + 100000; -- Genera un número aleatorio de 6 dígitos
+    SET nueva_contrasenia = LPAD(FLOOR(RAND() * 100000000), 8, '0'); 
+    
+    SET NEW.folio = nuevo_folio;
+    SET NEW.contrasenia = nueva_contrasenia;
+END;
+ $$
+DELIMITER ;
 
 
