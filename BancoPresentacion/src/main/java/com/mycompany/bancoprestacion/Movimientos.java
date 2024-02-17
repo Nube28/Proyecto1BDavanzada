@@ -29,6 +29,8 @@ public class Movimientos extends javax.swing.JFrame {
         this.cliente = cliente;
         this.cuenta = cuenta;
         this.conexion = conexion;
+        this.cuentaDAO = cuentaDAO;
+        
         String saludo = txtSaludo.getText().replaceAll("Usuario", cliente.getNombres());
         txtSaludo.setText(saludo);
         

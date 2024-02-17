@@ -51,9 +51,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         initComponents();
         this.cliente = cliente;
         this.cuentaDAO = cuentaDAO;
+        this.conexion = conexion;
+        
         String saludo = txtSaludo.getText().replaceAll("Usuario", cliente.getNombres());
         txtSaludo.setText(saludo);
-        this.conexion = conexion;
+        
         listarCuentas();
         
         ListTarjetas.addListSelectionListener((ListSelectionEvent e) -> {

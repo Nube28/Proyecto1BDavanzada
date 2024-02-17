@@ -6,6 +6,7 @@ package com.mycompany.bancoprestacion;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static java.util.logging.Logger.getLogger;
 import javax.swing.JOptionPane;
 import org.itson.bdavanzadas.conexion.IConexion;
 import org.itson.bdavanzadas.daos.ICuentaDAO;
@@ -44,7 +45,13 @@ public class MontoRetiroSinTarjeta extends javax.swing.JFrame {
         this.cuentaDAO = cuentaDAO;
         transaccionDAO = new TransaccionDAO(conexion);
         sinCuentaDAO = new SinCuentaDAO(conexion);
+        
         initComponents();
+        
+        String saludo = txtSaludo.getText().replaceAll("Usuario", this.cliente.getNombres());
+        txtSaludo.setText(saludo);
+        
+        txtIDeTarjeta.setText("Tarjeta " + cuenta.getNumero());
     }
 
     /**
@@ -252,7 +259,7 @@ public class MontoRetiroSinTarjeta extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-private boolean validarSaldo() {
+    private boolean validarSaldo() {
 
         try {
             float saldoDisponible = cuentaDAO.consultarCuenta(this.cuenta.getId_cuenta()).getSaldo();

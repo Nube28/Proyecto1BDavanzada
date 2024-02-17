@@ -341,20 +341,20 @@ public class RegistroCliente extends javax.swing.JFrame {
             return;
         }
         DireccionNuevaDTO direccionNuevaDTO = crearDireccion();
-        
-        
-        
+
         try{
             Cliente cliente = clienteDAO.agregar(clienteNuevoDTO);
             
             JOptionPane.showMessageDialog(this, "Cliente registrado!\nTu numero de cliente es: "+cliente.getId());
+            
+            PantallaInicial pi = new PantallaInicial(clienteDAO,conexion);
+            pi.setVisible(true);
+            this.dispose();
         }catch(PersistenciaException ex){
             JOptionPane.showMessageDialog(this, "No se puede agregar al cliente.");
         }
         
-        PantallaInicial pi = new PantallaInicial(clienteDAO,conexion);
-        pi.setVisible(true);
-        this.dispose();
+        
     }//GEN-LAST:event_btnCrearActionPerformed
     
     
@@ -362,14 +362,13 @@ public class RegistroCliente extends javax.swing.JFrame {
     private ClienteNuevoDTO crearCliente(){
         ClienteNuevoDTO clienteNuevoDTO = null;
         if(txfContraseña.getText().equals(txfConfirmarContraseña.getText())){
-        clienteNuevoDTO = new ClienteNuevoDTO();
-        clienteNuevoDTO.setNombres(txfNombre.getText());
-        clienteNuevoDTO.setApellido_paterno(txfApellidoPaterno.getText());
-        clienteNuevoDTO.setApellido_materno(txfApellidoMaterno.getText());
-        clienteNuevoDTO.setNacimiento(txfNacimiento.getText());
+            clienteNuevoDTO = new ClienteNuevoDTO();
+            clienteNuevoDTO.setNombres(txfNombre.getText());
+            clienteNuevoDTO.setApellido_paterno(txfApellidoPaterno.getText());
+            clienteNuevoDTO.setApellido_materno(txfApellidoMaterno.getText());
+            clienteNuevoDTO.setNacimiento(txfNacimiento.getText());
             clienteNuevoDTO.setContrasenia(txfContraseña.getText());
         }
-        
         return clienteNuevoDTO;
     }
 
