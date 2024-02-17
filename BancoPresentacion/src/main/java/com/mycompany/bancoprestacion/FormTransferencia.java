@@ -291,7 +291,7 @@ public class FormTransferencia extends javax.swing.JFrame {
         }
         TransaccionNuevaDTO trasanccionNueva = new TransaccionNuevaDTO();
         trasanccionNueva.setMonto(Float.parseFloat(tfiCantidad.getText()));
-        trasanccionNueva.setTipo(cuentaNum);
+        trasanccionNueva.setTipo("transferencia");
         trasanccionNueva.setId_cuenta(cliente.getId());
         Transaccion transaccionNueva = crearTransaccion(trasanccionNueva);
 

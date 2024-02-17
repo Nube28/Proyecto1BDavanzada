@@ -16,5 +16,7 @@ public interface ISinCuentaDAO {
 
     SinCuenta agregar(SinCuentaNuevaDTO sinCuentanNueva) throws PersistenciaException;
 
+    SinCuenta consultar(int id_transaccion) throws PersistenciaException;
+
     SinCuenta consultarSinCuenta(int folio) throws PersistenciaException;
 }

@@ -40,7 +40,8 @@ public class TransferenciaDAO implements ITransferenciaDAO {
                 INSERT INTO Transferencia(id_transaccion, id_cuenta_destino)
                 VALUES(?, ?);
             """;
-        try (Connection conexion = this.conexionDB.obtenerConexion(); PreparedStatement comando = conexion.prepareStatement(setenciaSQL, Statement.RETURN_GENERATED_KEYS);) {
+        try (Connection conexion = this.conexionDB.obtenerConexion();
+                PreparedStatement comando = conexion.prepareStatement(setenciaSQL, Statement.RETURN_GENERATED_KEYS);) {
             comando.setInt(1, TransferenciaNueva.getId_transaccion());
             comando.setInt(2, TransferenciaNueva.getCuenta_destino());
             int numeroRegistrosInsertados = comando.executeUpdate();
