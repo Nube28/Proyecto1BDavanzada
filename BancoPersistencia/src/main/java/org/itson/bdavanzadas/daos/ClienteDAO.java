@@ -34,8 +34,7 @@ public class ClienteDAO implements IClienteDAO {
                                          VALUES(?,?,?,?,?);
                              """;
         try (
-                Connection conexion = this.conexionDB.obtenerConexion();
-                PreparedStatement comando = conexion.prepareStatement(
+                Connection conexion = this.conexionDB.obtenerConexion(); PreparedStatement comando = conexion.prepareStatement(
                 setenciaSQL,
                 Statement.RETURN_GENERATED_KEYS);) {
             comando.setString(1, clienteNuevo.getContrasenia());
@@ -69,8 +68,36 @@ public class ClienteDAO implements IClienteDAO {
     }
 
     @Override
-    public Cliente consultarCliente(int id) throws PersistenciaException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Cliente consultarCliente(int usuario) throws PersistenciaException {
+        String setenciaSQL = """
+                             SELECT id,usuario,contrasenia,nombres,apellido_paterno,apellido_materno,fecha_nacimiento,edad FROM Clientes WHERE usuario=?;
+                             """;
+
+        try (
+                Connection conexion = this.conexionDB.obtenerConexion(); PreparedStatement comando = conexion.prepareStatement(
+                setenciaSQL);) {
+            comando.setInt(1, usuario);
+            ResultSet resultado = comando.executeQuery();
+
+            Cliente cliente = null;
+            if (resultado.next()) {
+                cliente = new Cliente(
+                        resultado.getInt("id"),
+                        resultado.getString("contrasenia"),
+                        resultado.getString("usuario"),
+                        resultado.getString("nombres"),
+                        resultado.getString("apellido_paterno"),
+                        resultado.getString("apellido_materno"),
+                        resultado.getString("fecha_nacimiento"),
+                        resultado.getInt("edad")
+                );
+            }
+
+            return cliente;
+        } catch (SQLException ex) {
+            logger.log(Level.INFO, "No se pudo obtener el usuario", ex);
+            throw new PersistenciaException("Contraseña o usuario incorrecta");
+        }
     }
 
     @Override
@@ -87,19 +114,19 @@ public class ClienteDAO implements IClienteDAO {
             ResultSet resultado = comando.executeQuery();
 
             Cliente cliente = null;
-            if(resultado.next()){
-                cliente= new Cliente(
-                    resultado.getInt("id"),
-                    resultado.getString("contrasenia"),
-                    resultado.getString("usuario"),
-                    resultado.getString("nombres"),
-                    resultado.getString("apellido_paterno"),
-                    resultado.getString("apellido_materno"),
-                    resultado.getString("fecha_nacimiento"),
-                    resultado.getInt("edad")
-            );
+            if (resultado.next()) {
+                cliente = new Cliente(
+                        resultado.getInt("id"),
+                        resultado.getString("contrasenia"),
+                        resultado.getString("usuario"),
+                        resultado.getString("nombres"),
+                        resultado.getString("apellido_paterno"),
+                        resultado.getString("apellido_materno"),
+                        resultado.getString("fecha_nacimiento"),
+                        resultado.getInt("edad")
+                );
             }
-            
+
             return cliente;
         } catch (SQLException ex) {
             logger.log(Level.INFO, "No se pudo obtener el usuario", ex);

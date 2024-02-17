@@ -14,6 +14,7 @@ import org.itson.bdavanzadas.daos.ICuentaDAO;
 import org.itson.bdavanzadas.dominio.Cliente;
 import org.itson.bdavanzadas.dominio.Cuenta;
 import org.itson.bdavanzadas.excepciones.PersistenciaException;
+import org.itson.bdavanzadas.utileria.EncriptarContrasenia;
 
 /**
  * @author Berry
@@ -22,10 +23,11 @@ public class PantallaInicial extends javax.swing.JFrame {
 
     private final IClienteDAO clienteDAO;
     private final IConexion conexion;
+
     /**
      * Creates new form PantallaInicial
      */
-    public PantallaInicial(IClienteDAO clienteDAO,IConexion conexion) {
+    public PantallaInicial(IClienteDAO clienteDAO, IConexion conexion) {
         initComponents();
         this.clienteDAO = clienteDAO;
         this.conexion = conexion;
@@ -220,21 +222,22 @@ public class PantallaInicial extends javax.swing.JFrame {
             return;
         }
         ICuentaDAO cuentaDAO = new CuentaDAO(conexion);
-        MenuPrincipal mp = new MenuPrincipal(cliente,cuentaDAO,conexion);
+        MenuPrincipal mp = new MenuPrincipal(cliente, cuentaDAO, conexion);
         mp.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnAccederActionPerformed
- 
+
     private void pasContraseñaUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pasContraseñaUsuarioActionPerformed
-        
+
     }//GEN-LAST:event_pasContraseñaUsuarioActionPerformed
     private Cliente login() {
         Cliente cliente = null;
         try {
             String usuario = this.txtUsuario.getText();
             char[] contrasenia = this.pasContraseñaUsuario.getPassword();
-            cliente = this.clienteDAO.consultarCliente(usuario, String.valueOf(contrasenia));
-            System.out.println(contrasenia);
+            cliente = this.clienteDAO.consultarCliente(Integer.valueOf(usuario));
+            System.out.println(EncriptarContrasenia.comprobarContrasenia(String.valueOf(contrasenia), cliente.getContrasenia()));
+
         } catch (PersistenciaException ex) {
             Logger.getLogger(PantallaInicial.class.getName()).log(Level.SEVERE, null, ex);
         }

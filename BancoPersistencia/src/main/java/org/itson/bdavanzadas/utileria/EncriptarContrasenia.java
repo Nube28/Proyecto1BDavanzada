@@ -15,4 +15,8 @@ public class EncriptarContrasenia {
     static public String encriptar(String contrasenia) {
         return BCrypt.hashpw(contrasenia, BCrypt.gensalt());
     }
+
+    static public boolean comprobarContrasenia(String contra1, String contra2) {
+        return BCrypt.checkpw(contra1, contra2);
+    }
 }
