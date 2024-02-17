@@ -9,22 +9,23 @@ package org.itson.bdavanzadas.dominio;
  * @author af_da
  */
 public class SinCuenta {
+
     private int id_transaccion;
     private String estado;
     private int folio;
-    private int contrasenia;
+    private String contrasenia;
 
     public SinCuenta() {
     }
 
-    public SinCuenta(int id_transaccion, String estado, int folio, int contrasenia) {
+    public SinCuenta(int id_transaccion, String estado, int folio, String contrasenia) {
         this.id_transaccion = id_transaccion;
         this.estado = estado;
         this.folio = folio;
         this.contrasenia = contrasenia;
     }
 
-    public SinCuenta(String estado, int folio, int contrasenia) {
+    public SinCuenta(String estado, int folio, String contrasenia) {
         this.estado = estado;
         this.folio = folio;
         this.contrasenia = contrasenia;
@@ -54,11 +55,11 @@ public class SinCuenta {
         this.folio = folio;
     }
 
-    public int getContrasenia() {
+    public String getContrasenia() {
         return contrasenia;
     }
 
-    public void setContrasenia(int contrasenia) {
+    public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
     }
 
@@ -95,6 +96,5 @@ public class SinCuenta {
         sb.append('}');
         return sb.toString();
     }
-    
-    
+
 }

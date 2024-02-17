@@ -4,22 +4,36 @@
  */
 package com.mycompany.bancoprestacion;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.itson.bdavanzadas.conexion.IConexion;
 import org.itson.bdavanzadas.daos.ICuentaDAO;
+import org.itson.bdavanzadas.daos.ISinCuentaDAO;
+import org.itson.bdavanzadas.daos.ITransaccionDAO;
+import org.itson.bdavanzadas.daos.SinCuentaDAO;
+import org.itson.bdavanzadas.daos.TransaccionDAO;
 import org.itson.bdavanzadas.dominio.Cliente;
 import org.itson.bdavanzadas.dominio.Cuenta;
+import org.itson.bdavanzadas.dominio.SinCuenta;
+import org.itson.bdavanzadas.dominio.Transaccion;
+import org.itson.bdavanzadas.dtos.SinCuentaNuevaDTO;
+import org.itson.bdavanzadas.dtos.TransaccionNuevaDTO;
+import org.itson.bdavanzadas.excepciones.PersistenciaException;
 
 /**
  *
  * @author Berry
  */
 public class MontoRetiroSinTarjeta extends javax.swing.JFrame {
+
     private Cliente cliente;
     private Cuenta cuenta;
     private final IConexion conexion;
     private ICuentaDAO cuentaDAO;
-    
+    private ITransaccionDAO transaccionDAO;
+    private ISinCuentaDAO sinCuentaDAO;
+
     /**
      * Creates new form MontoRetiroSinTarjeta
      */
@@ -28,7 +42,8 @@ public class MontoRetiroSinTarjeta extends javax.swing.JFrame {
         this.cuenta = cuenta;
         this.conexion = conexion;
         this.cuentaDAO = cuentaDAO;
-        
+        transaccionDAO = new TransaccionDAO(conexion);
+        sinCuentaDAO = new SinCuentaDAO(conexion);
         initComponents();
     }
 
@@ -237,21 +252,69 @@ public class MontoRetiroSinTarjeta extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+private boolean validarSaldo() {
 
+        try {
+            float saldoDisponible = cuentaDAO.consultarCuenta(this.cuenta.getId_cuenta()).getSaldo();
+            String saldoTransferir = txfMonto.getText();
+            return saldoDisponible > Integer.valueOf(saldoTransferir) && Integer.valueOf(saldoTransferir) > 0;
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(MontoRetiroSinTarjeta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        Tarjeta tarjeta = new Tarjeta(cliente, cuenta, conexion,cuentaDAO);
+
+        Tarjeta tarjeta = new Tarjeta(cliente, cuenta, conexion, cuentaDAO);
         tarjeta.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+
+        if (validarSaldo() == false) {
+            return;
+        }
+        //Creamos la transaccion
+
+        TransaccionNuevaDTO trasanccionNueva = new TransaccionNuevaDTO();
+        trasanccionNueva.setMonto(Float.parseFloat(txfMonto.getText()));
+        trasanccionNueva.setTipo("sin cuenta");
+        trasanccionNueva.setId_cuenta(cliente.getId());
+        Transaccion transaccionNueva = crearTransaccion(trasanccionNueva);
+        //Creamos el Sin Cuenta
+        SinCuentaNuevaDTO sinCuentaNuevaDTO = new SinCuentaNuevaDTO();
+        sinCuentaNuevaDTO.setId_transaccion(transaccionNueva.getId());
+        sinCuentaNuevaDTO.setEstado("pendiente");
+
+        SinCuenta sinCuentaNueva = crearSinCuenta(sinCuentaNuevaDTO);
+
         //if tiene dinero
-        JOptionPane.showMessageDialog(this, "Retiro sin tarjeta Generado\nFolio: "+"\nContraseña: "+"");
-        Tarjeta tarjeta = new Tarjeta(cliente, cuenta, conexion,cuentaDAO);
+        JOptionPane.showMessageDialog(this, "Retiro sin tarjeta Generado\nFolio: " + sinCuentaNueva.getFolio() + "\nContraseña: " + sinCuentaNueva.getContrasenia() + "");
+        Tarjeta tarjeta = new Tarjeta(cliente, cuenta, conexion, cuentaDAO);
         tarjeta.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
+    private Transaccion crearTransaccion(TransaccionNuevaDTO trasanccionNueva) {
+        Transaccion transaccion = null;
+        try {
+            transaccion = this.transaccionDAO.agregar(trasanccionNueva);
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(MontoRetiroSinTarjeta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return transaccion;
+    }
+
+    private SinCuenta crearSinCuenta(SinCuentaNuevaDTO sinCuentaNueva) {
+        SinCuenta sinCuenta = null;
+        try {
+            sinCuenta = this.sinCuentaDAO.agregar(sinCuentaNueva);
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(FormTransferencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return sinCuenta;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnSalir;

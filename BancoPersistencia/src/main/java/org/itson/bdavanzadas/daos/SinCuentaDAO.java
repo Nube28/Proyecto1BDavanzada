@@ -59,7 +59,7 @@ public class SinCuentaDAO implements ISinCuentaDAO {
     @Override
     public SinCuenta consultar(int id_transaccion) throws PersistenciaException {
         String setenciaSQL = """
-                             SELECT * FROM SinConsulta WHERE id_transaccion=?;
+                             SELECT folio,contrasenia FROM SinConsulta WHERE id_transaccion=?;
                              """;
 
         try (
@@ -71,7 +71,7 @@ public class SinCuentaDAO implements ISinCuentaDAO {
             SinCuenta sinCuenta = null;
             if (resultado.next()) {
                 sinCuenta = new SinCuenta();
-                sinCuenta.setEstado(resultado.getString("contrasenia"));
+                sinCuenta.setContrasenia(resultado.getString("contrasenia"));
                 sinCuenta.setFolio(resultado.getInt("folio"));
             }
             return sinCuenta;

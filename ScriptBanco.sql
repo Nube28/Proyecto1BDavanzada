@@ -123,7 +123,7 @@ CREATE TABLE IF NOT EXISTS Transferencia (
 
 CREATE TABLE IF NOT EXISTS SinCuenta (
     id_transaccion INT,
-    estado ENUM('cobrado', 'no cobrado'),
+    estado ENUM('cobrado', 'no cobrado','pendiente'),
     folio INT,
     contrasenia CHAR(8),
     FOREIGN KEY (id_transaccion) REFERENCES Transacciones(id)
