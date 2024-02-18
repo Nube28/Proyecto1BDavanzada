@@ -132,7 +132,15 @@ public class Movimientos extends javax.swing.JFrame {
             new String [] {
                 "Movimientos", "Fecha y Hora", "Cantidad"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         TabMoviemientos.setToolTipText("");
         TabMoviemientos.setGridColor(new java.awt.Color(2, 48, 71));
         TabMoviemientos.setSelectionBackground(new java.awt.Color(142, 202, 230));
