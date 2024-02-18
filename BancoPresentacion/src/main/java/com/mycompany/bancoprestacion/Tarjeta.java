@@ -33,13 +33,14 @@ public class Tarjeta extends javax.swing.JFrame {
         this.cuenta = cuenta;
         this.conexion = conexion;
         this.cuentaDAO = cuentaDAO;
-        
+
+        refrescarCuenta();
         String saludo = txtSaludo.getText().replaceAll("Usuario", this.cliente.getNombres());
         txtSaludo.setText(saludo);
 
-        txtSaldoModificar.setText("$" + cuenta.getSaldo());
+        txtSaldoModificar.setText("$" + this.cuenta.getSaldo());
 
-        txtIDeTarjeta.setText("Tarjeta " + cuenta.getNumero());
+        txtIDeTarjeta.setText("Tarjeta " + this.cuenta.getNumero());
     }
 
     /**
@@ -277,9 +278,15 @@ public class Tarjeta extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    private void refrescarCuenta() {
+        try {
+            this.cuenta = cuentaDAO.consultarCuenta(this.cuenta.getId_cuenta());
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(Tarjeta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        MenuPrincipal mp = new MenuPrincipal(cliente,cuentaDAO,conexion);
+        MenuPrincipal mp = new MenuPrincipal(cliente, cuentaDAO, conexion);
         mp.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
@@ -308,7 +315,7 @@ public class Tarjeta extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnTransferenciaActionPerformed
 
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelarCuenta;
     private javax.swing.JButton btnMovimineto;
