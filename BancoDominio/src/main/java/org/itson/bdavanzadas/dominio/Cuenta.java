@@ -4,35 +4,41 @@ import java.util.Date;
 import java.util.Objects;
 
 public class Cuenta {
+
     private int id_cuenta;
     private String fecha_apertura;
     private int numero;
     private float saldo;
     private int id_cliente;
+    private boolean esta_activo;
 
-    public Cuenta(int id_cuenta, String fecha_apertura, int numero, float saldo, int id_cliente) {
+    public Cuenta(int id_cuenta, String fecha_apertura, int numero, float saldo, int id_cliente, boolean esta_activo) {
         this.id_cuenta = id_cuenta;
         this.fecha_apertura = fecha_apertura;
         this.numero = numero;
         this.saldo = saldo;
         this.id_cliente = id_cliente;
+        this.esta_activo = esta_activo;
     }
 
-    public Cuenta(int id_cuenta, int numero, float saldo, int id_cliente) {
+    public Cuenta(int id_cuenta, int numero, float saldo, int id_cliente, boolean esta_activo) {
         this.id_cuenta = id_cuenta;
         this.saldo = saldo;
         this.id_cliente = id_cliente;
+        this.esta_activo = esta_activo;
     }
-    
-    public Cuenta( int numero, float saldo, int id_cliente) {
+
+    public Cuenta(int numero, float saldo, int id_cliente, boolean esta_activo) {
         this.numero = numero;
         this.saldo = saldo;
         this.id_cliente = id_cliente;
+        this.esta_activo = esta_activo;
+
     }
 
     public Cuenta() {
     }
-    
+
     public int getId_cuenta() {
         return id_cuenta;
     }
@@ -95,7 +101,13 @@ public class Cuenta {
         return this.id_cuenta == other.id_cuenta;
     }
 
+    public boolean isEsta_activo() {
+        return esta_activo;
+    }
 
+    public void setEsta_activo(boolean esta_activo) {
+        this.esta_activo = esta_activo;
+    }
 
     @Override
     public String toString() {
@@ -106,9 +118,11 @@ public class Cuenta {
         sb.append(", numero=").append(numero);
         sb.append(", saldo=").append(saldo);
         sb.append(", id_cliente=").append(id_cliente);
+        sb.append(", esta_activo=").append(esta_activo);
         sb.append('}');
         return sb.toString();
     }
-    
-    
+
+
+
 }
