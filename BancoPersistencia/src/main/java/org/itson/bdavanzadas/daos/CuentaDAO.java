@@ -73,7 +73,7 @@ public class CuentaDAO implements ICuentaDAO {
                         resultados.getInt("numero"),
                         resultados.getFloat("saldo"),
                         resultados.getInt("id_cliente"),
-                        resultados.getBoolean("activo")
+                        resultados.getBoolean("estado")
                 );
                 listaCuenta.add(cuenta);
             }
