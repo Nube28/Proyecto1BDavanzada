@@ -11,13 +11,16 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.itson.bdavanzadas.conexion.IConexion;
 import static org.itson.bdavanzadas.daos.ClienteDAO.logger;
+import static org.itson.bdavanzadas.daos.CuentaDAO.logger;
 import static org.itson.bdavanzadas.daos.TransferenciaDAO.logger;
 import org.itson.bdavanzadas.dominio.Cliente;
+import org.itson.bdavanzadas.dominio.Cuenta;
 import org.itson.bdavanzadas.dominio.Transaccion;
 import org.itson.bdavanzadas.dominio.Transferencia;
 import org.itson.bdavanzadas.dtos.TransaccionNuevaDTO;
@@ -104,7 +107,33 @@ public class TransaccionDAO implements ITransaccionDAO {
     }
     
     @Override
-    public List<Transaccion> consultar() throws PersistenciaException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public List<Transaccion> consultar(int id) throws PersistenciaException {
+        String setenciaSQL = """
+                SELECT * 
+                FROM transacciones
+                WHERE id_cuenta = ?;
+            """;
+        List<Transaccion> listaTransaccion = new LinkedList<>();
+
+        try (Connection conexion = this.conexionDB.obtenerConexion(); PreparedStatement comando = conexion.prepareStatement(setenciaSQL, Statement.RETURN_GENERATED_KEYS);) {
+            comando.setInt(1, id);
+            ResultSet resultados = comando.executeQuery();
+
+            while (resultados.next()) {
+                Transaccion transaccion = new Transaccion(
+                        resultados.getInt("id"),
+                        resultados.getFloat("monto"),
+                        resultados.getString("tipo"),
+                        resultados.getString("fecha"),
+                        resultados.getInt("id_cuenta")
+                );
+                listaTransaccion.add(transaccion);
+            }
+            logger.log(Level.INFO, "Se consulataros {0} Transacciones", listaTransaccion.size());
+            return listaTransaccion;
+        } catch (SQLException ex) {
+            logger.log(Level.INFO, "No se ha podido encontrar las cuentas la cuenta", ex);
+            throw new PersistenciaException("No se ha podido encontrar las cuentas la cuenta");
+        }
     }
 }

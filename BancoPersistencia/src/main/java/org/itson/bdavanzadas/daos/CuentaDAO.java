@@ -77,7 +77,7 @@ public class CuentaDAO implements ICuentaDAO {
                 );
                 listaCuenta.add(cuenta);
             }
-            logger.log(Level.INFO, "Se consulataros {0} socios", listaCuenta.size());
+            logger.log(Level.INFO, "Se consulataros {0} cuentas", listaCuenta.size());
             return listaCuenta;
         } catch (SQLException ex) {
             logger.log(Level.INFO, "No se ha podido encontrar las cuentas la cuenta", ex);

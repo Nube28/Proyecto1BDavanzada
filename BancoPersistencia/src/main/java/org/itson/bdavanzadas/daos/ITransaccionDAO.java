@@ -19,7 +19,7 @@ public interface ITransaccionDAO {
 
     Transaccion consultarTransaccion(int id) throws PersistenciaException;
 
-    List<Transaccion> consultar() throws PersistenciaException;
+    List<Transaccion> consultar(int id) throws PersistenciaException;
     
     
 }
