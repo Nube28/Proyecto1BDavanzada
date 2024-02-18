@@ -6,6 +6,7 @@ package com.mycompany.bancoprestacion;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import org.itson.bdavanzadas.conexion.IConexion;
 import org.itson.bdavanzadas.daos.ClienteDAO;
 import org.itson.bdavanzadas.daos.CuentaDAO;
@@ -20,7 +21,7 @@ import org.itson.bdavanzadas.utileria.EncriptarContrasenia;
  * @author Berry
  */
 public class PantallaInicial extends javax.swing.JFrame {
-
+    
     private final IClienteDAO clienteDAO;
     private final IConexion conexion;
 
@@ -216,10 +217,16 @@ public class PantallaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegistrarseActionPerformed
 
     private void btnAccederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccederActionPerformed
+        if (txtUsuario.getText().equals("") || String.valueOf(pasContraseñaUsuario.getPassword()).equals("")) {
+            JOptionPane.showMessageDialog(this, "Todo los campos deben estar llenos");
+            return;
+        }
+        
         Cliente cliente = login();
         if (cliente == null) {
-            System.out.println(cliente);
+            JOptionPane.showMessageDialog(this, "El usuario o la contraseña no coinciden");
             return;
+            
         }
         ICuentaDAO cuentaDAO = new CuentaDAO(conexion);
         MenuPrincipal mp = new MenuPrincipal(cliente, cuentaDAO, conexion);
@@ -236,13 +243,15 @@ public class PantallaInicial extends javax.swing.JFrame {
             String usuario = this.txtUsuario.getText();
             char[] contrasenia = this.pasContraseñaUsuario.getPassword();
             cliente = this.clienteDAO.consultarCliente(Integer.valueOf(usuario));
-            System.out.println(EncriptarContrasenia.comprobarContrasenia(String.valueOf(contrasenia), cliente.getContrasenia()));
-
+            if (!EncriptarContrasenia.comprobarContrasenia(String.valueOf(contrasenia), cliente.getContrasenia())) {
+                cliente = null;
+            }
+            
         } catch (PersistenciaException ex) {
             Logger.getLogger(PantallaInicial.class.getName()).log(Level.SEVERE, null, ex);
         }
         return cliente;
-
+        
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAcceder;
