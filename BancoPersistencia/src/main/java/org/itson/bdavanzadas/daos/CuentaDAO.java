@@ -43,7 +43,8 @@ public class CuentaDAO implements ICuentaDAO {
             Cuenta cuenta = new Cuenta(
                     idsGenerados.getInt(1),
                     cuentaNueva.getSaldo(),
-                    cuentaNueva.getId_cliente()
+                    cuentaNueva.getId_cliente(),
+                    cuentaNueva.isEsta_activo()
             );
             return cuenta;
         } catch (SQLException ex) {
@@ -71,7 +72,8 @@ public class CuentaDAO implements ICuentaDAO {
                         resultados.getString("fecha_apertura"),
                         resultados.getInt("numero"),
                         resultados.getFloat("saldo"),
-                        resultados.getInt("id_cliente")
+                        resultados.getInt("id_cliente"),
+                        resultados.getBoolean("activo")
                 );
                 listaCuenta.add(cuenta);
             }
@@ -101,7 +103,8 @@ public class CuentaDAO implements ICuentaDAO {
                         resultado.getString("fecha_apertura"),
                         resultado.getInt("numero"),
                         resultado.getFloat("saldo"),
-                        resultado.getInt("id_cliente")
+                        resultado.getInt("id_cliente"),
+                        resultado.getBoolean("activo")
                 );
             }
 
@@ -161,7 +164,8 @@ public class CuentaDAO implements ICuentaDAO {
                         resultado.getString("fecha_apertura"),
                         resultado.getInt("numero"),
                         resultado.getFloat("saldo"),
-                        resultado.getInt("id_cliente")
+                        resultado.getInt("id_cliente"),
+                        resultado.getBoolean("activo")
                 );
             }
 

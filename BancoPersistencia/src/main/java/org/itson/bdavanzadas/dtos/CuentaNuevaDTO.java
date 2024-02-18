@@ -11,7 +11,9 @@ package org.itson.bdavanzadas.dtos;
 public class CuentaNuevaDTO {
     private int saldo;
     private int id_cliente;
-
+    private boolean esta_activo;
+    
+    
     public int getSaldo() {
         return saldo;
     }
@@ -26,6 +28,14 @@ public class CuentaNuevaDTO {
 
     public void setId_cliente(int id_cliente) {
         this.id_cliente = id_cliente;
+    }
+
+    public boolean isEsta_activo() {
+        return esta_activo;
+    }
+
+    public void setEsta_activo(boolean esta_activo) {
+        this.esta_activo = esta_activo;
     }
     
     
