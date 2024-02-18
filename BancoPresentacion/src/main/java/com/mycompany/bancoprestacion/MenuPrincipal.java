@@ -38,7 +38,7 @@ import org.itson.bdavanzadas.excepciones.PersistenciaException;
  * @author Laboratorios
  */
 public class MenuPrincipal extends javax.swing.JFrame {
-
+    
     private DefaultListModel<String> modeloLista = new DefaultListModel<>();
     private Cliente cliente;
     private ICuentaDAO cuentaDAO;
@@ -63,18 +63,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 int index = ListTarjetas.getSelectedIndex();
                 if (index != -1) {
                     String cuenta = modeloLista.getElementAt(index);
-                    Tarjeta tarjeta = new Tarjeta(cliente, consultarCuenta(Integer.valueOf(cuenta)), conexion,cuentaDAO);
+                    Tarjeta tarjeta = new Tarjeta(cliente, consultarCuenta(Integer.valueOf(cuenta)), conexion, cuentaDAO);
                     tarjeta.setVisible(true);
                     this.dispose();
                 }
             }
         });
     }
-
+    
     private void listarCuentas() {
-
+        
         List<Cuenta> cuentas = null;
-
+        
         try {
             cuentas = cuentaDAO.consultar(cliente.getId());
         } catch (PersistenciaException pe) {
@@ -87,7 +87,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         ListTarjetas.setModel(modeloLista);
         jScrollPane1.setViewportView(ListTarjetas);
     }
-
+    
     private Cuenta consultarCuenta(int cuentaNum) {
         Cuenta cuenta = null;
         try {
@@ -289,7 +289,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
         IClienteDAO clienteDAO = new ClienteDAO(conexion);
-        PantallaInicial pi = new PantallaInicial(clienteDAO,conexion);
+        PantallaInicial pi = new PantallaInicial(clienteDAO, conexion);
         pi.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
@@ -298,14 +298,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
         CuentaNuevaDTO cuentaNDTO = new CuentaNuevaDTO();
         cuentaNDTO.setSaldo(500);
         cuentaNDTO.setId_cliente(cliente.getId());
-        
+        cuentaNDTO.setEsta_activo(true);
         try {
             Cuenta cuenta = cuentaDAO.agregar(cuentaNDTO);
             JOptionPane.showMessageDialog(this, "Tarjeta agregada!");
         } catch (PersistenciaException ex) {
             Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-                
         
         modeloLista.removeAllElements();
         listarCuentas();
