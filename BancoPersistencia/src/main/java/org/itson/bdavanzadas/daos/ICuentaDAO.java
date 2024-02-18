@@ -28,4 +28,7 @@ public interface ICuentaDAO {
     Cuenta consultarCuentaId(int id) throws PersistenciaException;
 
     void actualizarMontroTransaccion(Cuenta emisor, int numeroReceptor, float cantidad) throws PersistenciaException;
+
+    void retirarSinCuenta(Cuenta cuenta, float cantidad) throws PersistenciaException;
+
 }

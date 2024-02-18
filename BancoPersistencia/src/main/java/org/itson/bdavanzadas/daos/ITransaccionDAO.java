@@ -17,7 +17,7 @@ public interface ITransaccionDAO {
 
     Transaccion agregar(TransaccionNuevaDTO TransaccionNueva) throws PersistenciaException;
 
-    Transaccion consultarFecha(int id) throws PersistenciaException;
+    Transaccion consultarTransaccion(int id) throws PersistenciaException;
 
     List<Transaccion> consultar() throws PersistenciaException;
     

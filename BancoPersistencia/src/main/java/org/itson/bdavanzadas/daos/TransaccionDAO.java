@@ -29,21 +29,21 @@ import org.itson.bdavanzadas.excepciones.PersistenciaException;
  * @author af_da
  */
 public class TransaccionDAO implements ITransaccionDAO {
-
+    
     final IConexion conexionDB;
     static final Logger logger = Logger.getLogger(TransaccionDAO.class.getName());
-
+    
     public TransaccionDAO(IConexion conexion) {
         this.conexionDB = conexion;
     }
-
+    
     @Override
     public Transaccion agregar(TransaccionNuevaDTO transaccionNueva) throws PersistenciaException {
         String setenciaSQL = """
                              INSERT INTO transacciones(monto,tipo,id_cuenta)
                                          VALUES(?,?,?);
                              """;
-
+        
         try (
                 Connection conexion = this.conexionDB.obtenerConexion(); PreparedStatement comando = conexion.prepareStatement(
                 setenciaSQL,
@@ -51,7 +51,7 @@ public class TransaccionDAO implements ITransaccionDAO {
             comando.setFloat(1, transaccionNueva.getMonto());
             comando.setString(2, transaccionNueva.getTipo());
             comando.setInt(3, transaccionNueva.getId_cuenta());
-
+            
             int numeroRegistrosInsertados = comando.executeUpdate();
             logger.log(Level.INFO, "Se agrearon {0}", numeroRegistrosInsertados);
             ResultSet idsGenerados = comando.getGeneratedKeys();
@@ -61,7 +61,8 @@ public class TransaccionDAO implements ITransaccionDAO {
                     idGenerada,
                     transaccionNueva.getMonto(),
                     transaccionNueva.getTipo(),
-                    this.consultarFecha(idGenerada).getFecha()
+                    this.consultarTransaccion(idGenerada).getFecha(),
+                    transaccionNueva.getId_cuenta()
             );
             return transaccion;
         } catch (SQLException ex) {
@@ -69,26 +70,31 @@ public class TransaccionDAO implements ITransaccionDAO {
             throw new PersistenciaException("No se pudo agregar el socio");
         }
     }
-
+    
     @Override
-    public Transaccion consultarFecha(int id) throws PersistenciaException {
+    public Transaccion consultarTransaccion(int id) throws PersistenciaException {
         String setenciaSQL = """
-                             SELECT fecha FROM transacciones WHERE id=?;
+                             SELECT * FROM transacciones WHERE id=?;
                              """;
-
+        
         try (
                 Connection conexion = this.conexionDB.obtenerConexion(); PreparedStatement comando = conexion.prepareStatement(
                 setenciaSQL);) {
             comando.setLong(1, id);
             ResultSet resultado = comando.executeQuery();
-
+            
             Transaccion transaccion = null;
             if (resultado.next()) {
                 transaccion = new Transaccion();
                 Date fechaSQL = resultado.getDate("fecha");
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 String fechaString = dateFormat.format(fechaSQL);
+                
                 transaccion.setFecha(fechaString);
+                transaccion.setId(resultado.getInt("id"));
+                transaccion.setMonto(resultado.getFloat("monto"));
+                transaccion.setTipo(resultado.getString("tipo"));
+                transaccion.setId_cuenta(resultado.getInt("id_cuenta"));
             }
             return transaccion;
         } catch (SQLException ex) {
@@ -96,7 +102,7 @@ public class TransaccionDAO implements ITransaccionDAO {
             throw new PersistenciaException("Contraseña o usuario incorrecta");
         }
     }
-
+    
     @Override
     public List<Transaccion> consultar() throws PersistenciaException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

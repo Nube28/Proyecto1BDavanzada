@@ -18,5 +18,5 @@ public interface ISinCuentaDAO {
 
     SinCuenta consultar(int id_transaccion) throws PersistenciaException;
 
-    SinCuenta consultarSinCuenta(int folio) throws PersistenciaException;
+    SinCuenta consultarSinCuenta(int folio,String contrasenia) throws PersistenciaException;
 }

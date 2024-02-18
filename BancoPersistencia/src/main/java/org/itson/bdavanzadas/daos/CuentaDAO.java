@@ -197,4 +197,23 @@ public class CuentaDAO implements ICuentaDAO {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    @Override
+    public void retirarSinCuenta(Cuenta cuenta, float cantidad) throws PersistenciaException {
+        try (Connection conexion = conexionDB.obtenerConexion()) {
+            conexion.setAutoCommit(false); // Deshabilitar el autocommit
+
+            String sqlDebitar = "UPDATE cuentas SET saldo = saldo - ? WHERE id = ?";
+            try (PreparedStatement resultadoEmisor = conexion.prepareStatement(sqlDebitar)) {
+                resultadoEmisor.setFloat(1, cantidad);
+                resultadoEmisor.setInt(2, cuenta.getId_cuenta());
+                resultadoEmisor.executeUpdate();
+            }
+            // Confirmar la transacción
+            conexion.commit();
+
+        } catch (SQLException ex) {
+            System.err.println("Error en la transacción: " + ex.getMessage());
+        }
+    }
+
 }

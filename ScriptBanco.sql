@@ -151,7 +151,7 @@ BEGIN
     DECLARE nuevo_folio INT;
     DECLARE nueva_contrasenia CHAR(8);
     
-    SET nuevo_folio = FLOOR(RAND() * 900000) + 100000; -- Genera un número aleatorio de 6 dígitos
+    SET nuevo_folio = FLOOR(RAND() * 900000) + 100000; 
     SET nueva_contrasenia = LPAD(FLOOR(RAND() * 100000000), 8, '0'); 
     
     SET NEW.folio = nuevo_folio;
@@ -160,4 +160,27 @@ END;
  $$
 DELIMITER ;
 
+DELIMITER $$
+
+CREATE PROCEDURE CancelarTransaccion(
+    IN p_folio INT,
+    IN p_contrasenia VARCHAR(8)
+)
+BEGIN
+    DECLARE fecha_actual DATETIME;
+    DECLARE fecha_transaccion DATETIME;
+    DECLARE id_transaccion int;
+    
+    
+    SET fecha_actual = NOW();
+    
+	SELECT id_transaccion INTO id_transaccion FROM SinCuenta WHERE folio = p_folio AND contrasenia = p_contrasenia;
+SELECT fecha INTO fecha_transaccion FROM Transacciones WHERE id = id_transaccion;
+    
+    IF TIMESTAMPDIFF(MINUTE, fecha_transaccion, fecha_actual) >= 10 THEN
+        UPDATE SinCuenta SET estado = 'no cobrado' WHERE id_transaccion = id_transaccion;
+    END IF;
+END $$
+
+DELIMITER ;
 

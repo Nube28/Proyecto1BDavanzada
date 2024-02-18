@@ -4,9 +4,21 @@
  */
 package com.mycompany.bancoprestacion;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.itson.bdavanzadas.conexion.IConexion;
+import org.itson.bdavanzadas.daos.CuentaDAO;
 import org.itson.bdavanzadas.daos.IClienteDAO;
+import org.itson.bdavanzadas.daos.ICuentaDAO;
+import org.itson.bdavanzadas.daos.ISinCuentaDAO;
+import org.itson.bdavanzadas.daos.ITransaccionDAO;
+import org.itson.bdavanzadas.daos.SinCuentaDAO;
+import org.itson.bdavanzadas.daos.TransaccionDAO;
+import org.itson.bdavanzadas.dominio.Cuenta;
+import org.itson.bdavanzadas.dominio.SinCuenta;
+import org.itson.bdavanzadas.dominio.Transaccion;
+import org.itson.bdavanzadas.excepciones.PersistenciaException;
 
 /**
  *
@@ -16,13 +28,20 @@ public class FormRetiroSinCuenta extends javax.swing.JFrame {
 
     private final IClienteDAO clienteDAO;
     private final IConexion conexion;
+    private final ISinCuentaDAO sinCuentaDAO;
+    private final ITransaccionDAO transaccionDAO;
+    private final ICuentaDAO cuentaDAO;
+
     /**
      * Creates new form FormRetiroSinCuenta
      */
-    public FormRetiroSinCuenta(IClienteDAO clienteDAO,IConexion conexion) {
+    public FormRetiroSinCuenta(IClienteDAO clienteDAO, IConexion conexion) {
         initComponents();
         this.clienteDAO = clienteDAO;
         this.conexion = conexion;
+        this.sinCuentaDAO = new SinCuentaDAO(conexion);
+        this.transaccionDAO = new TransaccionDAO(conexion);
+        this.cuentaDAO = new CuentaDAO(conexion);
     }
 
     /**
@@ -210,7 +229,7 @@ public class FormRetiroSinCuenta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        PantallaInicial pi = new PantallaInicial(clienteDAO,conexion);
+        PantallaInicial pi = new PantallaInicial(clienteDAO, conexion);
         pi.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
@@ -219,18 +238,62 @@ public class FormRetiroSinCuenta extends javax.swing.JFrame {
         // primera validacion, que tenga texto Hecha :D
         // segunda validacion, que el folio y la contraseña existan y sean de la misma cosita
         // tercera validacion, el estado debe de ser activo
-        if (!txfFolio.getText().equals("") && !pasContraseña.getText().equals("")){
+        if (!txfFolio.getText().equals("") && !String.valueOf(pasContraseña.getPassword()).equals("")) {
+            this.realizarRetiro();
             JOptionPane.showMessageDialog(this, "Se retiro correctamente");
-            PantallaInicial pi = new PantallaInicial(clienteDAO,conexion);
+            PantallaInicial pi = new PantallaInicial(clienteDAO, conexion);
             pi.setVisible(true);
             this.dispose();
-        }
-        else{
+        } else {
             JOptionPane.showMessageDialog(this, "Ingrese los datos requeridos");
         }
-        
-    }//GEN-LAST:event_btnAceptarActionPerformed
 
+    }//GEN-LAST:event_btnAceptarActionPerformed
+    private SinCuenta obtenerSinCuenta() {
+        SinCuenta sinCuenta = null;
+        try {
+            sinCuenta = this.sinCuentaDAO.consultarSinCuenta(Integer.parseInt(txfFolio.getText()), String.valueOf(pasContraseña.getPassword()));
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(FormRetiroSinCuenta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return sinCuenta;
+    }
+
+    private Transaccion obtenerTransaccion() {
+        Transaccion transaccion = null;
+        SinCuenta sinCuenta = obtenerSinCuenta();
+        try {
+            transaccion = this.transaccionDAO.consultarTransaccion(sinCuenta.getId_transaccion());
+
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(FormRetiroSinCuenta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return transaccion;
+    }
+
+    private Cuenta obtenerCuenta() {
+        Cuenta cuenta = null;
+        Transaccion transaccion = obtenerTransaccion();
+
+        try {
+            cuenta = this.cuentaDAO.consultarCuentaId(transaccion.getId_cuenta());
+            System.out.println(cuenta);
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(PantallaInicial.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return cuenta;
+    }
+
+    private void realizarRetiro() {
+        Transaccion transaccion = obtenerTransaccion();
+        Cuenta cuenta = obtenerCuenta();
+        try {
+            this.cuentaDAO.retirarSinCuenta(cuenta, transaccion.getMonto());
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(FormRetiroSinCuenta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //return cuenta;
+    }
     private void pasContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pasContraseñaActionPerformed
 
     }//GEN-LAST:event_pasContraseñaActionPerformed

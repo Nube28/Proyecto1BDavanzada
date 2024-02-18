@@ -12,29 +12,29 @@ import java.util.Objects;
  * @author af_da
  */
 public class Transaccion {
+
     private int id;
     private float monto;
     private String tipo;
     private String fecha;
+    private int id_cuenta;
 
-    public Transaccion(int id, float monto, String tipo, String fecha) {
+    public Transaccion(int id, float monto, String tipo, String fecha, int id_cuenta) {
         this.id = id;
         this.monto = monto;
         this.tipo = tipo;
         this.fecha = fecha;
+        this.id_cuenta = id_cuenta;
     }
 
     public Transaccion() {
     }
-
-    
 
     public Transaccion(float monto, String tipo, String fecha) {
         this.monto = monto;
         this.tipo = tipo;
         this.fecha = fecha;
     }
-
 
     public int getId() {
         return id;
@@ -67,7 +67,6 @@ public class Transaccion {
     public void setFecha(String fecha) {
         this.fecha = fecha;
     }
-    
 
     @Override
     public int hashCode() {
@@ -90,7 +89,13 @@ public class Transaccion {
         return this.id == other.id;
     }
 
- 
+    public int getId_cuenta() {
+        return id_cuenta;
+    }
+
+    public void setId_cuenta(int id_cuenta) {
+        this.id_cuenta = id_cuenta;
+    }
 
     @Override
     public String toString() {
@@ -104,7 +109,4 @@ public class Transaccion {
         return sb.toString();
     }
 
-    
-    
-    
 }
