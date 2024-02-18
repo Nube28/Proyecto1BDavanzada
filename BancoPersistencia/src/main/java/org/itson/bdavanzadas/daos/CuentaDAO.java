@@ -89,7 +89,7 @@ public class CuentaDAO implements ICuentaDAO {
     public Cuenta consultarCuenta(int Id_cuenta) throws PersistenciaException {
         String setenciaSQL
                 = """
-                SELECT id,fecha_apertura,numero,saldo,id_cliente FROM cuentas
+                SELECT id,fecha_apertura,numero,saldo,id_cliente,activo FROM cuentas
                 WHERE numero = ?;
             """;
         try (Connection conexion = this.conexionDB.obtenerConexion(); PreparedStatement comando = conexion.prepareStatement(setenciaSQL, Statement.RETURN_GENERATED_KEYS);) {
@@ -150,7 +150,7 @@ public class CuentaDAO implements ICuentaDAO {
     public Cuenta consultarCuentaId(int id) throws PersistenciaException {
         String setenciaSQL
                 = """
-                SELECT id,fecha_apertura,numero,saldo,id_cliente FROM cuentas
+                SELECT id,fecha_apertura,numero,saldo,id_cliente,activo FROM cuentas
                 WHERE id = ?;
             """;
         try (Connection conexion = this.conexionDB.obtenerConexion(); PreparedStatement comando = conexion.prepareStatement(setenciaSQL, Statement.RETURN_GENERATED_KEYS);) {
