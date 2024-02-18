@@ -97,7 +97,7 @@ public class SinCuentaDAO implements ISinCuentaDAO {
                 setenciaSQL);) {
 
             //Inicio stored procedure
-            CallableStatement callableStatement = conexion.prepareCall("{call CancelarTransaccion(?,?)}");
+            CallableStatement callableStatement = conexion.prepareCall("{call ActualizarEstadoTransaccion(?,?)}");
             callableStatement.setInt(1, folio);
             callableStatement.setString(2, contrasenia);
             callableStatement.execute();

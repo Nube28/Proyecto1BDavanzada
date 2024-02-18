@@ -162,7 +162,7 @@ DELIMITER ;
 
 DELIMITER $$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `CancelarTransaccion`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ActualizarEstadoTransaccion`(
     IN p_folio INT,
     IN p_contrasenia VARCHAR(8)
 )
@@ -179,6 +179,9 @@ SELECT fecha INTO fecha_transaccion FROM Transacciones WHERE id = transaccion_id
     
     IF TIMESTAMPDIFF(MINUTE, fecha_transaccion, fecha_actual) >= 10 THEN
         UPDATE SinCuenta SET estado = 'no cobrado' WHERE id_transaccion = transaccion_id;
+        ELSE
+        UPDATE SinCuenta SET estado = 'cobrado' WHERE id_transaccion = transaccion_id;
+
     END IF;
 END $$
 
