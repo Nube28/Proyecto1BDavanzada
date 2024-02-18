@@ -4,11 +4,15 @@
  */
 package com.mycompany.bancoprestacion;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.itson.bdavanzadas.conexion.IConexion;
 import org.itson.bdavanzadas.daos.ICuentaDAO;
 import org.itson.bdavanzadas.dominio.Cliente;
 import org.itson.bdavanzadas.dominio.Cuenta;
+import org.itson.bdavanzadas.excepciones.PersistenciaException;
+import org.itson.bdavanzadas.utileria.EncriptarContrasenia;
 
 /**
  *
@@ -267,8 +271,12 @@ public class CancelarCuenta extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        if(pasContraseñaUsuario.getText().equals(cliente.getContrasenia())){
-            //cuenta.setActivo(false); Necesitamso eso en la base de datos
+        if(EncriptarContrasenia.comprobarContrasenia(pasContraseñaUsuario.getText(), cliente.getContrasenia())){
+            try {
+                cuentaDAO.CancelarCuenta(cuenta.getId_cuenta());
+            } catch (PersistenciaException ex) {
+                Logger.getLogger(CancelarCuenta.class.getName()).log(Level.SEVERE, null, ex);
+            }
             JOptionPane.showMessageDialog(this, "Se cancelo la cuenta correctamente");
             MenuPrincipal mp = new MenuPrincipal(cliente,cuentaDAO,conexion);
             mp.setVisible(true);

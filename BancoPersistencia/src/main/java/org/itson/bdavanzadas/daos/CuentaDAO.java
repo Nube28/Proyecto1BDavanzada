@@ -181,6 +181,7 @@ public class CuentaDAO implements ICuentaDAO {
             """;
         try (Connection conexion = this.conexionDB.obtenerConexion(); PreparedStatement comando = conexion.prepareStatement(setenciaSQL, Statement.RETURN_GENERATED_KEYS);) {
             comando.setInt(1, ID);
+            comando.execute();
         } catch (SQLException ex) {
             logger.log(Level.INFO, "No se pudo cancelar la cuenta", ex);
             throw new PersistenciaException("No se pudo cancelar la cuenta");
