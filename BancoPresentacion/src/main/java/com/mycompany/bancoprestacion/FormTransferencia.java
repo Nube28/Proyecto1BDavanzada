@@ -6,6 +6,7 @@ package com.mycompany.bancoprestacion;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import org.itson.bdavanzadas.conexion.IConexion;
 import org.itson.bdavanzadas.daos.ICuentaDAO;
 import org.itson.bdavanzadas.daos.ITransaccionDAO;
@@ -282,11 +283,17 @@ public class FormTransferencia extends javax.swing.JFrame {
     private void btnTransferirTarjetasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransferirTarjetasActionPerformed
         //Creamos la transaccion
         if (validarSaldo() == false) {
+            JOptionPane.showMessageDialog(this, "No dispone del saldo suficiente");
             return;
         }
         String cuentaNum = tfiNumCuenDestino.getText();
         Cuenta cuenta = existenciaCuenta(Integer.valueOf(cuentaNum));
         if (cuenta == null) {
+            JOptionPane.showMessageDialog(this, "Cuenta no encontrada");
+            return;
+        }
+        if (!cuenta.isEsta_activo()){
+            JOptionPane.showMessageDialog(this, "La cuenta esta inactiva");
             return;
         }
         TransaccionNuevaDTO trasanccionNueva = new TransaccionNuevaDTO();

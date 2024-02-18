@@ -82,7 +82,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
             // Manejar la excepción aquí
         }
         for (Cuenta cuenta : cuentas) {
-            modeloLista.addElement(String.valueOf(cuenta.getNumero()));
+            if(cuenta.isEsta_activo()){
+                modeloLista.addElement(String.valueOf(cuenta.getNumero()));
+            }
         }
         ListTarjetas.setModel(modeloLista);
         jScrollPane1.setViewportView(ListTarjetas);

@@ -4,10 +4,18 @@
  */
 package com.mycompany.bancoprestacion;
 
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 import org.itson.bdavanzadas.conexion.IConexion;
 import org.itson.bdavanzadas.daos.ICuentaDAO;
+import org.itson.bdavanzadas.daos.ITransaccionDAO;
+import org.itson.bdavanzadas.daos.TransaccionDAO;
 import org.itson.bdavanzadas.dominio.Cliente;
 import org.itson.bdavanzadas.dominio.Cuenta;
+import org.itson.bdavanzadas.dominio.Transaccion;
+import org.itson.bdavanzadas.excepciones.PersistenciaException;
 
 /**
  *
@@ -19,6 +27,7 @@ public class Movimientos extends javax.swing.JFrame {
     private Cuenta cuenta;
     private final IConexion conexion;
     private ICuentaDAO cuentaDAO;
+    private ITransaccionDAO transaccionDAO;
 
     /**
      * Creates new form Movimientos
@@ -30,11 +39,14 @@ public class Movimientos extends javax.swing.JFrame {
         this.cuenta = cuenta;
         this.conexion = conexion;
         this.cuentaDAO = cuentaDAO;
+        this.transaccionDAO = new TransaccionDAO(conexion);
         
         String saludo = txtSaludo.getText().replaceAll("Usuario", cliente.getNombres());
         txtSaludo.setText(saludo);
         
         txtIDeTarjeta.setText("Tarjeta "+ cuenta.getNumero());
+        
+        insertarDatos();
     }
 
     /**
@@ -55,7 +67,7 @@ public class Movimientos extends javax.swing.JFrame {
         txtIDeTarjeta = new javax.swing.JLabel();
         panMensaje = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TabMoviemientos = new javax.swing.JTable();
         btnVolver = new javax.swing.JButton();
         btnBuscar = new javax.swing.JButton();
 
@@ -108,18 +120,23 @@ public class Movimientos extends javax.swing.JFrame {
 
         panMensaje.setBackground(new java.awt.Color(142, 202, 230));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TabMoviemientos.setBackground(new java.awt.Color(142, 202, 230));
+        TabMoviemientos.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        TabMoviemientos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Movimientos", "Fecha", "Hora", "Cantidad"
+                "Movimientos", "Fecha y Hora", "Cantidad"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        TabMoviemientos.setToolTipText("");
+        TabMoviemientos.setGridColor(new java.awt.Color(2, 48, 71));
+        TabMoviemientos.setSelectionBackground(new java.awt.Color(142, 202, 230));
+        jScrollPane1.setViewportView(TabMoviemientos);
 
         javax.swing.GroupLayout panMensajeLayout = new javax.swing.GroupLayout(panMensaje);
         panMensaje.setLayout(panMensajeLayout);
@@ -247,12 +264,29 @@ public class Movimientos extends javax.swing.JFrame {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code he:
     }//GEN-LAST:event_btnBuscarActionPerformed
-
+    private void insertarDatos() {
+        List<Transaccion> listaTransacciones;
+        try {
+            listaTransacciones = transaccionDAO.consultar(cuenta.getId_cuenta());
+        } catch (PersistenciaException ex) {
+            listaTransacciones = null;
+            Logger.getLogger(Movimientos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        DefaultTableModel modelo = (DefaultTableModel) this.TabMoviemientos.getModel();
+        modelo.setRowCount(0);
+        listaTransacciones.forEach(transaccion -> {
+            Object[] fila = new Object[3];
+            fila[0] = transaccion.getTipo();
+            fila[1] = transaccion.getFecha();
+            fila[2] = "$ "+transaccion.getMonto();
+            modelo.addRow(fila);
+        });
+}
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable TabMoviemientos;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnVolver;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JPanel panAzulClaro;
     private javax.swing.JPanel panAzulObscuro;
     private javax.swing.JPanel panLogo;
