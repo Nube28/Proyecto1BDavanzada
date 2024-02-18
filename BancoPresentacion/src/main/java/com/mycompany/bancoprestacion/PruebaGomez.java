@@ -60,7 +60,7 @@ public class PruebaGomez {
 //            Logger.getLogger(PruebaGomez.class.getName()).log(Level.SEVERE, null, pe);
 //
 //        }
-        PantallaInicial pi = new PantallaInicial(clienteDAO,conexion);
+        PantallaInicial pi = new PantallaInicial(clienteDAO, conexion);
         pi.setVisible(true);
     }
 }

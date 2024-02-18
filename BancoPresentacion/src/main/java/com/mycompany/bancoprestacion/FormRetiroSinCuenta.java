@@ -239,7 +239,11 @@ public class FormRetiroSinCuenta extends javax.swing.JFrame {
         // segunda validacion, que el folio y la contraseña existan y sean de la misma cosita
         // tercera validacion, el estado debe de ser activo
         if (!txfFolio.getText().equals("") && !String.valueOf(pasContraseña.getPassword()).equals("")) {
-            this.realizarRetiro();
+            if (!this.realizarRetiro()) {
+                JOptionPane.showMessageDialog(this, "El folio ha caducado");
+
+                return;
+            }
             JOptionPane.showMessageDialog(this, "Se retiro correctamente");
             PantallaInicial pi = new PantallaInicial(clienteDAO, conexion);
             pi.setVisible(true);
@@ -253,15 +257,22 @@ public class FormRetiroSinCuenta extends javax.swing.JFrame {
         SinCuenta sinCuenta = null;
         try {
             sinCuenta = this.sinCuentaDAO.consultarSinCuenta(Integer.parseInt(txfFolio.getText()), String.valueOf(pasContraseña.getPassword()));
+            if (sinCuenta.getEstado().equalsIgnoreCase("no cobrado")) {
+                return null;
+            }
         } catch (PersistenciaException ex) {
             Logger.getLogger(FormRetiroSinCuenta.class.getName()).log(Level.SEVERE, null, ex);
         }
+
         return sinCuenta;
     }
 
     private Transaccion obtenerTransaccion() {
         Transaccion transaccion = null;
         SinCuenta sinCuenta = obtenerSinCuenta();
+        if (sinCuenta == null) {
+            return null;
+        }
         try {
             transaccion = this.transaccionDAO.consultarTransaccion(sinCuenta.getId_transaccion());
 
@@ -274,7 +285,10 @@ public class FormRetiroSinCuenta extends javax.swing.JFrame {
     private Cuenta obtenerCuenta() {
         Cuenta cuenta = null;
         Transaccion transaccion = obtenerTransaccion();
+        if (transaccion == null) {
 
+            return null;
+        }
         try {
             cuenta = this.cuentaDAO.consultarCuentaId(transaccion.getId_cuenta());
             System.out.println(cuenta);
@@ -284,15 +298,22 @@ public class FormRetiroSinCuenta extends javax.swing.JFrame {
         return cuenta;
     }
 
-    private void realizarRetiro() {
+    private boolean realizarRetiro() {
         Transaccion transaccion = obtenerTransaccion();
+        if (transaccion == null) {
+            return false;
+        }
         Cuenta cuenta = obtenerCuenta();
+        if (cuenta == null) {
+            return false;
+        }
         try {
             this.cuentaDAO.retirarSinCuenta(cuenta, transaccion.getMonto());
+
         } catch (PersistenciaException ex) {
             Logger.getLogger(FormRetiroSinCuenta.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //return cuenta;
+        return true;
     }
     private void pasContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pasContraseñaActionPerformed
 

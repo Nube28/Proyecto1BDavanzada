@@ -264,7 +264,7 @@ public class MontoRetiroSinTarjeta extends javax.swing.JFrame {
         try {
             float saldoDisponible = cuentaDAO.consultarCuenta(this.cuenta.getId_cuenta()).getSaldo();
             String saldoTransferir = txfMonto.getText();
-            return saldoDisponible > Integer.valueOf(saldoTransferir) && Integer.valueOf(saldoTransferir) > 0;
+            return saldoDisponible >= Integer.valueOf(saldoTransferir) && Integer.valueOf(saldoTransferir) > 0;
         } catch (PersistenciaException ex) {
             Logger.getLogger(MontoRetiroSinTarjeta.class.getName()).log(Level.SEVERE, null, ex);
         }

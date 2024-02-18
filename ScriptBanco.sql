@@ -162,23 +162,23 @@ DELIMITER ;
 
 DELIMITER $$
 
-CREATE PROCEDURE CancelarTransaccion(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CancelarTransaccion`(
     IN p_folio INT,
     IN p_contrasenia VARCHAR(8)
 )
 BEGIN
     DECLARE fecha_actual DATETIME;
     DECLARE fecha_transaccion DATETIME;
-    DECLARE id_transaccion int;
+    DECLARE transaccion_id int;
     
     
     SET fecha_actual = NOW();
     
-	SELECT id_transaccion INTO id_transaccion FROM SinCuenta WHERE folio = p_folio AND contrasenia = p_contrasenia;
-SELECT fecha INTO fecha_transaccion FROM Transacciones WHERE id = id_transaccion;
+	SELECT id_transaccion INTO transaccion_id FROM SinCuenta WHERE folio = p_folio AND contrasenia = p_contrasenia;
+SELECT fecha INTO fecha_transaccion FROM Transacciones WHERE id = transaccion_id;
     
     IF TIMESTAMPDIFF(MINUTE, fecha_transaccion, fecha_actual) >= 10 THEN
-        UPDATE SinCuenta SET estado = 'no cobrado' WHERE id_transaccion = id_transaccion;
+        UPDATE SinCuenta SET estado = 'no cobrado' WHERE id_transaccion = transaccion_id;
     END IF;
 END $$
 
