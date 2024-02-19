@@ -4,6 +4,7 @@
  */
 package com.mycompany.bancoprestacion;
 
+import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -133,11 +134,21 @@ public class FormTransferencia extends javax.swing.JFrame {
         txtCantidad.setText("Cantidad:");
 
         tfiCantidad.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        tfiCantidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfiCantidadActionPerformed(evt);
+            }
+        });
+        tfiCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfiCantidadKeyTyped(evt);
+            }
+        });
 
         tfiNumCuenDestino.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
-        tfiNumCuenDestino.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfiNumCuenDestinoActionPerformed(evt);
+        tfiNumCuenDestino.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfiNumCuenDestinoKeyTyped(evt);
             }
         });
 
@@ -268,7 +279,7 @@ public class FormTransferencia extends javax.swing.JFrame {
     private boolean validarSaldo() {
         float saldoDisponible = cuenta.getSaldo();
         String saldoTransferir = tfiCantidad.getText();
-        return saldoDisponible > Integer.valueOf(saldoTransferir) && Integer.valueOf(saldoTransferir) > 0;
+        return saldoDisponible > Float.valueOf(saldoTransferir) && Float.valueOf(saldoTransferir) > 0;
     }
 
     private Cuenta existenciaCuenta(int cuentaNum) {
@@ -286,15 +297,21 @@ public class FormTransferencia extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "No dispone del saldo suficiente");
             return;
         }
-        String cuentaNum = tfiNumCuenDestino.getText();
-        Cuenta cuenta = existenciaCuenta(Integer.valueOf(cuentaNum));
-        if (cuenta == null) {
+        String cuentaNumDestino = tfiNumCuenDestino.getText();
+        Cuenta cuentaDestino = existenciaCuenta(Integer.valueOf(cuentaNumDestino));
+        if (cuentaDestino == null) {
             JOptionPane.showMessageDialog(this, "Cuenta no encontrada");
             return;
         }
-        if (!cuenta.isEsta_activo()){
+        if (!cuentaDestino.isEsta_activo()) {
             JOptionPane.showMessageDialog(this, "La cuenta esta inactiva");
             return;
+        }
+
+        if (cuentaDestino.getId_cuenta() == cuenta.getId_cuenta()) {
+            JOptionPane.showMessageDialog(this, "No se puede transferir a la misma cuenta");
+            return;
+
         }
         TransaccionNuevaDTO trasanccionNueva = new TransaccionNuevaDTO();
         trasanccionNueva.setMonto(Float.parseFloat(tfiCantidad.getText()));
@@ -305,14 +322,9 @@ public class FormTransferencia extends javax.swing.JFrame {
         //Creamos la transferencia
         TransferenciaNuevaDTO transferenciaNueva = new TransferenciaNuevaDTO();
 
-        try {
-            int cuentaDestino = Integer.valueOf(tfiNumCuenDestino.getText());
+        //int cuentaDestino = Integer.valueOf(tfiNumCuenDestino.getText());
+        transferenciaNueva.setCuenta_destino(cuentaDestino.getId_cuenta());
 
-            transferenciaNueva.setCuenta_destino(cuentaDAO.consultarCuenta(cuentaDestino).getId_cuenta());
-
-        } catch (PersistenciaException pe) {
-
-        }
         transferenciaNueva.setId_transaccion(transaccionNueva.getId());
 
         Transferencia trasferenciaNueva = crearTransferencia(transferenciaNueva);
@@ -334,9 +346,37 @@ public class FormTransferencia extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
 
-    private void tfiNumCuenDestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfiNumCuenDestinoActionPerformed
+    private void tfiNumCuenDestinoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfiNumCuenDestinoKeyTyped
+        int key = evt.getKeyChar();
+        boolean numero = key >= 48 && key <= 57;
+
+        if (!numero) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_tfiNumCuenDestinoKeyTyped
+
+    private void tfiCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfiCantidadKeyTyped
+        char c = evt.getKeyChar();
+        boolean isDigit = (c >= '0' && c <= '9');
+        boolean isDot = (c == '.' && !tfiCantidad.getText().contains("."));
+        boolean isBackspace = (c == KeyEvent.VK_BACK_SPACE);
+        boolean isValidInput = isDigit || isDot || isBackspace;
+        if (tfiCantidad.getText().contains(".")) {
+            int dotIndex = tfiCantidad.getText().indexOf(".");
+            int dotPosition = tfiCantidad.getText().length() - dotIndex - 1;
+            if (dotPosition >= 2 && isDigit && tfiCantidad.getText().substring(dotIndex + 1).length() >= 2) {
+                evt.consume();
+                return;
+            }
+        }
+        if (!isValidInput) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_tfiCantidadKeyTyped
+
+    private void tfiCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfiCantidadActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tfiNumCuenDestinoActionPerformed
+    }//GEN-LAST:event_tfiCantidadActionPerformed
     private Transaccion crearTransaccion(TransaccionNuevaDTO trasanccionNueva) {
         Transaccion transaccion = null;
         try {

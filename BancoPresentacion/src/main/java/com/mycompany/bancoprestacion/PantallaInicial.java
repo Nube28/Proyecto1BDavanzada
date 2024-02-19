@@ -4,6 +4,7 @@
  */
 package com.mycompany.bancoprestacion;
 
+import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -91,6 +92,16 @@ public class PantallaInicial extends javax.swing.JFrame {
         });
 
         txtUsuario.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        txtUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUsuarioActionPerformed(evt);
+            }
+        });
+        txtUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtUsuarioKeyTyped(evt);
+            }
+        });
 
         btnAcceder.setBackground(new java.awt.Color(252, 191, 73));
         btnAcceder.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
@@ -205,7 +216,7 @@ public class PantallaInicial extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRetiroSinCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetiroSinCuentaActionPerformed
-        FormRetiroSinCuenta rsc = new FormRetiroSinCuenta(clienteDAO,conexion);
+        FormRetiroSinCuenta rsc = new FormRetiroSinCuenta(clienteDAO, conexion);
         rsc.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRetiroSinCuentaActionPerformed
@@ -237,6 +248,19 @@ public class PantallaInicial extends javax.swing.JFrame {
     private void pasContraseñaUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pasContraseñaUsuarioActionPerformed
 
     }//GEN-LAST:event_pasContraseñaUsuarioActionPerformed
+
+    private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUsuarioActionPerformed
+
+    private void txtUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyTyped
+        int key = evt.getKeyChar();
+        boolean numero = key >= 48 && key <= 57;
+
+        if (!numero) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtUsuarioKeyTyped
     private Cliente login() {
         Cliente cliente = null;
         try {
