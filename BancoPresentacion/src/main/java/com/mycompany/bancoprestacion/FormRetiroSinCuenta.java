@@ -240,7 +240,7 @@ public class FormRetiroSinCuenta extends javax.swing.JFrame {
         // tercera validacion, el estado debe de ser activo
         if (!txfFolio.getText().equals("") && !String.valueOf(pasContraseña.getPassword()).equals("")) {
             if (!this.realizarRetiro()) {
-                JOptionPane.showMessageDialog(this, "El folio ha caducado");
+                JOptionPane.showMessageDialog(this, "El folio ha caducado o ya fue retirado");
 
                 return;
             }
@@ -257,7 +257,7 @@ public class FormRetiroSinCuenta extends javax.swing.JFrame {
         SinCuenta sinCuenta = null;
         try {
             sinCuenta = this.sinCuentaDAO.consultarSinCuenta(Integer.parseInt(txfFolio.getText()), String.valueOf(pasContraseña.getPassword()));
-            if (sinCuenta.getEstado().equalsIgnoreCase("no cobrado")) {
+            if (sinCuenta.getEstado().equalsIgnoreCase("no cobrado") || sinCuenta.getEstado().equalsIgnoreCase("cobrado")) {
                 return null;
             }
         } catch (PersistenciaException ex) {
