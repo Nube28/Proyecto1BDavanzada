@@ -118,11 +118,21 @@ public class FormRetiroSinCuenta extends javax.swing.JFrame {
         txtContraseña.setText("Contraseña:");
 
         txfFolio.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        txfFolio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfFolioKeyTyped(evt);
+            }
+        });
 
         pasContraseña.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
         pasContraseña.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pasContraseñaActionPerformed(evt);
+            }
+        });
+        pasContraseña.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                pasContraseñaKeyTyped(evt);
             }
         });
 
@@ -318,6 +328,24 @@ public class FormRetiroSinCuenta extends javax.swing.JFrame {
     private void pasContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pasContraseñaActionPerformed
 
     }//GEN-LAST:event_pasContraseñaActionPerformed
+
+    private void txfFolioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfFolioKeyTyped
+        int key = evt.getKeyChar();
+        boolean numero = key >= 48 && key <= 57;
+
+        if (!numero) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txfFolioKeyTyped
+
+    private void pasContraseñaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pasContraseñaKeyTyped
+        int key = evt.getKeyChar();
+        boolean numero = key >= 48 && key <= 57;
+
+        if (!numero) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_pasContraseñaKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
