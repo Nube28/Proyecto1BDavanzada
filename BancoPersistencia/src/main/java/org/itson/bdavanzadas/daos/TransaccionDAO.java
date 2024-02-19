@@ -136,4 +136,11 @@ public class TransaccionDAO implements ITransaccionDAO {
             throw new PersistenciaException("No se ha podido encontrar las cuentas la cuenta");
         }
     }
+
+    @Override
+    public List<Transaccion> consultarPeriodo(int id, String desde, String hasta) throws PersistenciaException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+   
 }
