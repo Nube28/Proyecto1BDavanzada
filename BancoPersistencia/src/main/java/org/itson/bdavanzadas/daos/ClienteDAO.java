@@ -135,8 +135,36 @@ public class ClienteDAO implements IClienteDAO {
     }
 
     @Override
-    public Cliente actualizar(ClienteActualizadoDTO socioActualizado) throws PersistenciaException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Cliente actualizar(ClienteNuevoDTO clienteNuevoDTO) throws PersistenciaException {
+        String setenciaSQL = """
+                            UPDATE Clientes
+                            SET nombres = ?
+                            Where id =?
+                             Clientes(contrasenia,nombres,apellido_paterno,apellido_materno,fecha_nacimiento)
+                                         VALUES(?,?,?,?,?);
+                             """;
+        try (
+                Connection conexion = this.conexionDB.obtenerConexion(); PreparedStatement comando = conexion.prepareStatement(
+                setenciaSQL,
+                Statement.RETURN_GENERATED_KEYS);) {
+            comando.setString(1, clienteNuevo.getContrasenia());
+            comando.setString(2, clienteNuevo.getNombres());
+            comando.setString(3, clienteNuevo.getApellido_materno());
+            comando.setString(4, clienteNuevo.getApellido_paterno());
+            comando.setString(5, clienteNuevo.getNacimiento());
+            int numeroRegistrosInsertados = comando.executeUpdate();
+            logger.log(Level.INFO, "Se agrearon {0}", numeroRegistrosInsertados);
+            ResultSet idsGenerados = comando.getGeneratedKeys();
+            idsGenerados.next();
+            Cliente cliente = new Cliente(
+                    idsGenerados.getInt(1),
+                    clienteNuevo.getContrasenia(),
+                    clienteNuevo.getNombres(),
+                    clienteNuevo.getApellido_paterno(),
+                    clienteNuevo.getApellido_materno(),
+                    clienteNuevo.getNacimiento()
+            );
+            return cliente;
     }
 
     @Override
