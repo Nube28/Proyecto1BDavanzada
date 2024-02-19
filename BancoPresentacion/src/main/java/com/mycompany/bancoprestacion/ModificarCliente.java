@@ -6,6 +6,8 @@ package com.mycompany.bancoprestacion;
 
 import javax.swing.JOptionPane;
 import org.itson.bdavanzadas.conexion.IConexion;
+import org.itson.bdavanzadas.daos.ClienteDAO;
+import org.itson.bdavanzadas.daos.CuentaDAO;
 import org.itson.bdavanzadas.daos.IClienteDAO;
 import org.itson.bdavanzadas.daos.ICuentaDAO;
 import org.itson.bdavanzadas.dominio.Cliente;
@@ -18,10 +20,12 @@ import org.itson.bdavanzadas.excepciones.PersistenciaException;
  * @author Laboratorios
  */
 public class ModificarCliente extends javax.swing.JFrame {
+
     private Cliente cliente;
     private ICuentaDAO cuentaDAO;
     private final IConexion conexion;
     private IClienteDAO clienteDAO;
+
     /**
      * Creates new form Modificar
      */
@@ -30,6 +34,7 @@ public class ModificarCliente extends javax.swing.JFrame {
         this.cliente = cliente;
         this.cuentaDAO = cuentaDAO;
         this.conexion = conexion;
+        this.clienteDAO = new ClienteDAO(conexion);
     }
 
     /**
@@ -299,7 +304,7 @@ public class ModificarCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        MenuPrincipal pi = new MenuPrincipal (cliente, cuentaDAO, conexion);
+        MenuPrincipal pi = new MenuPrincipal(cliente, cuentaDAO, conexion);
         pi.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
@@ -309,62 +314,66 @@ public class ModificarCliente extends javax.swing.JFrame {
 
         DireccionNuevaDTO direccionNuevaDTO = actualizarDireccion();
 
-        try{
-            Cliente cliente = clienteDAO.actualizar(clienteNuevoDTO);
+        try {
+            Cliente clienteAct = clienteDAO.actualizar(clienteNuevoDTO, cliente);
 
-            JOptionPane.showMessageDialog(this, "Cliente registrado!\nTu numero de cliente es: "+cliente.getId());
+            JOptionPane.showMessageDialog(this, "Actualizacion de datos Correcta!");
 
-            PantallaInicial pi = new PantallaInicial(clienteDAO,conexion);
+            MenuPrincipal pi = new MenuPrincipal(cliente, cuentaDAO, conexion);
             pi.setVisible(true);
             this.dispose();
-        }catch(PersistenciaException ex){
+        } catch (PersistenciaException ex) {
             JOptionPane.showMessageDialog(this, "No se puede agregar al cliente.");
         }
 
     }//GEN-LAST:event_btnCrearActionPerformed
-    private ClienteNuevoDTO actaulizarCliente(){
-        ClienteNuevoDTO clienteNuevoDTO = null;
-            clienteNuevoDTO = new ClienteNuevoDTO();
-            if(txfNombre.getText() == null){
-                clienteNuevoDTO.setNombres(cliente.getNombres());
-            }
-            else{
-                clienteNuevoDTO.setNombres(txfNombre.getText());
-            }
-            
-            if(txfApellidoPaterno.getText()== null){
-                clienteNuevoDTO.setApellido_paterno(cliente.getApellido_paterno());
-            }
-            else{
-                clienteNuevoDTO.setApellido_paterno(txfApellidoPaterno.getText());
-            }
-            
-            if(txfApellidoMaterno.getText()== null){
-                clienteNuevoDTO.setApellido_materno(cliente.getApellido_materno());
-            }
-            else{
-                clienteNuevoDTO.setApellido_materno(txfApellidoMaterno.getText());
-            }
-            
-            if(txfNacimiento.getText()== null){
-                clienteNuevoDTO.setNacimiento(cliente.getNacimiento());
-            }
-            else{
-                clienteNuevoDTO.setNacimiento(txfNacimiento.getText());
-            }
+    private ClienteNuevoDTO actaulizarCliente() {
+        ClienteNuevoDTO clienteNuevoDTO = new ClienteNuevoDTO();
+        if (txfNombre.getText().equals("")) {
+            clienteNuevoDTO.setNombres(cliente.getNombres());
+        } else {
+            clienteNuevoDTO.setNombres(txfNombre.getText());
+        }
+
+        if (txfApellidoPaterno.getText().equals("")) {
+            clienteNuevoDTO.setApellido_paterno(cliente.getApellido_paterno());
+        } else {
+            clienteNuevoDTO.setApellido_paterno(txfApellidoPaterno.getText());
+        }
+
+        if (txfApellidoMaterno.getText().equals("")) {
+            clienteNuevoDTO.setApellido_materno(cliente.getApellido_materno());
+        } else {
+            clienteNuevoDTO.setApellido_materno(txfApellidoMaterno.getText());
+        }
+
+        if (txfNacimiento.getText().equals("")) {
+            clienteNuevoDTO.setNacimiento(cliente.getNacimiento());
+        } else {
+            clienteNuevoDTO.setNacimiento(txfNacimiento.getText());
+        }
         return clienteNuevoDTO;
     }
 
-    private DireccionNuevaDTO actualizarDireccion(){
+    private DireccionNuevaDTO actualizarDireccion() {
         DireccionNuevaDTO dn = new DireccionNuevaDTO();
-        dn.setCalle(txfCalle.getText());
-        dn.setCodigo_postal(txfCodigoPostal.getText());
-        dn.setColonia(txfColonia.getText());
-        dn.setNumero_exterior(Integer.valueOf(txfNumExterior.getText()));
-        if(!txfNumInterior.getText().equals("")){
+
+        if (!txfCalle.getText().equals("")) {
+            dn.setCalle(txfCalle.getText());
+        }
+        if (!txfCodigoPostal.getText().equals("")) {
+            dn.setCodigo_postal(txfCodigoPostal.getText());
+        }
+        if (!txfColonia.getText().equals("")) {
+            dn.setColonia(txfColonia.getText());
+        }
+        if (!txfNumExterior.getText().equals("")) {
+            dn.setNumero_exterior(Integer.valueOf(txfNumExterior.getText()));
+        }
+        if (!txfNumExterior.getText().equals("")) {
             dn.setNumero_interior(Integer.valueOf(txfNumInterior.getText()));
         }
-        
+
         return dn;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -135,36 +135,38 @@ public class ClienteDAO implements IClienteDAO {
     }
 
     @Override
-    public Cliente actualizar(ClienteNuevoDTO clienteNuevoDTO) throws PersistenciaException {
+    public Cliente actualizar(ClienteNuevoDTO clienteNuevo, Cliente cliente) throws PersistenciaException {
         String setenciaSQL = """
                             UPDATE Clientes
-                            SET nombres = ?
-                            Where id =?
-                             Clientes(contrasenia,nombres,apellido_paterno,apellido_materno,fecha_nacimiento)
-                                         VALUES(?,?,?,?,?);
+                            SET nombres = ?,
+                                apellido_paterno = ?,
+                                apellido_materno = ?,
+                                fecha_nacimiento = ?
+                            WHERE id = ?
                              """;
-        try (
-                Connection conexion = this.conexionDB.obtenerConexion(); PreparedStatement comando = conexion.prepareStatement(
-                setenciaSQL,
-                Statement.RETURN_GENERATED_KEYS);) {
-            comando.setString(1, clienteNuevo.getContrasenia());
-            comando.setString(2, clienteNuevo.getNombres());
-            comando.setString(3, clienteNuevo.getApellido_materno());
-            comando.setString(4, clienteNuevo.getApellido_paterno());
-            comando.setString(5, clienteNuevo.getNacimiento());
+        try (Connection conexion = this.conexionDB.obtenerConexion(); PreparedStatement comando = conexion.prepareStatement( setenciaSQL, Statement.RETURN_GENERATED_KEYS);){
+            comando.setString(1, clienteNuevo.getNombres());
+            comando.setString(2, clienteNuevo.getApellido_materno());
+            comando.setString(3, clienteNuevo.getApellido_paterno());
+            comando.setString(4, clienteNuevo.getNacimiento());
+            comando.setInt(5, cliente.getId());
+            
             int numeroRegistrosInsertados = comando.executeUpdate();
-            logger.log(Level.INFO, "Se agrearon {0}", numeroRegistrosInsertados);
-            ResultSet idsGenerados = comando.getGeneratedKeys();
-            idsGenerados.next();
-            Cliente cliente = new Cliente(
-                    idsGenerados.getInt(1),
-                    clienteNuevo.getContrasenia(),
+            logger.log(Level.INFO, "Se actualizaron {0}", numeroRegistrosInsertados);
+            
+            Cliente clienteAct = new Cliente(
+                    cliente.getId(),
+                    cliente.getContrasenia(),
                     clienteNuevo.getNombres(),
                     clienteNuevo.getApellido_paterno(),
                     clienteNuevo.getApellido_materno(),
                     clienteNuevo.getNacimiento()
             );
-            return cliente;
+            return clienteAct;
+        } catch (SQLException ex) {
+            logger.log(Level.INFO, "No se pudo actualizar", ex);
+            throw new PersistenciaException("No se pudo actualizar");
+        }
     }
 
     @Override

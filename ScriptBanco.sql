@@ -23,6 +23,14 @@ BEGIN
 END;
 //
 
+CREATE TRIGGER actualizar_edad_cliente
+BEFORE UPDATE ON Clientes
+FOR EACH ROW
+BEGIN
+    SET NEW.edad = TIMESTAMPDIFF(YEAR, NEW.fecha_nacimiento, CURDATE());
+END;
+//
+
 DELIMITER //
 CREATE TRIGGER incrementar_usuario
 BEFORE INSERT ON Clientes

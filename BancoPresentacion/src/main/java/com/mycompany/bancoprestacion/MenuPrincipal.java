@@ -313,7 +313,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCrearTarjetasActionPerformed
 
     private void btnOpcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpcionesActionPerformed
-        // TODO add your handling code here:
+        ModificarCliente mc = new ModificarCliente(cliente, cuentaDAO, conexion);
+        mc.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnOpcionesActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
