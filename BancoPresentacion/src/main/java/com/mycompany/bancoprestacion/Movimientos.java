@@ -70,6 +70,13 @@ public class Movimientos extends javax.swing.JFrame {
         TabMoviemientos = new javax.swing.JTable();
         btnVolver = new javax.swing.JButton();
         btnBuscar = new javax.swing.JButton();
+        txfDesde = new javax.swing.JTextField();
+        txfHasta = new javax.swing.JTextField();
+        txtDesde = new javax.swing.JLabel();
+        txtHasta = new javax.swing.JLabel();
+        txtaaaammdd = new javax.swing.JLabel();
+        txtaaaammddd = new javax.swing.JLabel();
+        txtFiltrado = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -181,6 +188,25 @@ public class Movimientos extends javax.swing.JFrame {
             }
         });
 
+        txfDesde.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+
+        txfHasta.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+
+        txtDesde.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
+        txtDesde.setText("Desde");
+
+        txtHasta.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
+        txtHasta.setText("Hasta");
+
+        txtaaaammdd.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        txtaaaammdd.setText("(aaaa-mm-dd)");
+
+        txtaaaammddd.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        txtaaaammddd.setText("(aaaa-mm-dd)");
+
+        txtFiltrado.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
+        txtFiltrado.setText("Filtrado");
+
         javax.swing.GroupLayout panAzulClaroLayout = new javax.swing.GroupLayout(panAzulClaro);
         panAzulClaro.setLayout(panAzulClaroLayout);
         panAzulClaroLayout.setHorizontalGroup(
@@ -195,15 +221,40 @@ public class Movimientos extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(panSaludo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panAzulClaroLayout.createSequentialGroup()
+                        .addComponent(txtIDeTarjeta)
+                        .addContainerGap())
+                    .addGroup(panAzulClaroLayout.createSequentialGroup()
+                        .addComponent(panMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(panAzulClaroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtIDeTarjeta)
                             .addGroup(panAzulClaroLayout.createSequentialGroup()
-                                .addComponent(panMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(33, 33, 33)
+                                .addGap(18, 18, 18)
                                 .addGroup(panAzulClaroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnVolver)
-                                    .addComponent(btnBuscar))))
-                        .addContainerGap(24, Short.MAX_VALUE))))
+                                    .addGroup(panAzulClaroLayout.createSequentialGroup()
+                                        .addGroup(panAzulClaroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txfDesde)
+                                            .addComponent(txfHasta)
+                                            .addGroup(panAzulClaroLayout.createSequentialGroup()
+                                                .addGroup(panAzulClaroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addGroup(panAzulClaroLayout.createSequentialGroup()
+                                                        .addComponent(txtHasta)
+                                                        .addGap(18, 18, 18)
+                                                        .addComponent(txtaaaammddd))
+                                                    .addGroup(panAzulClaroLayout.createSequentialGroup()
+                                                        .addComponent(txtDesde)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                        .addComponent(txtaaaammdd)))
+                                                .addGap(0, 12, Short.MAX_VALUE)))
+                                        .addContainerGap())
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panAzulClaroLayout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addGroup(panAzulClaroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(btnVolver)
+                                            .addComponent(btnBuscar))
+                                        .addGap(62, 62, 62))))
+                            .addGroup(panAzulClaroLayout.createSequentialGroup()
+                                .addGap(57, 57, 57)
+                                .addComponent(txtFiltrado)
+                                .addGap(0, 0, Short.MAX_VALUE))))))
         );
         panAzulClaroLayout.setVerticalGroup(
             panAzulClaroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -222,10 +273,24 @@ public class Movimientos extends javax.swing.JFrame {
                 .addGroup(panAzulClaroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panAzulClaroLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtFiltrado)
+                        .addGap(33, 33, 33)
+                        .addGroup(panAzulClaroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtDesde)
+                            .addComponent(txtaaaammdd))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txfDesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(panAzulClaroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtHasta)
+                            .addComponent(txtaaaammddd))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txfHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
                         .addComponent(btnBuscar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnVolver)
-                        .addGap(14, 14, 14))
+                        .addGap(15, 15, 15))
                     .addGroup(panAzulClaroLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(panMensaje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -253,7 +318,7 @@ public class Movimientos extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panAzulObscuro, javax.swing.GroupLayout.DEFAULT_SIZE, 716, Short.MAX_VALUE)
+            .addComponent(panAzulObscuro, javax.swing.GroupLayout.DEFAULT_SIZE, 789, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,7 +335,7 @@ public class Movimientos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        // TODO add your handling code he:
+        
     }//GEN-LAST:event_btnBuscarActionPerformed
     private void insertarDatos() {
         List<Transaccion> listaTransacciones;
@@ -300,8 +365,15 @@ public class Movimientos extends javax.swing.JFrame {
     private javax.swing.JPanel panLogo;
     private javax.swing.JPanel panMensaje;
     private javax.swing.JPanel panSaludo;
+    private javax.swing.JTextField txfDesde;
+    private javax.swing.JTextField txfHasta;
+    private javax.swing.JLabel txtDesde;
+    private javax.swing.JLabel txtFiltrado;
+    private javax.swing.JLabel txtHasta;
     private javax.swing.JLabel txtIDeTarjeta;
     private javax.swing.JLabel txtSaludo;
     private javax.swing.JLabel txtTitulo;
+    private javax.swing.JLabel txtaaaammdd;
+    private javax.swing.JLabel txtaaaammddd;
     // End of variables declaration//GEN-END:variables
 }

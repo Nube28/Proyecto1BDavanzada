@@ -21,5 +21,6 @@ public interface ITransaccionDAO {
 
     List<Transaccion> consultar(int id) throws PersistenciaException;
     
+    List<Transaccion> consultarPeriodo(int id, String desde, String hasta) throws PersistenciaException;
     
 }
