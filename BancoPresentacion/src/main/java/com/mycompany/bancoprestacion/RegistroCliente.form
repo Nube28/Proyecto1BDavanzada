@@ -28,7 +28,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="panAzulObscuro" alignment="0" pref="416" max="32767" attributes="0"/>
+          <Component id="panAzulObscuro" alignment="0" pref="419" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -226,15 +226,18 @@
                           </Group>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="txtContraseña" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txfContraseña" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txfContraseña" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtConfirmarContraseña" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txfConfirmarContraseña" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="txtConfirmarContraseña" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="txfConfirmarContraseña" min="-2" pref="33" max="-2" attributes="0"/>
+                              <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="8" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnVolver" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnCrear" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -313,6 +316,9 @@
                   <Font name="Comic Sans MS" size="18" style="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfNombreKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="txtApellidoPaterno">
               <Properties>
@@ -328,6 +334,9 @@
                   <Font name="Comic Sans MS" size="18" style="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfApellidoPaternoKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="txtApellidoMaterno">
               <Properties>
@@ -343,6 +352,9 @@
                   <Font name="Comic Sans MS" size="18" style="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfApellidoMaternoKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="txtNacimiento">
               <Properties>
@@ -358,6 +370,10 @@
                   <Font name="Comic Sans MS" size="18" style="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txfNacimientoActionPerformed"/>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfNacimientoKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="txtContrase&#xf1;a">
               <Properties>
@@ -367,26 +383,12 @@
                 <Property name="text" type="java.lang.String" value="Contrase&#xf1;a"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txfContrase&#xf1;a">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Comic Sans MS" size="18" style="0"/>
-                </Property>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JLabel" name="txtConfirmarContrase&#xf1;a">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Comic Sans MS" size="24" style="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Confirmar Contrase&#xf1;a"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="txfConfirmarContrase&#xf1;a">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Comic Sans MS" size="18" style="0"/>
-                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="txtCalle">
@@ -418,6 +420,9 @@
                   <Font name="Comic Sans MS" size="18" style="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfCodigoPostalKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="txtColonia">
               <Properties>
@@ -448,6 +453,9 @@
                   <Font name="Comic Sans MS" size="18" style="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfNumExteriorKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="txtNumInterior">
               <Properties>
@@ -463,6 +471,16 @@
                   <Font name="Comic Sans MS" size="18" style="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfNumInteriorKeyTyped"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JPasswordField" name="txfContrase&#xf1;a">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txfContrase&#xf1;aActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JPasswordField" name="txfConfirmarContrase&#xf1;a">
             </Component>
           </SubComponents>
         </Container>
