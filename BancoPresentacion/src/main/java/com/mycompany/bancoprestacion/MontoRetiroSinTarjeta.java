@@ -45,12 +45,12 @@ public class MontoRetiroSinTarjeta extends javax.swing.JFrame {
         this.cuentaDAO = cuentaDAO;
         transaccionDAO = new TransaccionDAO(conexion);
         sinCuentaDAO = new SinCuentaDAO(conexion);
-        
+
         initComponents();
-        
+
         String saludo = txtSaludo.getText().replaceAll("Usuario", this.cliente.getNombres());
         txtSaludo.setText(saludo);
-        
+
         txtIDeTarjeta.setText("Tarjeta " + cuenta.getNumero());
     }
 
@@ -302,7 +302,14 @@ public class MontoRetiroSinTarjeta extends javax.swing.JFrame {
         tarjeta.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnAceptarActionPerformed
-
+    /**
+     * Crea una nueva transacción utilizando la información proporcionada en un
+     * objeto TransaccionNuevaDTO. 
+     *
+     * @param trasanccionNueva El objeto TransaccionNuevaDTO que contiene la
+     * información de la nueva transacción.
+     * @return El objeto Transaccion creado y persistido en la base de datos.
+     */
     private Transaccion crearTransaccion(TransaccionNuevaDTO trasanccionNueva) {
         Transaccion transaccion = null;
         try {
@@ -313,6 +320,14 @@ public class MontoRetiroSinTarjeta extends javax.swing.JFrame {
         return transaccion;
     }
 
+    /**
+     * Crea una nueva cuenta sin asociar a un cliente utilizando la información
+     * proporcionada en un objeto SinCuentaNuevaDTO. 
+     *
+     * @param sinCuentaNueva SinCuentaNuevaDTO que contiene la
+     * información de la nueva cuenta.
+     * @return El objeto SinCuenta creado y persistido en la base de datos.
+     */
     private SinCuenta crearSinCuenta(SinCuentaNuevaDTO sinCuentaNueva) {
         SinCuenta sinCuenta = null;
         try {
