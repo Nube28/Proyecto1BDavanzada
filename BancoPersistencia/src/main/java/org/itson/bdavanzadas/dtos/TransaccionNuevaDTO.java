@@ -1,3 +1,6 @@
+/**
+ * TransaccionNuevaDTO.java
+ */
 package org.itson.bdavanzadas.dtos;
 
 import java.util.Date;
@@ -11,6 +14,12 @@ public class TransaccionNuevaDTO {
     private String tipo;
     private String fecha;
     private int id_cuenta;
+
+    /**
+     * Constructor por defecto de la clase TransaccionNuevaDTO.
+     */
+    public TransaccionNuevaDTO() {
+    }
 
     /**
      * Obtiene el monto de la transacción.

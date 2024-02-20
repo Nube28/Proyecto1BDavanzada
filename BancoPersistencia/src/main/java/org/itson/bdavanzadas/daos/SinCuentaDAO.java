@@ -18,7 +18,7 @@ import org.itson.bdavanzadas.excepciones.PersistenciaException;
 
 /**
  * Esta clase proporciona métodos para acceder y manipular datos de
- * transacciones de retiro sin cuenta en una capa de acceso a datos (DAO)
+ * SinCuentaDAO de retiro sin cuenta en una capa de acceso a datos (DAO)
  *
  */
 public class SinCuentaDAO implements ISinCuentaDAO {
@@ -27,7 +27,7 @@ public class SinCuentaDAO implements ISinCuentaDAO {
     static final Logger logger = Logger.getLogger(SinCuentaDAO.class.getName());
 
     /**
-     * Construye un nuevo objeto CuentaDAO con la conexión especificada.
+     * Construye un nuevo objeto SinCuentaDAO con la conexión especificada.
      *
      * @param conexion La conexión a la base de datos que se utilizará para
      * interactuar con las cuentas.

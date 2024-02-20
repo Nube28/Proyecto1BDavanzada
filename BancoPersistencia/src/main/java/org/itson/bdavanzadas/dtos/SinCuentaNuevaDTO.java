@@ -1,3 +1,6 @@
+/**
+ * SinCuentaNuevaDTO.java
+ */
 package org.itson.bdavanzadas.dtos;
 
 /**
@@ -9,6 +12,12 @@ public class SinCuentaNuevaDTO {
     private String estado;
     private int folio;
     private int contrasenia;
+
+    /**
+     * Constructor por defecto de la clase SinCuentaNuevaDTO.
+     */
+    public SinCuentaNuevaDTO() {
+    }
 
     /**
      * Obtiene el estado de la transacción sin cuenta asociada.

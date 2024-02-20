@@ -1,3 +1,6 @@
+/**
+ * EncriptarContrasenia.java
+ */
 package org.itson.bdavanzadas.utileria;
 
 import org.mindrot.jbcrypt.BCrypt;
@@ -7,6 +10,12 @@ import org.mindrot.jbcrypt.BCrypt;
  * utilizando el algoritmo BCrypt.
  */
 public class EncriptarContrasenia {
+
+    /**
+     * Constructor por defecto de la clase EncriptarContrasenia.
+     */
+    public EncriptarContrasenia() {
+    }
 
     /**
      * Encripta una contraseña utilizando el algoritmo BCrypt.
@@ -29,4 +38,5 @@ public class EncriptarContrasenia {
     static public boolean comprobarContrasenia(String contra1, String contra2) {
         return BCrypt.checkpw(contra1, contra2);
     }
+
 }

@@ -1,3 +1,6 @@
+/**
+ * PersistenciaException.java
+ */
 package org.itson.bdavanzadas.excepciones;
 
 /**

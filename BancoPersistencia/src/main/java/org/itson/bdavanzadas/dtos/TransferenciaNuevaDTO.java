@@ -1,3 +1,6 @@
+/**
+ * TransferenciaNuevaDTO.java
+ */
 package org.itson.bdavanzadas.dtos;
 
 /**
@@ -7,6 +10,12 @@ public class TransferenciaNuevaDTO {
 
     private int id_transaccion;
     private int cuenta_destino;
+
+    /**
+     * Constructor por defecto de la clase TransferenciaNuevaDTO.
+     */
+    public TransferenciaNuevaDTO() {
+    }
 
     /**
      * Obtiene el ID de la transacción.

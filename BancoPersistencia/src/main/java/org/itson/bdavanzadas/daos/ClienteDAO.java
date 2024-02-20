@@ -17,8 +17,8 @@ import org.itson.bdavanzadas.dtos.ClienteNuevoDTO;
 import org.itson.bdavanzadas.excepciones.PersistenciaException;
 
 /**
- *
- * @author af_da
+ * Esta clase proporciona métodos para acceder y manipular datos de clientes en
+ * una capa de acceso a datos.
  */
 public class ClienteDAO implements IClienteDAO {
 
@@ -26,7 +26,7 @@ public class ClienteDAO implements IClienteDAO {
     static final Logger logger = Logger.getLogger(ClienteDAO.class.getName());
 
     /**
-     * Construye un nuevo objeto CuentaDAO con la conexión especificada.
+     * Construye un nuevo objeto ClienteDAO con la conexión especificada.
      *
      * @param conexion La conexión a la base de datos que se utilizará para
      * interactuar con las cuentas.
