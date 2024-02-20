@@ -51,7 +51,6 @@ public class RegistroCliente extends javax.swing.JFrame {
         panAzulObscuro = new javax.swing.JPanel();
         panAzulClaro = new javax.swing.JPanel();
         panLogo = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         txtTitulo = new javax.swing.JLabel();
         txtINombre = new javax.swing.JLabel();
         btnVolver = new javax.swing.JButton();
@@ -85,19 +84,15 @@ public class RegistroCliente extends javax.swing.JFrame {
 
         panAzulClaro.setBackground(new java.awt.Color(33, 158, 188));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/multimedia/LogoMuyImportantePqueñ.png"))); // NOI18N
-
         javax.swing.GroupLayout panLogoLayout = new javax.swing.GroupLayout(panLogo);
         panLogo.setLayout(panLogoLayout);
         panLogoLayout.setHorizontalGroup(
             panLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panLogoLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGap(0, 69, Short.MAX_VALUE)
         );
         panLogoLayout.setVerticalGroup(
             panLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2)
+            .addGap(0, 73, Short.MAX_VALUE)
         );
 
         txtTitulo.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
@@ -526,12 +521,9 @@ public class RegistroCliente extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCrear;
     private javax.swing.JButton btnVolver;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel panAzulClaro;
     private javax.swing.JPanel panAzulObscuro;
     private javax.swing.JPanel panLogo;
-    private javax.swing.JPanel panLogo1;
     private javax.swing.JTextField txfApellidoMaterno;
     private javax.swing.JTextField txfApellidoPaterno;
     private javax.swing.JTextField txfCalle;
