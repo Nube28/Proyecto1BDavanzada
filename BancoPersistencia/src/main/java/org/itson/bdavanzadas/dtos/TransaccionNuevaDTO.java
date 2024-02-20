@@ -1,3 +1,6 @@
+/**
+ * TransaccionNuevaDTO.java
+ */
 package org.itson.bdavanzadas.dtos;
 
 import java.util.Date;

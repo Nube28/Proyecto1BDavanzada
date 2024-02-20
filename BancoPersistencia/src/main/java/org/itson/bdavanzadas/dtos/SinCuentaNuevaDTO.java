@@ -1,3 +1,6 @@
+/**
+ * SinCuentaNuevaDTO.java
+ */
 package org.itson.bdavanzadas.dtos;
 
 /**

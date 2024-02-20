@@ -1,3 +1,6 @@
+/**
+ * EncriptarContrasenia.java
+ */
 package org.itson.bdavanzadas.utileria;
 
 import org.mindrot.jbcrypt.BCrypt;
