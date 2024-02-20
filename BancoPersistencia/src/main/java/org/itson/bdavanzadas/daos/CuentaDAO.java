@@ -117,29 +117,29 @@ public class CuentaDAO implements ICuentaDAO {
 
     @Override
     public void actualizarMontroTransaccion(Cuenta emisor, int numeroReceptor, float cantidad) throws PersistenciaException {
-        try (Connection conn = conexionDB.obtenerConexion()) {
-            conn.setAutoCommit(false); // Deshabilitar el autocommit
+        try (Connection conexion = conexionDB.obtenerConexion()) {
+            conexion.setAutoCommit(false); // Deshabilitar el autocommit
             if (emisor.getSaldo() > cantidad) {
-                conn.rollback();
+                conexion.rollback();
             }
             // Debitar el monto de la cuenta origen
-            String sqlDebitar = "UPDATE cuentas SET saldo = saldo - ? WHERE id = ?";
-            try (PreparedStatement resultadoEmisor = conn.prepareStatement(sqlDebitar)) {
+            String consultaDisminuir = "UPDATE cuentas SET saldo = saldo - ? WHERE id = ?";
+            try (PreparedStatement resultadoEmisor = conexion.prepareStatement(consultaDisminuir)) {
                 resultadoEmisor.setFloat(1, cantidad);
                 resultadoEmisor.setInt(2, emisor.getId_cuenta());
                 resultadoEmisor.executeUpdate();
             }
 
             // Acreditar el monto en la cuenta destino
-            String sqlAcreditar = "UPDATE cuentas SET saldo = saldo + ? WHERE numero = ?";
-            try (PreparedStatement resultadoReceptor = conn.prepareStatement(sqlAcreditar)) {
+            String consultaAumentar = "UPDATE cuentas SET saldo = saldo + ? WHERE numero = ?";
+            try (PreparedStatement resultadoReceptor = conexion.prepareStatement(consultaAumentar)) {
                 resultadoReceptor.setFloat(1, cantidad);
                 resultadoReceptor.setInt(2, numeroReceptor);
                 resultadoReceptor.executeUpdate();
             }
 
             // Confirmar la transacción
-            conn.commit();
+            conexion.commit();
 
             System.out.println("Transferencia completada con éxito.");
         } catch (SQLException ex) {
@@ -203,7 +203,9 @@ public class CuentaDAO implements ICuentaDAO {
     public void retirarSinCuenta(Cuenta cuenta, float cantidad) throws PersistenciaException {
         try (Connection conexion = conexionDB.obtenerConexion()) {
             conexion.setAutoCommit(false); // Deshabilitar el autocommit
-
+            if (cuenta.getSaldo() > cantidad) {
+                conexion.rollback();
+            }
             String sqlDebitar = "UPDATE cuentas SET saldo = saldo - ? WHERE id = ?";
             try (PreparedStatement resultadoEmisor = conexion.prepareStatement(sqlDebitar)) {
                 resultadoEmisor.setFloat(1, cantidad);
