@@ -25,7 +25,7 @@ import org.itson.bdavanzadas.excepciones.PersistenciaException;
  * @author Laboratorios
  */
 public class ModificarCliente extends javax.swing.JFrame {
-
+    
     private Cliente cliente;
     private ICuentaDAO cuentaDAO;
     private final IConexion conexion;
@@ -54,11 +54,11 @@ public class ModificarCliente extends javax.swing.JFrame {
         txfNacimiento.setText(cliente.getNacimiento());
         txfNombre.setText(cliente.getNombres());
         txfCalle.setText(domicilio.getCalle());
-        txfCodigoPostal.setText(domicilio.getCodigo_postal()+"");
+        txfCodigoPostal.setText(domicilio.getCodigo_postal() + "");
         txfColonia.setText(domicilio.getColonia());
-        txfNumExterior.setText(domicilio.getNumero_exterior()+"");
-        txfNumInterior.setText(domicilio.getNumero_interioro()+"");
-
+        txfNumExterior.setText(domicilio.getNumero_exterior() + "");
+        txfNumInterior.setText(domicilio.getNumero_interioro() + "");
+        
     }
 
     /**
@@ -349,16 +349,21 @@ public class ModificarCliente extends javax.swing.JFrame {
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
         ClienteNuevoDTO clienteNuevoDTO = actaulizarCliente();
-
+        
         DomicilioNuevoDTO domicilioNuevoDTO = new DomicilioNuevoDTO();
-
+        domicilioNuevoDTO.setCalle(txfCalle.getText());
+        domicilioNuevoDTO.setCodigo_postal(Integer.valueOf(txfCodigoPostal.getText()));
+        domicilioNuevoDTO.setColonia(txfColonia.getText());
+        domicilioNuevoDTO.setId_cliente(cliente.getId());
+        domicilioNuevoDTO.setNumero_exterior(Integer.valueOf(txfNumExterior.getText()));
+        domicilioNuevoDTO.setNumero_interior(Integer.valueOf(txfNumInterior.getText()));
         try {
             Cliente clienteAct = clienteDAO.actualizar(clienteNuevoDTO, cliente);
             
             Domicilio domicilioAct = domicilioDAO.actualizar(domicilioNuevoDTO, domicilio);
             
             JOptionPane.showMessageDialog(this, "Actualizacion de datos Correcta!");
-
+            
             MenuPrincipal pi = new MenuPrincipal(cliente, cuentaDAO, conexion);
             pi.setVisible(true);
             this.dispose();
@@ -381,19 +386,19 @@ public class ModificarCliente extends javax.swing.JFrame {
         } else {
             clienteNuevoDTO.setNombres(txfNombre.getText());
         }
-
+        
         if (txfApellidoPaterno.getText().equals("")) {
             clienteNuevoDTO.setApellido_paterno(cliente.getApellido_paterno());
         } else {
             clienteNuevoDTO.setApellido_paterno(txfApellidoPaterno.getText());
         }
-
+        
         if (txfApellidoMaterno.getText().equals("")) {
             clienteNuevoDTO.setApellido_materno(cliente.getApellido_materno());
         } else {
             clienteNuevoDTO.setApellido_materno(txfApellidoMaterno.getText());
         }
-
+        
         if (txfNacimiento.getText().equals("")) {
             clienteNuevoDTO.setNacimiento(cliente.getNacimiento());
         } else {
@@ -411,7 +416,7 @@ public class ModificarCliente extends javax.swing.JFrame {
      */
     private DomicilioNuevoDTO actualizarDireccion() {
         DomicilioNuevoDTO dn = new DomicilioNuevoDTO();
-
+        
         if (!txfCalle.getText().equals("")) {
             dn.setCalle(txfCalle.getText());
         }
