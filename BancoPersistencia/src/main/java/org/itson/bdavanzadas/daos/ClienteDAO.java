@@ -13,7 +13,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.itson.bdavanzadas.conexion.IConexion;
 import org.itson.bdavanzadas.dominio.Cliente;
-import org.itson.bdavanzadas.dtos.ClienteActualizadoDTO;
 import org.itson.bdavanzadas.dtos.ClienteNuevoDTO;
 import org.itson.bdavanzadas.excepciones.PersistenciaException;
 

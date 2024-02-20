@@ -5,7 +5,6 @@ package org.itson.bdavanzadas.daos;
 
 import java.util.List;
 import org.itson.bdavanzadas.dominio.Cliente;
-import org.itson.bdavanzadas.dtos.ClienteActualizadoDTO;
 import org.itson.bdavanzadas.dtos.ClienteNuevoDTO;
 import org.itson.bdavanzadas.excepciones.PersistenciaException;
 
