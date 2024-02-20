@@ -63,6 +63,7 @@ public class Movimientos extends javax.swing.JFrame {
         panAzulObscuro = new javax.swing.JPanel();
         panAzulClaro = new javax.swing.JPanel();
         panLogo = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         panSaludo = new javax.swing.JPanel();
         txtSaludo = new javax.swing.JLabel();
         txtTitulo = new javax.swing.JLabel();
@@ -87,15 +88,27 @@ public class Movimientos extends javax.swing.JFrame {
 
         panAzulClaro.setBackground(new java.awt.Color(33, 158, 188));
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/multimedia/LogoMuyImportantePqueñ.png"))); // NOI18N
+
         javax.swing.GroupLayout panLogoLayout = new javax.swing.GroupLayout(panLogo);
         panLogo.setLayout(panLogoLayout);
         panLogoLayout.setHorizontalGroup(
             panLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 69, Short.MAX_VALUE)
+            .addGroup(panLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panLogoLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel2)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         panLogoLayout.setVerticalGroup(
             panLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(panLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panLogoLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel2)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         panSaludo.setBackground(new java.awt.Color(142, 202, 230));
@@ -443,6 +456,7 @@ public class Movimientos extends javax.swing.JFrame {
     private javax.swing.JTable TabMoviemientos;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnVolver;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel panAzulClaro;
     private javax.swing.JPanel panAzulObscuro;

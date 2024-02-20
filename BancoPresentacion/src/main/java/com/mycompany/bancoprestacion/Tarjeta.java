@@ -55,6 +55,7 @@ public class Tarjeta extends javax.swing.JFrame {
         panAzulObscuro = new javax.swing.JPanel();
         panAzulClaro = new javax.swing.JPanel();
         panLogo = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         panSaludo = new javax.swing.JPanel();
         txtSaludo = new javax.swing.JLabel();
         txtTitulo = new javax.swing.JLabel();
@@ -75,15 +76,17 @@ public class Tarjeta extends javax.swing.JFrame {
 
         panAzulClaro.setBackground(new java.awt.Color(33, 158, 188));
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/multimedia/LogoMuyImportantePqueñ.png"))); // NOI18N
+
         javax.swing.GroupLayout panLogoLayout = new javax.swing.GroupLayout(panLogo);
         panLogo.setLayout(panLogoLayout);
         panLogoLayout.setHorizontalGroup(
             panLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 69, Short.MAX_VALUE)
+            .addComponent(jLabel1)
         );
         panLogoLayout.setVerticalGroup(
             panLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addComponent(jLabel1)
         );
 
         panSaludo.setBackground(new java.awt.Color(142, 202, 230));
@@ -228,9 +231,9 @@ public class Tarjeta extends javax.swing.JFrame {
                         .addComponent(txtTitulo))
                     .addGroup(panAzulClaroLayout.createSequentialGroup()
                         .addGap(15, 15, 15)
-                        .addGroup(panAzulClaroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(panSaludo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGroup(panAzulClaroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(panLogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(panSaludo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addComponent(txtIDeTarjeta)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -323,6 +326,7 @@ public class Tarjeta extends javax.swing.JFrame {
     private javax.swing.JButton btnRetirar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnTransferencia;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel panAzulClaro;
     private javax.swing.JPanel panAzulObscuro;
     private javax.swing.JPanel panLogo;
