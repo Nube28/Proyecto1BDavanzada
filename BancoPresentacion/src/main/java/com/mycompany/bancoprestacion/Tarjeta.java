@@ -55,7 +55,6 @@ public class Tarjeta extends javax.swing.JFrame {
         panAzulObscuro = new javax.swing.JPanel();
         panAzulClaro = new javax.swing.JPanel();
         panLogo = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         panSaludo = new javax.swing.JPanel();
         txtSaludo = new javax.swing.JLabel();
         txtTitulo = new javax.swing.JLabel();
@@ -76,17 +75,15 @@ public class Tarjeta extends javax.swing.JFrame {
 
         panAzulClaro.setBackground(new java.awt.Color(33, 158, 188));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/multimedia/LogoMuyImportantePqueñ.png"))); // NOI18N
-
         javax.swing.GroupLayout panLogoLayout = new javax.swing.GroupLayout(panLogo);
         panLogo.setLayout(panLogoLayout);
         panLogoLayout.setHorizontalGroup(
             panLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1)
+            .addGap(0, 69, Short.MAX_VALUE)
         );
         panLogoLayout.setVerticalGroup(
             panLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1)
+            .addGap(0, 73, Short.MAX_VALUE)
         );
 
         panSaludo.setBackground(new java.awt.Color(142, 202, 230));
@@ -326,7 +323,6 @@ public class Tarjeta extends javax.swing.JFrame {
     private javax.swing.JButton btnRetirar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnTransferencia;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel panAzulClaro;
     private javax.swing.JPanel panAzulObscuro;
     private javax.swing.JPanel panLogo;
