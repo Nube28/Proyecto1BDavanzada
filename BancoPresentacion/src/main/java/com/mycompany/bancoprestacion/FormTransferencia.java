@@ -386,6 +386,15 @@ public class FormTransferencia extends javax.swing.JFrame {
     private void tfiCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfiCantidadActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfiCantidadActionPerformed
+    /**
+     * Crea una nueva transacción utilizando la información proporcionada en un
+     * objeto TransaccionNuevaDTO.
+     *
+     * @param trasanccionNueva El objeto TransaccionNuevaDTO que contiene la
+     * información de la nueva transacción.
+     * @return El objeto Transaccion creado y persistido en la base de datos, o
+     * null si ocurrió una excepción durante la persistencia.
+     */
     private Transaccion crearTransaccion(TransaccionNuevaDTO trasanccionNueva) {
         Transaccion transaccion = null;
         try {
@@ -397,6 +406,15 @@ public class FormTransferencia extends javax.swing.JFrame {
         return transaccion;
     }
 
+    /**
+     * Crea una nueva transferencia utilizando la información proporcionada en
+     * un objeto TransferenciaNuevaDTO.
+     *
+     * @param trasferenciaNueva El objeto TransferenciaNuevaDTO que contiene la
+     * información de la nueva transferencia.
+     * @return El objeto Transferencia creado y persistido en la base de datos,
+     * o null si ocurrió una excepción durante la persistencia.
+     */
     private Transferencia crearTransferencia(TransferenciaNuevaDTO trasferenciaNueva) {
         Transferencia transferencia = null;
         try {
@@ -407,6 +425,13 @@ public class FormTransferencia extends javax.swing.JFrame {
         return transferencia;
     }
 
+    /**
+     * Obtiene una instancia de Cuenta a partir del ID proporcionado.
+     *
+     * @param id El ID de la cuenta que se desea obtener.
+     * @return La Cuenta correspondiente al ID proporcionado, o null si no se
+     * encuentra.
+     */
     private Cuenta obtenerCuenta(int id) {
         Cuenta cuenta = null;
         try {

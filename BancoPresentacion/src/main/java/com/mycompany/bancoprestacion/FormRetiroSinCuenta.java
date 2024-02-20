@@ -264,7 +264,7 @@ public class FormRetiroSinCuenta extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnAceptarActionPerformed
-    
+
     private void pasContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pasContraseñaActionPerformed
 
     }//GEN-LAST:event_pasContraseñaActionPerformed
@@ -286,6 +286,13 @@ public class FormRetiroSinCuenta extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_pasContraseñaKeyTyped
+    /**
+     * Obtiene una instancia de SinCuenta correspondiente al folio y contraseña
+     * ingresados.
+     *
+     * @return La SinCuenta correspondiente al folio y contraseña ingresados, o
+     * null si no se encuentra o está en estado "no cobrado" o "cobrado".
+     */
     private SinCuenta obtenerSinCuenta() {
         SinCuenta sinCuenta = null;
         try {
@@ -300,6 +307,12 @@ public class FormRetiroSinCuenta extends javax.swing.JFrame {
         return sinCuenta;
     }
 
+    /**
+     * Obtiene una instancia de Transaccion asociada a la SinCuenta obtenida.
+     *
+     * @return La Transaccion asociada a la SinCuenta obtenida, o null si no se
+     * encuentra.
+     */
     private Transaccion obtenerTransaccion() {
         Transaccion transaccion = null;
         SinCuenta sinCuenta = obtenerSinCuenta();
@@ -315,6 +328,12 @@ public class FormRetiroSinCuenta extends javax.swing.JFrame {
         return transaccion;
     }
 
+    /**
+     * Obtiene una instancia de Cuenta asociada a la Transaccion obtenida.
+     *
+     * @return La Cuenta asociada a la Transaccion obtenida, o null si no se
+     * encuentra.
+     */
     private Cuenta obtenerCuenta() {
         Cuenta cuenta = null;
         Transaccion transaccion = obtenerTransaccion();
@@ -331,6 +350,12 @@ public class FormRetiroSinCuenta extends javax.swing.JFrame {
         return cuenta;
     }
 
+    /**
+     * Realiza un retiro de la cuenta asociada a la Transaccion obtenida.
+     *
+     * @return true si el retiro se realiza correctamente, false si no se puede
+     * obtener la Transaccion o la Cuenta asociada.
+     */
     private boolean realizarRetiro() {
         Transaccion transaccion = obtenerTransaccion();
         if (transaccion == null) {
