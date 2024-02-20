@@ -74,7 +74,7 @@ public class CuentaDAO implements ICuentaDAO {
         } catch (SQLException ex) {
             logger.log(Level.INFO, "No se ha podido agregar la cuenta", ex);
             throw new PersistenciaException("No se pudo agregar la cuenta");
-        }
+        } 
     }
 
     /**

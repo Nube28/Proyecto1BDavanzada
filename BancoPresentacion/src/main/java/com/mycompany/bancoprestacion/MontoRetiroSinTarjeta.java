@@ -50,7 +50,6 @@ public class MontoRetiroSinTarjeta extends javax.swing.JFrame {
 
         String saludo = txtSaludo.getText().replaceAll("Usuario", this.cliente.getNombres());
         txtSaludo.setText(saludo);
-        
         txtIDeTarjeta.setText("Tarjeta " + cuenta.getNumero());
     }
 
