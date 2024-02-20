@@ -468,6 +468,13 @@ public class RegistroCliente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txfNacimientoKeyTyped
 
+    /**
+     * Crea un objeto ClienteNuevoDTO con la información proporcionada en los
+     * campos de entrada.
+     *
+     * @return ClienteNuevoDTO con la información ingresada o null si las
+     * contraseñas no coinciden.
+     */
     private ClienteNuevoDTO crearCliente() {
         ClienteNuevoDTO clienteNuevoDTO = null;
         if (txfContraseña.getText().equals(txfConfirmarContraseña.getText())) {
@@ -481,6 +488,12 @@ public class RegistroCliente extends javax.swing.JFrame {
         return clienteNuevoDTO;
     }
 
+    /**
+     * Crea un objeto DireccionNuevaDTO con la información proporcionada en los
+     * campos de entrada.
+     *
+     * @return DireccionNuevaDTO con la información ingresada.
+     */
     private DireccionNuevaDTO crearDireccion() {
         DireccionNuevaDTO dn = new DireccionNuevaDTO();
         dn.setCalle(txfCalle.getText());

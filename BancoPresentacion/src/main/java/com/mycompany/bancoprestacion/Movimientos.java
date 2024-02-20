@@ -377,7 +377,9 @@ public class Movimientos extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_txfHastaKeyTyped
-
+    /**
+     * Inserta los datos de las transacciones en la Tabla "Tab Movimientos".
+     */
     private void insertarDatos() {
         List<Transaccion> listaTransacciones;
         try {
@@ -399,6 +401,12 @@ public class Movimientos extends javax.swing.JFrame {
         });
     }
 
+    /**
+     * Actualiza los datos de las transacciones filtradas por un período
+     *
+     * @param desde La fecha de inicio del período de filtrado.
+     * @param hasta La fecha de fin del período de filtrado.
+     */
     private void actualizarDatosFiltrados(String desde, String hasta) {
         List<Transaccion> listaTransacciones;
         try {
@@ -420,6 +428,12 @@ public class Movimientos extends javax.swing.JFrame {
         });
     }
 
+    /**
+     * Valida que la fecha tenga el formato correcto (AAAA-MM-DD).
+     *
+     * @param fecha La cadena de texto que se desea verificar.
+     * @return true si la cadena tiene el formato de fecha esperado.
+     */
     public static boolean verificarFormatoFecha(String fecha) {
         String regex = "\\d{4}-\\d{2}-\\d{2}";
         return Pattern.matches(regex, fecha);

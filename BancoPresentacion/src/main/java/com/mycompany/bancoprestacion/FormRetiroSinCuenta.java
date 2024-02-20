@@ -264,6 +264,28 @@ public class FormRetiroSinCuenta extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnAceptarActionPerformed
+    
+    private void pasContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pasContraseñaActionPerformed
+
+    }//GEN-LAST:event_pasContraseñaActionPerformed
+
+    private void txfFolioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfFolioKeyTyped
+        int key = evt.getKeyChar();
+        boolean numero = key >= 48 && key <= 57;
+
+        if (!numero) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txfFolioKeyTyped
+
+    private void pasContraseñaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pasContraseñaKeyTyped
+        int key = evt.getKeyChar();
+        boolean numero = key >= 48 && key <= 57;
+
+        if (!numero) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_pasContraseñaKeyTyped
     private SinCuenta obtenerSinCuenta() {
         SinCuenta sinCuenta = null;
         try {
@@ -326,28 +348,6 @@ public class FormRetiroSinCuenta extends javax.swing.JFrame {
         }
         return true;
     }
-    private void pasContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pasContraseñaActionPerformed
-
-    }//GEN-LAST:event_pasContraseñaActionPerformed
-
-    private void txfFolioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfFolioKeyTyped
-        int key = evt.getKeyChar();
-        boolean numero = key >= 48 && key <= 57;
-
-        if (!numero) {
-            evt.consume();
-        }
-    }//GEN-LAST:event_txfFolioKeyTyped
-
-    private void pasContraseñaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pasContraseñaKeyTyped
-        int key = evt.getKeyChar();
-        boolean numero = key >= 48 && key <= 57;
-
-        if (!numero) {
-            evt.consume();
-        }
-    }//GEN-LAST:event_pasContraseñaKeyTyped
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnVolver;
