@@ -1,3 +1,6 @@
+/*
+ * IDomicilioDAO.java
+ */
 package org.itson.bdavanzadas.daos;
 
 import org.itson.bdavanzadas.dominio.Domicilio;
@@ -5,7 +8,8 @@ import org.itson.bdavanzadas.dtos.DomicilioNuevoDTO;
 import org.itson.bdavanzadas.excepciones.PersistenciaException;
 
 /**
- * Interfaz que se usa para crear un domicilio al cliente
+ * Interfaz que define operaciones para agregar y consultar domicilios en el
+ * sistema.
  */
 public interface IDomicilioDAO {
 

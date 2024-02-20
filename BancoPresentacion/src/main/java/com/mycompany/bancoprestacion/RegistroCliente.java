@@ -15,7 +15,6 @@ import org.itson.bdavanzadas.daos.IDomicilioDAO;
 import org.itson.bdavanzadas.dominio.Cliente;
 import org.itson.bdavanzadas.dominio.Domicilio;
 import org.itson.bdavanzadas.dtos.ClienteNuevoDTO;
-import org.itson.bdavanzadas.dtos.DireccionNuevaDTO;
 import org.itson.bdavanzadas.dtos.DomicilioNuevoDTO;
 import org.itson.bdavanzadas.excepciones.PersistenciaException;
 
@@ -399,6 +398,7 @@ public class RegistroCliente extends javax.swing.JFrame {
         }
         DomicilioNuevoDTO dom = crearDireccion();
         
+        DomicilioNuevoDTO domicilioNuevoDTO = crearDireccion();
 
         try {
             Cliente cliente = clienteDAO.agregar(clienteNuevoDTO);
@@ -501,10 +501,10 @@ public class RegistroCliente extends javax.swing.JFrame {
     }
 
     /**
-     * Crea un objeto DireccionNuevaDTO con la información proporcionada en los
+     * Crea un objeto DomicilioNuevoDTO con la información proporcionada en los
      * campos de entrada.
      *
-     * @return DireccionNuevaDTO con la información ingresada.
+     * @return DomicilioNuevoDTO con la información ingresada.
      */
     private DomicilioNuevoDTO crearDireccion() {
         DomicilioNuevoDTO dn = new DomicilioNuevoDTO();
@@ -514,9 +514,9 @@ public class RegistroCliente extends javax.swing.JFrame {
         dn.setNumero_exterior(Integer.valueOf(txfNumExterior.getText()));
         if (!txfNumInterior.getText().equals("")) {
             dn.setNumero_interior(Integer.valueOf(txfNumInterior.getText()));
+        } else {
+            dn.setNumero_interior(0);
         }
-        
-
         return dn;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

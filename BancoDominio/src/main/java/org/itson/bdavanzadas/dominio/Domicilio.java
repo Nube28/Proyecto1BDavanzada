@@ -3,8 +3,6 @@
  */
 package org.itson.bdavanzadas.dominio;
 
-import java.util.Objects;
-
 /**
  * Clase que representa la entidad Domicilio
  *
@@ -35,6 +33,7 @@ public class Domicilio {
      * @param numero_interioro El número interior.
      * @param codigo_postal El código postal.
      * @param colonia La colonia.
+     * @param id_cliente id del cliente
      */
     public Domicilio(int id_domicilio, String calle, int numero_exterior, int numero_interioro, int codigo_postal, String colonia, int id_cliente) {
         this.id_domicilio = id_domicilio;
@@ -55,6 +54,7 @@ public class Domicilio {
      * @param numero_interioro El número interior.
      * @param codigo_postal El código postal.
      * @param colonia La colonia.
+     * @param id_cliente id del cliente
      */
     public Domicilio(String calle, int numero_exterior, int numero_interioro, int codigo_postal, String colonia, int id_cliente) {
         this.calle = calle;
@@ -206,10 +206,20 @@ public class Domicilio {
         return this.id_domicilio == other.id_domicilio;
     }
 
+    /**
+     * Obtiene el ID del cliente.
+     *
+     * @return El ID del cliente.
+     */
     public int getId_cliente() {
         return id_cliente;
     }
 
+    /**
+     * Establece el ID del cliente.
+     *
+     * @param id_cliente El nuevo ID del cliente a establecer.
+     */
     public void setId_cliente(int id_cliente) {
         this.id_cliente = id_cliente;
     }
@@ -220,6 +230,7 @@ public class Domicilio {
      * @return Una cadena que contiene la información del domicilio.
      */
     @Override
+
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Domicilio{");
