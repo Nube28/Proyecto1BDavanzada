@@ -7,6 +7,8 @@ package com.mycompany.bancoprestacion;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.itson.bdavanzadas.conexion.IConexion;
 import org.itson.bdavanzadas.daos.ICuentaDAO;
@@ -28,25 +30,24 @@ public class Movimientos extends javax.swing.JFrame {
     private final IConexion conexion;
     private ICuentaDAO cuentaDAO;
     private ITransaccionDAO transaccionDAO;
-    
 
     /**
      * Creates new form Movimientos
      */
     public Movimientos(Cliente cliente, Cuenta cuenta, IConexion conexion, ICuentaDAO cuentaDAO) {
         initComponents();
-        
+
         this.cliente = cliente;
         this.cuenta = cuenta;
         this.conexion = conexion;
         this.cuentaDAO = cuentaDAO;
         this.transaccionDAO = new TransaccionDAO(conexion);
-        
+
         String saludo = txtSaludo.getText().replaceAll("Usuario", cliente.getNombres());
         txtSaludo.setText(saludo);
-        
-        txtIDeTarjeta.setText("Tarjeta "+ cuenta.getNumero());
-        
+
+        txtIDeTarjeta.setText("Tarjeta " + cuenta.getNumero());
+
         insertarDatos();
     }
 
@@ -190,8 +191,18 @@ public class Movimientos extends javax.swing.JFrame {
         });
 
         txfDesde.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        txfDesde.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfDesdeKeyTyped(evt);
+            }
+        });
 
         txfHasta.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        txfHasta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfHastaKeyTyped(evt);
+            }
+        });
 
         txtDesde.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
         txtDesde.setText("Desde");
@@ -336,8 +347,30 @@ public class Movimientos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-       actualizarDatosFiltrados(txfDesde.getText() , txfHasta.getText());
+        String fechaDesde = txfDesde.getText();
+        String fechaHasta = txfHasta.getText();
+
+        if (!verificarFormatoFecha(fechaDesde) && !verificarFormatoFecha(fechaHasta)) {
+            JOptionPane.showMessageDialog(this, "Las fechas tienen que estar en formato aaaa/mm/dd");
+            return;
+        }
+
+        actualizarDatosFiltrados(fechaDesde, fechaHasta);
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void txfDesdeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfDesdeKeyTyped
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txfDesdeKeyTyped
+
+    private void txfHastaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfHastaKeyTyped
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txfHastaKeyTyped
     private void insertarDatos() {
         List<Transaccion> listaTransacciones;
         try {
@@ -352,11 +385,11 @@ public class Movimientos extends javax.swing.JFrame {
             Object[] fila = new Object[3];
             fila[0] = transaccion.getTipo();
             fila[1] = transaccion.getFecha();
-            fila[2] = "$ "+transaccion.getMonto();
+            fila[2] = "$ " + transaccion.getMonto();
             modelo.addRow(fila);
-        });    
+        });
     }
-    
+
     private void actualizarDatosFiltrados(String desde, String hasta) {
         List<Transaccion> listaTransacciones;
         try {
@@ -371,10 +404,16 @@ public class Movimientos extends javax.swing.JFrame {
             Object[] fila = new Object[3];
             fila[0] = transaccion.getTipo();
             fila[1] = transaccion.getFecha();
-            fila[2] = "$ "+transaccion.getMonto();
+            fila[2] = "$ " + transaccion.getMonto();
             modelo.addRow(fila);
         });
     }
+
+    public static boolean verificarFormatoFecha(String fecha) {
+        String regex = "\\d{4}-\\d{2}-\\d{2}";
+        return Pattern.matches(regex, fecha);
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TabMoviemientos;
     private javax.swing.JButton btnBuscar;
