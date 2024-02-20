@@ -1,12 +1,12 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * DomicilioNuevoDTO.java
  */
 package org.itson.bdavanzadas.dtos;
 
 /**
+ * Esta clase representa un objeto de transferencia de datos (DTO) para
+ * almacenar los datos de un nuevo domicilio.
  *
- * @author af_da
  */
 public class DomicilioNuevoDTO {
 
