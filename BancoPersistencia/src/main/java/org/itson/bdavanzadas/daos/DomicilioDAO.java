@@ -1,6 +1,5 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * DomicilioDAO.java
  */
 package org.itson.bdavanzadas.daos;
 
@@ -17,8 +16,8 @@ import org.itson.bdavanzadas.dtos.DomicilioNuevoDTO;
 import org.itson.bdavanzadas.excepciones.PersistenciaException;
 
 /**
- *
- * @author af_da
+ * Clase que define operaciones para agregar y consultar domicilios en el
+ * sistema.
  */
 public class DomicilioDAO implements IDomicilioDAO {
 
@@ -35,6 +34,15 @@ public class DomicilioDAO implements IDomicilioDAO {
         this.conexionDB = conexion;
     }
 
+    /**
+     * Agrega un nuevo domicilio al sistema.
+     *
+     * @param domicilioNuevo Objeto DomicilioNuevoDTO que contiene los datos del
+     * nuevo domicilio.
+     * @return El domicilio agregado.
+     * @throws PersistenciaException Si ocurre un error durante la operación de
+     * persistencia.
+     */
     @Override
     public Domicilio agregar(DomicilioNuevoDTO domicilioNuevo) throws PersistenciaException {
         String setenciaSQL
@@ -69,6 +77,14 @@ public class DomicilioDAO implements IDomicilioDAO {
         }
     }
 
+    /**
+     * Consulta un domicilio por su ID en el sistema.
+     *
+     * @param id El ID del domicilio a consultar.
+     * @return El domicilio encontrado.
+     * @throws PersistenciaException Si ocurre un error durante la operación de
+     * consulta.
+     */
     @Override
     public Domicilio consultar(int id) throws PersistenciaException {
         String setenciaSQL

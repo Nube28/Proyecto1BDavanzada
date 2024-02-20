@@ -12,7 +12,7 @@ import org.itson.bdavanzadas.daos.IClienteDAO;
 import org.itson.bdavanzadas.daos.ICuentaDAO;
 import org.itson.bdavanzadas.dominio.Cliente;
 import org.itson.bdavanzadas.dtos.ClienteNuevoDTO;
-import org.itson.bdavanzadas.dtos.DireccionNuevaDTO;
+import org.itson.bdavanzadas.dtos.DomicilioNuevoDTO;
 import org.itson.bdavanzadas.excepciones.PersistenciaException;
 
 /**
@@ -323,7 +323,7 @@ public class ModificarCliente extends javax.swing.JFrame {
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
         ClienteNuevoDTO clienteNuevoDTO = actaulizarCliente();
 
-        DireccionNuevaDTO direccionNuevaDTO = actualizarDireccion();
+        DomicilioNuevoDTO domicilioNuevoDTO = new DomicilioNuevoDTO();
 
         try {
             Cliente clienteAct = clienteDAO.actualizar(clienteNuevoDTO, cliente);
@@ -377,17 +377,17 @@ public class ModificarCliente extends javax.swing.JFrame {
      * Actualiza la información de la dirección utilizando los datos ingresados
      * en los campos de texto.
      *
-     * @return Un objeto DireccionNuevaDTO con la información actualizada de la
+     * @return Un objeto DomicilioNuevoDTO con la información actualizada de la
      * dirección.
      */
-    private DireccionNuevaDTO actualizarDireccion() {
-        DireccionNuevaDTO dn = new DireccionNuevaDTO();
+    private DomicilioNuevoDTO actualizarDireccion() {
+        DomicilioNuevoDTO dn = new DomicilioNuevoDTO();
 
         if (!txfCalle.getText().equals("")) {
             dn.setCalle(txfCalle.getText());
         }
         if (!txfCodigoPostal.getText().equals("")) {
-            dn.setCodigo_postal(txfCodigoPostal.getText());
+            dn.setCodigo_postal(Integer.valueOf(txfCodigoPostal.getText()));
         }
         if (!txfColonia.getText().equals("")) {
             dn.setColonia(txfColonia.getText());
@@ -398,7 +398,9 @@ public class ModificarCliente extends javax.swing.JFrame {
         if (!txfNumExterior.getText().equals("")) {
             dn.setNumero_interior(Integer.valueOf(txfNumInterior.getText()));
         }
-
+        if (!txfNumExterior.getText().equals("")) {
+            dn.setId_cliente(cliente.getId());
+        }
         return dn;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
