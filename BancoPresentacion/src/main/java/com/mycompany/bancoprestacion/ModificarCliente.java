@@ -338,6 +338,13 @@ public class ModificarCliente extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnCrearActionPerformed
+    /**
+     * Actualiza la información del cliente utilizando los datos ingresados en
+     * los campos de texto.
+     *
+     * @return Un objeto ClienteNuevoDTO con la información actualizada del
+     * cliente.
+     */
     private ClienteNuevoDTO actaulizarCliente() {
         ClienteNuevoDTO clienteNuevoDTO = new ClienteNuevoDTO();
         if (txfNombre.getText().equals("")) {
@@ -366,6 +373,13 @@ public class ModificarCliente extends javax.swing.JFrame {
         return clienteNuevoDTO;
     }
 
+    /**
+     * Actualiza la información de la dirección utilizando los datos ingresados
+     * en los campos de texto.
+     *
+     * @return Un objeto DireccionNuevaDTO con la información actualizada de la
+     * dirección.
+     */
     private DireccionNuevaDTO actualizarDireccion() {
         DireccionNuevaDTO dn = new DireccionNuevaDTO();
 
