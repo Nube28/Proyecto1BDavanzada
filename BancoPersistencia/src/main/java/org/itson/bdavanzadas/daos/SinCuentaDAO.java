@@ -126,8 +126,7 @@ public class SinCuentaDAO implements ISinCuentaDAO {
         String setenciaSQL = """
                              SELECT * FROM SinCuenta WHERE folio=? and contrasenia =?;
                              """;
-
-
+        
         try (
                 Connection conexion = this.conexionDB.obtenerConexion(); PreparedStatement comando = conexion.prepareStatement(
                 setenciaSQL);) {
