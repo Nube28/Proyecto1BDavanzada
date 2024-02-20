@@ -359,6 +359,9 @@
                   <Font name="Comic Sans MS" size="18" style="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfDesdeKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="txfHasta">
               <Properties>
@@ -366,6 +369,9 @@
                   <Font name="Comic Sans MS" size="18" style="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfHastaKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="txtDesde">
               <Properties>

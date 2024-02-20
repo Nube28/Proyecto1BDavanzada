@@ -4,6 +4,8 @@
  */
 package com.mycompany.bancoprestacion;
 
+import java.awt.event.KeyEvent;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import org.itson.bdavanzadas.conexion.IConexion;
 import org.itson.bdavanzadas.daos.ClienteDAO;
@@ -18,15 +20,16 @@ import org.itson.bdavanzadas.excepciones.PersistenciaException;
  * @author Berry
  */
 public class RegistroCliente extends javax.swing.JFrame {
-    
+
     private final IClienteDAO clienteDAO;
     private final IConexion conexion;
+
     /**
      * Creates new form RegistroCliente
      */
     public RegistroCliente(ClienteDAO clienteDAO, IConexion conexion) {
         initComponents();
-        
+
         this.clienteDAO = clienteDAO;
         this.conexion = conexion;
     }
@@ -55,9 +58,7 @@ public class RegistroCliente extends javax.swing.JFrame {
         txtNacimiento = new javax.swing.JLabel();
         txfNacimiento = new javax.swing.JTextField();
         txtContraseña = new javax.swing.JLabel();
-        txfContraseña = new javax.swing.JTextField();
         txtConfirmarContraseña = new javax.swing.JLabel();
-        txfConfirmarContraseña = new javax.swing.JTextField();
         txtCalle = new javax.swing.JLabel();
         txfCalle = new javax.swing.JTextField();
         txtCodigoPostal = new javax.swing.JLabel();
@@ -68,6 +69,8 @@ public class RegistroCliente extends javax.swing.JFrame {
         txfNumExterior = new javax.swing.JTextField();
         txtNumInterior = new javax.swing.JLabel();
         txfNumInterior = new javax.swing.JTextField();
+        txfContraseña = new javax.swing.JPasswordField();
+        txfConfirmarContraseña = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -113,31 +116,52 @@ public class RegistroCliente extends javax.swing.JFrame {
         });
 
         txfNombre.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        txfNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfNombreKeyTyped(evt);
+            }
+        });
 
         txtApellidoPaterno.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
         txtApellidoPaterno.setText("Apellido Paterno");
 
         txfApellidoPaterno.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        txfApellidoPaterno.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfApellidoPaternoKeyTyped(evt);
+            }
+        });
 
         txtApellidoMaterno.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
         txtApellidoMaterno.setText("Apellido Materno");
 
         txfApellidoMaterno.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        txfApellidoMaterno.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfApellidoMaternoKeyTyped(evt);
+            }
+        });
 
         txtNacimiento.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
         txtNacimiento.setText("Nacimiento (aaaa-mm-dd)");
 
         txfNacimiento.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        txfNacimiento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txfNacimientoActionPerformed(evt);
+            }
+        });
+        txfNacimiento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfNacimientoKeyTyped(evt);
+            }
+        });
 
         txtContraseña.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
         txtContraseña.setText("Contraseña");
 
-        txfContraseña.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
-
         txtConfirmarContraseña.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
         txtConfirmarContraseña.setText("Confirmar Contraseña");
-
-        txfConfirmarContraseña.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
 
         txtCalle.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
         txtCalle.setText("Calle");
@@ -148,6 +172,11 @@ public class RegistroCliente extends javax.swing.JFrame {
         txtCodigoPostal.setText("Codigo Postal");
 
         txfCodigoPostal.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        txfCodigoPostal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfCodigoPostalKeyTyped(evt);
+            }
+        });
 
         txtColonia.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
         txtColonia.setText("Colonia");
@@ -158,11 +187,27 @@ public class RegistroCliente extends javax.swing.JFrame {
         txtNumExterior.setText("Num. Exterior");
 
         txfNumExterior.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        txfNumExterior.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfNumExteriorKeyTyped(evt);
+            }
+        });
 
         txtNumInterior.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
         txtNumInterior.setText("Num. Interior");
 
         txfNumInterior.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        txfNumInterior.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfNumInteriorKeyTyped(evt);
+            }
+        });
+
+        txfContraseña.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txfContraseñaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panAzulClaroLayout = new javax.swing.GroupLayout(panAzulClaro);
         panAzulClaro.setLayout(panAzulClaroLayout);
@@ -284,12 +329,14 @@ public class RegistroCliente extends javax.swing.JFrame {
                         .addComponent(txfNumInterior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panAzulClaroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtContraseña)
-                        .addComponent(txfContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txfContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panAzulClaroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panAzulClaroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtConfirmarContraseña)
-                    .addComponent(txfConfirmarContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(panAzulClaroLayout.createSequentialGroup()
+                        .addComponent(txfConfirmarContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addGroup(panAzulClaroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVolver)
                     .addComponent(btnCrear))
@@ -321,47 +368,108 @@ public class RegistroCliente extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panAzulObscuro, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE)
+            .addComponent(panAzulObscuro, javax.swing.GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        PantallaInicial pi = new PantallaInicial(clienteDAO,conexion);
+        PantallaInicial pi = new PantallaInicial(clienteDAO, conexion);
         pi.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
         ClienteNuevoDTO clienteNuevoDTO = crearCliente();
-        
-        if(clienteNuevoDTO == null){
+        if (!verificarFormatoFecha(txfNacimiento.getText())) {
+            JOptionPane.showMessageDialog(this, "La fecha tiene que estar en formato aaaa-mm-dd");
+            return;
+        }
+        if (clienteNuevoDTO == null) {
             JOptionPane.showMessageDialog(this, "LAS CONTRASEÑAS NO COINCIDEN.");
             return;
         }
         DireccionNuevaDTO direccionNuevaDTO = crearDireccion();
 
-        try{
+        try {
             Cliente cliente = clienteDAO.agregar(clienteNuevoDTO);
-            
-            JOptionPane.showMessageDialog(this, "Cliente registrado!\nTu numero de cliente es: "+cliente.getId());
-            
-            PantallaInicial pi = new PantallaInicial(clienteDAO,conexion);
+
+            JOptionPane.showMessageDialog(this, "Cliente registrado!\nTu numero de cliente es: " + cliente.getId());
+
+            PantallaInicial pi = new PantallaInicial(clienteDAO, conexion);
             pi.setVisible(true);
             this.dispose();
-        }catch(PersistenciaException ex){
+        } catch (PersistenciaException ex) {
             JOptionPane.showMessageDialog(this, "No se puede agregar al cliente.");
         }
-        
-        
+
+
     }//GEN-LAST:event_btnCrearActionPerformed
-    
-    
-    
-    private ClienteNuevoDTO crearCliente(){
+    public static boolean verificarFormatoFecha(String fecha) {
+        String regex = "\\d{4}-\\d{2}-\\d{2}";
+        return Pattern.matches(regex, fecha);
+    }
+    private void txfNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfNombreKeyTyped
+        char c = evt.getKeyChar();
+        if (!Character.isLetter(c) && c != KeyEvent.VK_BACK_SPACE && c != KeyEvent.VK_SPACE) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txfNombreKeyTyped
+
+    private void txfApellidoPaternoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfApellidoPaternoKeyTyped
+        char c = evt.getKeyChar();
+        if (!Character.isLetter(c) && c != KeyEvent.VK_BACK_SPACE && c != KeyEvent.VK_SPACE) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txfApellidoPaternoKeyTyped
+
+    private void txfApellidoMaternoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfApellidoMaternoKeyTyped
+        char c = evt.getKeyChar();
+        if (!Character.isLetter(c) && c != KeyEvent.VK_BACK_SPACE && c != KeyEvent.VK_SPACE) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txfApellidoMaternoKeyTyped
+
+    private void txfCodigoPostalKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfCodigoPostalKeyTyped
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txfCodigoPostalKeyTyped
+
+    private void txfNumExteriorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfNumExteriorKeyTyped
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txfNumExteriorKeyTyped
+
+    private void txfNumInteriorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfNumInteriorKeyTyped
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txfNumInteriorKeyTyped
+
+    private void txfContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfContraseñaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txfContraseñaActionPerformed
+
+    private void txfNacimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfNacimientoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txfNacimientoActionPerformed
+
+    private void txfNacimientoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfNacimientoKeyTyped
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txfNacimientoKeyTyped
+
+    private ClienteNuevoDTO crearCliente() {
         ClienteNuevoDTO clienteNuevoDTO = null;
-        if(txfContraseña.getText().equals(txfConfirmarContraseña.getText())){
+        if (txfContraseña.getPassword().equals(txfConfirmarContraseña.getText())) {
             clienteNuevoDTO = new ClienteNuevoDTO();
             clienteNuevoDTO.setNombres(txfNombre.getText());
             clienteNuevoDTO.setApellido_paterno(txfApellidoPaterno.getText());
@@ -372,16 +480,16 @@ public class RegistroCliente extends javax.swing.JFrame {
         return clienteNuevoDTO;
     }
 
-    private DireccionNuevaDTO crearDireccion(){
+    private DireccionNuevaDTO crearDireccion() {
         DireccionNuevaDTO dn = new DireccionNuevaDTO();
         dn.setCalle(txfCalle.getText());
         dn.setCodigo_postal(txfCodigoPostal.getText());
         dn.setColonia(txfColonia.getText());
         dn.setNumero_exterior(Integer.valueOf(txfNumExterior.getText()));
-        if(!txfNumInterior.getText().equals("")){
+        if (!txfNumInterior.getText().equals("")) {
             dn.setNumero_interior(Integer.valueOf(txfNumInterior.getText()));
         }
-        
+
         return dn;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -395,8 +503,8 @@ public class RegistroCliente extends javax.swing.JFrame {
     private javax.swing.JTextField txfCalle;
     private javax.swing.JTextField txfCodigoPostal;
     private javax.swing.JTextField txfColonia;
-    private javax.swing.JTextField txfConfirmarContraseña;
-    private javax.swing.JTextField txfContraseña;
+    private javax.swing.JPasswordField txfConfirmarContraseña;
+    private javax.swing.JPasswordField txfContraseña;
     private javax.swing.JTextField txfNacimiento;
     private javax.swing.JTextField txfNombre;
     private javax.swing.JTextField txfNumExterior;

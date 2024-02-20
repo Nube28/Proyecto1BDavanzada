@@ -7,6 +7,8 @@ package com.mycompany.bancoprestacion;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.itson.bdavanzadas.conexion.IConexion;
 import org.itson.bdavanzadas.daos.ICuentaDAO;
@@ -189,8 +191,18 @@ public class Movimientos extends javax.swing.JFrame {
         });
 
         txfDesde.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        txfDesde.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfDesdeKeyTyped(evt);
+            }
+        });
 
         txfHasta.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        txfHasta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfHastaKeyTyped(evt);
+            }
+        });
 
         txtDesde.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
         txtDesde.setText("Desde");
@@ -335,11 +347,38 @@ public class Movimientos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+
         actualizarDatosFiltrados(txfDesde.getText(), txfHasta.getText());
-    }//GEN-LAST:event_btnBuscarActionPerformed
+    }                                         
     /**
      * Inserta los datos de las transacciones en la Tabla "Tab Movimientos".
      */
+
+        String fechaDesde = txfDesde.getText();
+        String fechaHasta = txfHasta.getText();
+
+        if (!verificarFormatoFecha(fechaDesde) && !verificarFormatoFecha(fechaHasta)) {
+            JOptionPane.showMessageDialog(this, "Las fechas tienen que estar en formato aaaa/mm/dd");
+            return;
+        }
+
+        actualizarDatosFiltrados(fechaDesde, fechaHasta);
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void txfDesdeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfDesdeKeyTyped
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txfDesdeKeyTyped
+
+    private void txfHastaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfHastaKeyTyped
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txfHastaKeyTyped
+
     private void insertarDatos() {
         List<Transaccion> listaTransacciones;
         try {
@@ -359,12 +398,7 @@ public class Movimientos extends javax.swing.JFrame {
         });
     }
 
-    /**
-     * Actualiza los datos de las transacciones filtradas por un período
-     *
-     * @param desde La fecha de inicio del período de filtrado.
-     * @param hasta La fecha de fin del período de filtrado.
-     */
+
     private void actualizarDatosFiltrados(String desde, String hasta) {
         List<Transaccion> listaTransacciones;
         try {
@@ -383,6 +417,12 @@ public class Movimientos extends javax.swing.JFrame {
             modelo.addRow(fila);
         });
     }
+
+    public static boolean verificarFormatoFecha(String fecha) {
+        String regex = "\\d{4}-\\d{2}-\\d{2}";
+        return Pattern.matches(regex, fecha);
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TabMoviemientos;
     private javax.swing.JButton btnBuscar;
