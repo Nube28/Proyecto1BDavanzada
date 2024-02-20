@@ -1,3 +1,6 @@
+/**
+ * ClienteNuevoDTO.java
+ */
 package org.itson.bdavanzadas.dtos;
 
 import org.itson.bdavanzadas.utileria.EncriptarContrasenia;
@@ -12,6 +15,11 @@ public class ClienteNuevoDTO {
     private String apellido_paterno;
     private String apellido_materno;
     private String nacimiento;
+    /**
+     * Constructor por defecto de la clase ClienteNuevoDTO.
+     */
+    public ClienteNuevoDTO() {
+    }
 
     /**
      * Obtiene la contraseña del cliente.

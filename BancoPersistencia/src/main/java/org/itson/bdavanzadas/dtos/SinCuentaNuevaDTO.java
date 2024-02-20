@@ -14,6 +14,12 @@ public class SinCuentaNuevaDTO {
     private int contrasenia;
 
     /**
+     * Constructor por defecto de la clase SinCuentaNuevaDTO.
+     */
+    public SinCuentaNuevaDTO() {
+    }
+
+    /**
      * Obtiene el estado de la transacción sin cuenta asociada.
      *
      * @return El estado de la transacción sin cuenta asociada.

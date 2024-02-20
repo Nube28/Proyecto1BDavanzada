@@ -12,6 +12,12 @@ public class TransferenciaNuevaDTO {
     private int cuenta_destino;
 
     /**
+     * Constructor por defecto de la clase TransferenciaNuevaDTO.
+     */
+    public TransferenciaNuevaDTO() {
+    }
+
+    /**
      * Obtiene el ID de la transacción.
      *
      * @return El ID de la transacción.

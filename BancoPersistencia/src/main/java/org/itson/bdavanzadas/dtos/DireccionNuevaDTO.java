@@ -29,10 +29,10 @@ public class DireccionNuevaDTO {
      * @param codigo_postal El código postal de la dirección.
      * @param colonia La colonia de la dirección.
      */
-    public DireccionNuevaDTO(String calle, int numero_exterior, int numero_interioro, String codigo_postal, String colonia) {
+    public DireccionNuevaDTO(String calle, int numero_exterior, int numero_interior, String codigo_postal, String colonia) {
         this.calle = calle;
         this.numero_exterior = numero_exterior;
-        this.numero_interior = numero_interioro;
+        this.numero_interior = numero_interior;
         this.codigo_postal = codigo_postal;
         this.colonia = colonia;
     }
@@ -87,8 +87,8 @@ public class DireccionNuevaDTO {
      *
      * @param numero_interior El número interior de la dirección a establecer.
      */
-    public void setNumero_interior(int numero_interioro) {
-        this.numero_interior = numero_interioro;
+    public void setNumero_interior(int numero_interior) {
+        this.numero_interior = numero_interior;
     }
 
     /**

@@ -29,6 +29,12 @@ public class TransferenciaDAO implements ITransferenciaDAO {
     final IConexion conexionDB;
     static final Logger logger = Logger.getLogger(TransferenciaDAO.class.getName());
 
+    /**
+     * Construye un nuevo objeto TransferenciaDAO con la conexión especificada.
+     *
+     * @param conexion La conexión a la base de datos que se utilizará para
+     * interactuar con las cuentas.
+     */
     public TransferenciaDAO(IConexion conexion) {
         this.conexionDB = conexion;
     }
@@ -44,22 +50,22 @@ public class TransferenciaDAO implements ITransferenciaDAO {
      * de los datos de la transferencia.
      */
     @Override
-    public Transferencia agregar(TransferenciaNuevaDTO TransferenciaNueva) throws PersistenciaException {
+    public Transferencia agregar(TransferenciaNuevaDTO transferenciaNueva) throws PersistenciaException {
         String setenciaSQL
                 = """
                 INSERT INTO Transferencia(id_transaccion, id_cuenta_destino)
                 VALUES(?, ?);
             """;
         try (Connection conexion = this.conexionDB.obtenerConexion(); PreparedStatement comando = conexion.prepareStatement(setenciaSQL, Statement.RETURN_GENERATED_KEYS);) {
-            comando.setInt(1, TransferenciaNueva.getId_transaccion());
-            comando.setInt(2, TransferenciaNueva.getCuenta_destino());
+            comando.setInt(1, transferenciaNueva.getId_transaccion());
+            comando.setInt(2, transferenciaNueva.getCuenta_destino());
             int numeroRegistrosInsertados = comando.executeUpdate();
             logger.log(Level.INFO, "Se agrearon {0}", numeroRegistrosInsertados);
             ResultSet idsGenerados = comando.getGeneratedKeys();
             idsGenerados.next();
             Transferencia transferencia = new Transferencia(
-                    TransferenciaNueva.getId_transaccion(),
-                    TransferenciaNueva.getCuenta_destino()
+                    transferenciaNueva.getId_transaccion(),
+                    transferenciaNueva.getCuenta_destino()
             );
             return transferencia;
         } catch (SQLException ex) {

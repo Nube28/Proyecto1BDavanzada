@@ -12,6 +12,12 @@ import org.mindrot.jbcrypt.BCrypt;
 public class EncriptarContrasenia {
 
     /**
+     * Constructor por defecto de la clase EncriptarContrasenia.
+     */
+    public EncriptarContrasenia() {
+    }
+
+    /**
      * Encripta una contraseña utilizando el algoritmo BCrypt.
      *
      * @param contrasenia La contraseña a encriptar.
@@ -32,4 +38,5 @@ public class EncriptarContrasenia {
     static public boolean comprobarContrasenia(String contra1, String contra2) {
         return BCrypt.checkpw(contra1, contra2);
     }
+
 }

@@ -1,3 +1,6 @@
+/**
+ * Conexion.java
+ */
 package org.itson.bdavanzadas.conexion;
 
 import java.sql.Connection;

@@ -38,7 +38,7 @@ public class TransaccionDAO implements ITransaccionDAO {
     static final Logger logger = Logger.getLogger(TransaccionDAO.class.getName());
 
     /**
-     * Construye un nuevo objeto CuentaDAO con la conexión especificada.
+     * Construye un nuevo objeto TransaccionDAO con la conexión especificada.
      *
      * @param conexion La conexión a la base de datos que se utilizará para
      * interactuar con las cuentas.

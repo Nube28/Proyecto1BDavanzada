@@ -1,3 +1,7 @@
+/**
+ * CuentaNuevaDTO.java
+ */
+
 package org.itson.bdavanzadas.dtos;
 
 /**
@@ -8,6 +12,11 @@ public class CuentaNuevaDTO {
     private int saldo;
     private int id_cliente;
     private boolean esta_activo;
+    /**
+     * Constructor por defecto de la clase CuentaNuevaDTO. 
+     */
+    public CuentaNuevaDTO() {
+    }
 
     /**
      * Obtiene el saldo de la cuenta.

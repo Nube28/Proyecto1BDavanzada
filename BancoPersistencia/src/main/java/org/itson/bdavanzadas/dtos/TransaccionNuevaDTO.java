@@ -16,6 +16,12 @@ public class TransaccionNuevaDTO {
     private int id_cuenta;
 
     /**
+     * Constructor por defecto de la clase TransaccionNuevaDTO.
+     */
+    public TransaccionNuevaDTO() {
+    }
+
+    /**
      * Obtiene el monto de la transacción.
      *
      * @return El monto de la transacción.
