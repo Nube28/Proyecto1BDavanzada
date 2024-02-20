@@ -292,6 +292,12 @@ public class FormTransferencia extends javax.swing.JFrame {
         return cuenta;
     }
     private void btnTransferirTarjetasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransferirTarjetasActionPerformed
+
+        if (tfiNumCuenDestino.getText().isEmpty() || tfiCantidad.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Todos los campos tienen que estar llenos.");
+
+            return;
+        }
         //Creamos la transaccion
         if (validarSaldo() == false) {
             JOptionPane.showMessageDialog(this, "No dispone del saldo suficiente");
@@ -357,19 +363,21 @@ public class FormTransferencia extends javax.swing.JFrame {
 
     private void tfiCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfiCantidadKeyTyped
         char c = evt.getKeyChar();
-        boolean isDigit = (c >= '0' && c <= '9');
-        boolean isDot = (c == '.' && !tfiCantidad.getText().contains("."));
-        boolean isBackspace = (c == KeyEvent.VK_BACK_SPACE);
-        boolean isValidInput = isDigit || isDot || isBackspace;
+        boolean esDigito = (c >= '0' && c <= '9');
+        boolean esPunto = (c == '.' && !tfiCantidad.getText().contains("."));
+        boolean esBorrar = (c == KeyEvent.VK_BACK_SPACE);
+        boolean esDatosValidos = esDigito || esPunto || esBorrar;
+
         if (tfiCantidad.getText().contains(".")) {
-            int dotIndex = tfiCantidad.getText().indexOf(".");
-            int dotPosition = tfiCantidad.getText().length() - dotIndex - 1;
-            if (dotPosition >= 2 && isDigit && tfiCantidad.getText().substring(dotIndex + 1).length() >= 2) {
+            int puntoIndex = tfiCantidad.getText().indexOf(".");
+            int dotPosition = tfiCantidad.getText().length() - puntoIndex - 1;
+            if (dotPosition >= 2 && esDigito && tfiCantidad.getSelectionStart() > puntoIndex) {
                 evt.consume();
                 return;
             }
         }
-        if (!isValidInput) {
+
+        if (!esDatosValidos) {
             evt.consume();
         }
     }//GEN-LAST:event_tfiCantidadKeyTyped
