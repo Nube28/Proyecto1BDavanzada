@@ -345,15 +345,10 @@ public class Movimientos extends javax.swing.JFrame {
         ta.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
-
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-
-        actualizarDatosFiltrados(txfDesde.getText(), txfHasta.getText());
-    }                                         
     /**
      * Inserta los datos de las transacciones en la Tabla "Tab Movimientos".
      */
-
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         String fechaDesde = txfDesde.getText();
         String fechaHasta = txfHasta.getText();
 
@@ -363,6 +358,9 @@ public class Movimientos extends javax.swing.JFrame {
         }
 
         actualizarDatosFiltrados(fechaDesde, fechaHasta);
+        actualizarDatosFiltrados(txfDesde.getText(), txfHasta.getText());
+
+
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void txfDesdeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfDesdeKeyTyped
@@ -385,7 +383,9 @@ public class Movimientos extends javax.swing.JFrame {
             listaTransacciones = transaccionDAO.consultar(cuenta.getId_cuenta());
         } catch (PersistenciaException ex) {
             listaTransacciones = null;
-            Logger.getLogger(Movimientos.class.getName()).log(Level.SEVERE, null, ex);
+            Logger
+                    .getLogger(Movimientos.class
+                            .getName()).log(Level.SEVERE, null, ex);
         }
         DefaultTableModel modelo = (DefaultTableModel) this.TabMoviemientos.getModel();
         modelo.setRowCount(0);
@@ -398,14 +398,15 @@ public class Movimientos extends javax.swing.JFrame {
         });
     }
 
-
     private void actualizarDatosFiltrados(String desde, String hasta) {
         List<Transaccion> listaTransacciones;
         try {
             listaTransacciones = transaccionDAO.consultarPeriodo(cuenta.getId_cuenta(), desde, hasta);
         } catch (PersistenciaException ex) {
             listaTransacciones = null;
-            Logger.getLogger(Movimientos.class.getName()).log(Level.SEVERE, null, ex);
+            Logger
+                    .getLogger(Movimientos.class
+                            .getName()).log(Level.SEVERE, null, ex);
         }
         DefaultTableModel modelo = (DefaultTableModel) this.TabMoviemientos.getModel();
         modelo.setRowCount(0);
