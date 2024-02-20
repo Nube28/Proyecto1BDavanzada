@@ -287,7 +287,7 @@ public class MontoRetiroSinTarjeta extends javax.swing.JFrame {
         TransaccionNuevaDTO trasanccionNueva = new TransaccionNuevaDTO();
         trasanccionNueva.setMonto(Float.parseFloat(txfMonto.getText()));
         trasanccionNueva.setTipo("sin cuenta");
-        trasanccionNueva.setId_cuenta(cliente.getId());
+        trasanccionNueva.setId_cuenta(cuenta.getId_cuenta());
         Transaccion transaccionNueva = crearTransaccion(trasanccionNueva);
         //Creamos el Sin Cuenta
         SinCuentaNuevaDTO sinCuentaNuevaDTO = new SinCuentaNuevaDTO();

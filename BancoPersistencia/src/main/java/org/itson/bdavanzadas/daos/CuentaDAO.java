@@ -172,7 +172,7 @@ public class CuentaDAO implements ICuentaDAO {
     public void actualizarMontroTransaccion(Cuenta emisor, int numeroReceptor, float cantidad) throws PersistenciaException {
         try (Connection conexion = conexionDB.obtenerConexion()) {
             conexion.setAutoCommit(false); // Deshabilitar el autocommit
-            if (emisor.getSaldo() > cantidad) {
+            if (emisor.getSaldo() < cantidad) {
                 conexion.rollback();
             }
             // Debitar el monto de la cuenta origen
@@ -290,7 +290,8 @@ public class CuentaDAO implements ICuentaDAO {
     public void retirarSinCuenta(Cuenta cuenta, float cantidad) throws PersistenciaException {
         try (Connection conexion = conexionDB.obtenerConexion()) {
             conexion.setAutoCommit(false); // Deshabilitar el autocommit
-            if (cuenta.getSaldo() > cantidad) {
+            if (cuenta.getSaldo() < cantidad) {
+                System.out.println("si entro");
                 conexion.rollback();
             }
             String sqlDebitar = "UPDATE cuentas SET saldo = saldo - ? WHERE id = ?";
@@ -306,5 +307,5 @@ public class CuentaDAO implements ICuentaDAO {
             System.err.println("Error en la transacción: " + ex.getMessage());
         }
     }
-
+    
 }
