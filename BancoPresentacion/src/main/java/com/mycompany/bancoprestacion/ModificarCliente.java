@@ -25,7 +25,7 @@ import org.itson.bdavanzadas.excepciones.PersistenciaException;
  * @author Laboratorios
  */
 public class ModificarCliente extends javax.swing.JFrame {
-    
+
     private Cliente cliente;
     private ICuentaDAO cuentaDAO;
     private final IConexion conexion;
@@ -48,7 +48,7 @@ public class ModificarCliente extends javax.swing.JFrame {
         } catch (PersistenciaException ex) {
             Logger.getLogger(ModificarCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         txfApellidoMaterno.setText(cliente.getApellido_materno());
         txfApellidoPaterno.setText(cliente.getApellido_paterno());
         txfNacimiento.setText(cliente.getNacimiento());
@@ -58,7 +58,7 @@ public class ModificarCliente extends javax.swing.JFrame {
         txfColonia.setText(domicilio.getColonia());
         txfNumExterior.setText(domicilio.getNumero_exterior() + "");
         txfNumInterior.setText(domicilio.getNumero_interioro() + "");
-        
+
     }
 
     /**
@@ -164,6 +164,11 @@ public class ModificarCliente extends javax.swing.JFrame {
         txtCodigoPostal.setText("Codigo Postal");
 
         txfCodigoPostal.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        txfCodigoPostal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfCodigoPostalKeyTyped(evt);
+            }
+        });
 
         txtColonia.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
         txtColonia.setText("Colonia");
@@ -336,7 +341,7 @@ public class ModificarCliente extends javax.swing.JFrame {
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
         ClienteNuevoDTO clienteNuevoDTO = actaulizarCliente();
-        
+
         DomicilioNuevoDTO domicilioNuevoDTO = new DomicilioNuevoDTO();
         domicilioNuevoDTO.setCalle(txfCalle.getText());
         domicilioNuevoDTO.setCodigo_postal(Integer.valueOf(txfCodigoPostal.getText()));
@@ -346,11 +351,11 @@ public class ModificarCliente extends javax.swing.JFrame {
         domicilioNuevoDTO.setNumero_interior(Integer.valueOf(txfNumInterior.getText()));
         try {
             Cliente clienteAct = clienteDAO.actualizar(clienteNuevoDTO, cliente);
-            
+
             Domicilio domicilioAct = domicilioDAO.actualizar(domicilioNuevoDTO, domicilio);
-            
+
             JOptionPane.showMessageDialog(this, "Actualizacion de datos Correcta!");
-            
+
             MenuPrincipal pi = new MenuPrincipal(cliente, cuentaDAO, conexion);
             pi.setVisible(true);
             this.dispose();
@@ -359,6 +364,13 @@ public class ModificarCliente extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnCrearActionPerformed
+
+    private void txfCodigoPostalKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfCodigoPostalKeyTyped
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c) || txfCodigoPostal.getText().length() >= 5) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txfCodigoPostalKeyTyped
     /**
      * Actualiza la información del cliente utilizando los datos ingresados en
      * los campos de texto.
@@ -373,19 +385,19 @@ public class ModificarCliente extends javax.swing.JFrame {
         } else {
             clienteNuevoDTO.setNombres(txfNombre.getText());
         }
-        
+
         if (txfApellidoPaterno.getText().equals("")) {
             clienteNuevoDTO.setApellido_paterno(cliente.getApellido_paterno());
         } else {
             clienteNuevoDTO.setApellido_paterno(txfApellidoPaterno.getText());
         }
-        
+
         if (txfApellidoMaterno.getText().equals("")) {
             clienteNuevoDTO.setApellido_materno(cliente.getApellido_materno());
         } else {
             clienteNuevoDTO.setApellido_materno(txfApellidoMaterno.getText());
         }
-        
+
         if (txfNacimiento.getText().equals("")) {
             clienteNuevoDTO.setNacimiento(cliente.getNacimiento());
         } else {
@@ -403,7 +415,7 @@ public class ModificarCliente extends javax.swing.JFrame {
      */
     private DomicilioNuevoDTO actualizarDireccion() {
         DomicilioNuevoDTO dn = new DomicilioNuevoDTO();
-        
+
         if (!txfCalle.getText().equals("")) {
             dn.setCalle(txfCalle.getText());
         }

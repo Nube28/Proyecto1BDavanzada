@@ -397,17 +397,16 @@ public class RegistroCliente extends javax.swing.JFrame {
             return;
         }
         DomicilioNuevoDTO dom = crearDireccion();
-        
+
         DomicilioNuevoDTO domicilioNuevoDTO = crearDireccion();
 
         try {
             Cliente cliente = clienteDAO.agregar(clienteNuevoDTO);
-            
+
             dom.setId_cliente(cliente.getId());
-            
+
             Domicilio domicilio = domicilioDAO.agregar(dom);
-            
-            
+
             JOptionPane.showMessageDialog(this, "Cliente registrado!\nTu numero de cliente es: " + cliente.getId());
 
             PantallaInicial pi = new PantallaInicial(clienteDAO, conexion);
@@ -446,7 +445,7 @@ public class RegistroCliente extends javax.swing.JFrame {
 
     private void txfCodigoPostalKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfCodigoPostalKeyTyped
         char c = evt.getKeyChar();
-        if (!Character.isDigit(c)) {
+        if (!Character.isDigit(c) || txfCodigoPostal.getText().length() >= 5) {
             evt.consume();
         }
     }//GEN-LAST:event_txfCodigoPostalKeyTyped
