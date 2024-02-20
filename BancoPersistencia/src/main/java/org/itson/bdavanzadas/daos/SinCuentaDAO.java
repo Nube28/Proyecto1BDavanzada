@@ -17,12 +17,12 @@ import org.itson.bdavanzadas.dtos.SinCuentaNuevaDTO;
 import org.itson.bdavanzadas.excepciones.PersistenciaException;
 
 /**
- * Esta clase proporciona métodos para acceder y manipular datos de
- * SinCuentaDAO de retiro sin cuenta en una capa de acceso a datos (DAO)
+ * Esta clase proporciona métodos para acceder y manipular datos de SinCuentaDAO
+ * de retiro sin cuenta en una capa de acceso a datos (DAO)
  *
  */
 public class SinCuentaDAO implements ISinCuentaDAO {
-
+    
     final IConexion conexionDB;
     static final Logger logger = Logger.getLogger(SinCuentaDAO.class.getName());
 
@@ -58,7 +58,7 @@ public class SinCuentaDAO implements ISinCuentaDAO {
             //Inicio stored procedure
             comando.setInt(1, sinCuentanNueva.getId_transaccion());
             comando.setString(2, sinCuentanNueva.getEstado());
-
+            
             int numeroRegistrosInsertados = comando.executeUpdate();
             logger.log(Level.INFO, "Se agrearon {0}", numeroRegistrosInsertados);
             SinCuenta sinCuenta = new SinCuenta(
@@ -67,7 +67,7 @@ public class SinCuentaDAO implements ISinCuentaDAO {
                     this.consultar(sinCuentanNueva.getId_transaccion()).getFolio(),
                     this.consultar(sinCuentanNueva.getId_transaccion()).getContrasenia()
             );
-
+            
             return sinCuenta;
         } catch (SQLException ex) {
             logger.log(Level.INFO, "No se ha podido agregar la transferencia", ex);
@@ -89,13 +89,13 @@ public class SinCuentaDAO implements ISinCuentaDAO {
         String setenciaSQL = """
                              SELECT folio,contrasenia FROM SinCuenta WHERE id_transaccion=?;
                              """;
-
+        
         try (
                 Connection conexion = this.conexionDB.obtenerConexion(); PreparedStatement comando = conexion.prepareStatement(
                 setenciaSQL);) {
             comando.setInt(1, id_transaccion);
             ResultSet resultado = comando.executeQuery();
-
+            
             SinCuenta sinCuenta = null;
             if (resultado.next()) {
                 sinCuenta = new SinCuenta();
@@ -106,7 +106,7 @@ public class SinCuentaDAO implements ISinCuentaDAO {
         } catch (SQLException ex) {
             logger.log(Level.INFO, "No se pudo obtener la cuenta", ex);
             throw new PersistenciaException("No se ha encontrado la cuenta");
-
+            
         }
     }
 
@@ -122,41 +122,46 @@ public class SinCuentaDAO implements ISinCuentaDAO {
      */
     @Override
     public SinCuenta consultarSinCuenta(int folio, String contrasenia) throws PersistenciaException {
-
+        
         String setenciaSQL = """
                              SELECT * FROM SinCuenta WHERE folio=? and contrasenia =?;
                              """;
+        //SinCuenta estadoAntiguo = consultarSinCuentaEstado(folio);
+        //System.out.println(estadoAntiguo.getEstado()+"yolo");
 
         try (
                 Connection conexion = this.conexionDB.obtenerConexion(); PreparedStatement comando = conexion.prepareStatement(
                 setenciaSQL);) {
-
-            //Inicio stored procedure
-            CallableStatement callableStatement = conexion.prepareCall("{call ActualizarEstadoTransaccion(?,?)}");
-            callableStatement.setInt(1, folio);
-            callableStatement.setString(2, contrasenia);
-            callableStatement.execute();
-            callableStatement.close();
-
-            //Fin storedProcedure
+            
             comando.setInt(1, folio);
             comando.setString(2, contrasenia);
+            
             ResultSet resultado = comando.executeQuery();
-
             SinCuenta sinCuenta = null;
             if (resultado.next()) {
                 sinCuenta = new SinCuenta();
+                sinCuenta.setEstado(resultado.getString("estado"));
                 sinCuenta.setId_transaccion(resultado.getInt("id_transaccion"));
                 sinCuenta.setContrasenia(resultado.getString("contrasenia"));
                 sinCuenta.setFolio(resultado.getInt("folio"));
-                sinCuenta.setEstado(resultado.getString("estado"));
+
+                //Inicio stored procedure
+                try (CallableStatement callableStatement = conexion.prepareCall("{call ActualizarEstadoTransaccion(?,?)}")) {
+                    callableStatement.setInt(1, folio);
+                    callableStatement.setString(2, contrasenia);
+                    callableStatement.execute();
+                }
+
+                //Fin storedProcedure
             }
+            
             return sinCuenta;
         } catch (SQLException ex) {
             logger.log(Level.INFO, "No se pudo obtener la cuenta", ex);
             throw new PersistenciaException("No se ha encontrado la cuenta");
-
+            
         }
     }
+
 
 }
