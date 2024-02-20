@@ -294,6 +294,7 @@ public class CuentaDAO implements ICuentaDAO {
                 System.out.println("si entro");
                 conexion.rollback();
             }
+            
             String sqlDebitar = "UPDATE cuentas SET saldo = saldo - ? WHERE id = ?";
             try (PreparedStatement resultadoEmisor = conexion.prepareStatement(sqlDebitar)) {
                 resultadoEmisor.setFloat(1, cantidad);
