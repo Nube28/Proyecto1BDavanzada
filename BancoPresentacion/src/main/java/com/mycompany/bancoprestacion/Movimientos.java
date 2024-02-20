@@ -360,14 +360,14 @@ public class Movimientos extends javax.swing.JFrame {
 
     private void txfDesdeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfDesdeKeyTyped
         char c = evt.getKeyChar();
-        if (!Character.isDigit(c)) {
+        if (!Character.isDigit(c) && c != '-') {
             evt.consume();
         }
     }//GEN-LAST:event_txfDesdeKeyTyped
 
     private void txfHastaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfHastaKeyTyped
         char c = evt.getKeyChar();
-        if (!Character.isDigit(c)) {
+        if (!Character.isDigit(c) && c != '-') {
             evt.consume();
         }
     }//GEN-LAST:event_txfHastaKeyTyped

@@ -462,14 +462,14 @@ public class RegistroCliente extends javax.swing.JFrame {
 
     private void txfNacimientoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfNacimientoKeyTyped
         char c = evt.getKeyChar();
-        if (!Character.isDigit(c)) {
+        if (!Character.isDigit(c) && c != '-') {
             evt.consume();
         }
     }//GEN-LAST:event_txfNacimientoKeyTyped
 
     private ClienteNuevoDTO crearCliente() {
         ClienteNuevoDTO clienteNuevoDTO = null;
-        if (txfContraseña.getPassword().equals(txfConfirmarContraseña.getText())) {
+        if (txfContraseña.getText().equals(txfConfirmarContraseña.getText())) {
             clienteNuevoDTO = new ClienteNuevoDTO();
             clienteNuevoDTO.setNombres(txfNombre.getText());
             clienteNuevoDTO.setApellido_paterno(txfApellidoPaterno.getText());
