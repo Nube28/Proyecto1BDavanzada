@@ -5,6 +5,8 @@
 package com.mycompany.bancoprestacion;
 
 import java.awt.event.KeyEvent;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import org.itson.bdavanzadas.conexion.IConexion;
@@ -392,6 +394,10 @@ public class RegistroCliente extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "La fecha tiene que estar en formato aaaa-mm-dd");
             return;
         }
+        if (calcularEdad(txfNacimiento.getText()) < 18) {
+            JOptionPane.showMessageDialog(this, "Tienes que ser mayor de 18 años");
+            return;
+        }
         if (clienteNuevoDTO == null) {
             JOptionPane.showMessageDialog(this, "LAS CONTRASEÑAS NO COINCIDEN.");
             return;
@@ -418,7 +424,17 @@ public class RegistroCliente extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_btnCrearActionPerformed
-    public static boolean verificarFormatoFecha(String fecha) {
+
+    private int calcularEdad(String fecha) {
+        LocalDate fechaNacimiento = LocalDate.parse(fecha.replace("/", "-"));
+
+        LocalDate fechaActual = LocalDate.now();
+
+        int edad = Period.between(fechaNacimiento, fechaActual).getYears();
+        return edad;
+    }
+
+    private boolean verificarFormatoFecha(String fecha) {
         String regex = "\\d{4}-\\d{2}-\\d{2}";
         return Pattern.matches(regex, fecha);
     }
