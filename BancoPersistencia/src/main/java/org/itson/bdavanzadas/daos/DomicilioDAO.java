@@ -90,7 +90,7 @@ public class DomicilioDAO implements IDomicilioDAO {
         String setenciaSQL
                 = """
                 SELECT * FROM domicilios
-                WHERE id = ?;
+                WHERE id_cliente = ?;
             """;
         try (Connection conexion = this.conexionDB.obtenerConexion(); PreparedStatement comando = conexion.prepareStatement(setenciaSQL, Statement.RETURN_GENERATED_KEYS);) {
             comando.setInt(1, id);
@@ -132,7 +132,7 @@ public class DomicilioDAO implements IDomicilioDAO {
             comando.setString(1, domicilioNuevo.getCalle());
             comando.setInt(2, domicilioNuevo.getNumero_exterior());
             comando.setInt(3, domicilioNuevo.getNumero_interior());
-            comando.setString(4, domicilioNuevo.getCodigo_postal() + "");
+            comando.setInt(4, domicilioNuevo.getCodigo_postal());
             comando.setString(5, domicilioNuevo.getColonia());
             comando.setInt(6, domicilioNuevo.getId_cliente());
 
@@ -148,7 +148,7 @@ public class DomicilioDAO implements IDomicilioDAO {
                     domicilioNuevo.getColonia(),
                     domicilio.getId_cliente()
             );
-            
+
             return domicilioAct;
 
         } catch (SQLException ex) {
