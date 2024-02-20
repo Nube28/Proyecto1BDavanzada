@@ -186,18 +186,18 @@ public class TransaccionDAO implements ITransaccionDAO {
     @Override
     public List<Transaccion> consultarPeriodo(int id, String desde, String hasta) throws PersistenciaException {
         String setenciaSQL = """
-                SELECT * 
-                FROM transacciones
-                WHERE id_cuenta = ? 
-                and fecha <= ?
-                and fecha >= ?
-            """;
+            SELECT * 
+            FROM transacciones
+            WHERE id_cuenta = ? 
+            AND fecha >= ? 
+            AND fecha <= ?;
+        """;
         List<Transaccion> listaTransaccion = new LinkedList<>();
 
         try (Connection conexion = this.conexionDB.obtenerConexion(); PreparedStatement comando = conexion.prepareStatement(setenciaSQL, Statement.RETURN_GENERATED_KEYS);) {
             comando.setInt(1, id);
-            comando.setString(2, desde);
-            comando.setString(3, hasta);
+            comando.setString(2, desde + " 00:00:00");
+            comando.setString(3, hasta + " 23:59:59");
             ResultSet resultados = comando.executeQuery();
 
             while (resultados.next()) {
