@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS Domicilios (
     codigo_postal VARCHAR(5),
     colonia VARCHAR(100),
     id_cliente int,
-    FOREIGN KEY (id_cliente) REFERENCES Domicilios(id)
+    FOREIGN KEY (id_cliente) REFERENCES Clientes(id)
 );
 
 CREATE TABLE IF NOT EXISTS Cuentas (

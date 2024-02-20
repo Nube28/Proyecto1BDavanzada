@@ -15,8 +15,9 @@ public class Domicilio {
     private String calle;
     private int numero_exterior;
     private int numero_interioro;
-    private String codigo_postal;
+    private int codigo_postal;
     private String colonia;
+    private int id_cliente;
 
     /**
      * Constructor por defecto de la clase Domicilio. Crea un nuevo objeto
@@ -35,13 +36,14 @@ public class Domicilio {
      * @param codigo_postal El código postal.
      * @param colonia La colonia.
      */
-    public Domicilio(int id_domicilio, String calle, int numero_exterior, int numero_interioro, String codigo_postal, String colonia) {
+    public Domicilio(int id_domicilio, String calle, int numero_exterior, int numero_interioro, int codigo_postal, String colonia, int id_cliente) {
         this.id_domicilio = id_domicilio;
         this.calle = calle;
         this.numero_exterior = numero_exterior;
         this.numero_interioro = numero_interioro;
         this.codigo_postal = codigo_postal;
         this.colonia = colonia;
+        this.id_cliente = id_cliente;
     }
 
     /**
@@ -54,12 +56,13 @@ public class Domicilio {
      * @param codigo_postal El código postal.
      * @param colonia La colonia.
      */
-    public Domicilio(String calle, int numero_exterior, int numero_interioro, String codigo_postal, String colonia) {
+    public Domicilio(String calle, int numero_exterior, int numero_interioro, int codigo_postal, String colonia, int id_cliente) {
         this.calle = calle;
         this.numero_exterior = numero_exterior;
         this.numero_interioro = numero_interioro;
         this.codigo_postal = codigo_postal;
         this.colonia = colonia;
+        this.id_cliente = id_cliente;
     }
 
     /**
@@ -139,7 +142,7 @@ public class Domicilio {
      *
      * @return El código postal.
      */
-    public String getCodigo_postal() {
+    public int getCodigo_postal() {
         return codigo_postal;
     }
 
@@ -148,7 +151,7 @@ public class Domicilio {
      *
      * @param codigo_postal El nuevo código postal.
      */
-    public void setCodigo_postal(String codigo_postal) {
+    public void setCodigo_postal(int codigo_postal) {
         this.codigo_postal = codigo_postal;
     }
 
@@ -201,6 +204,14 @@ public class Domicilio {
         }
         final Domicilio other = (Domicilio) obj;
         return this.id_domicilio == other.id_domicilio;
+    }
+
+    public int getId_cliente() {
+        return id_cliente;
+    }
+
+    public void setId_cliente(int id_cliente) {
+        this.id_cliente = id_cliente;
     }
 
     /**
