@@ -28,25 +28,24 @@ public class Movimientos extends javax.swing.JFrame {
     private final IConexion conexion;
     private ICuentaDAO cuentaDAO;
     private ITransaccionDAO transaccionDAO;
-    
 
     /**
      * Creates new form Movimientos
      */
     public Movimientos(Cliente cliente, Cuenta cuenta, IConexion conexion, ICuentaDAO cuentaDAO) {
         initComponents();
-        
+
         this.cliente = cliente;
         this.cuenta = cuenta;
         this.conexion = conexion;
         this.cuentaDAO = cuentaDAO;
         this.transaccionDAO = new TransaccionDAO(conexion);
-        
+
         String saludo = txtSaludo.getText().replaceAll("Usuario", cliente.getNombres());
         txtSaludo.setText(saludo);
-        
-        txtIDeTarjeta.setText("Tarjeta "+ cuenta.getNumero());
-        
+
+        txtIDeTarjeta.setText("Tarjeta " + cuenta.getNumero());
+
         insertarDatos();
     }
 
@@ -336,8 +335,11 @@ public class Movimientos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-       actualizarDatosFiltrados(txfDesde.getText() , txfHasta.getText());
+        actualizarDatosFiltrados(txfDesde.getText(), txfHasta.getText());
     }//GEN-LAST:event_btnBuscarActionPerformed
+    /**
+     * Inserta los datos de las transacciones en la Tabla "Tab Movimientos".
+     */
     private void insertarDatos() {
         List<Transaccion> listaTransacciones;
         try {
@@ -352,11 +354,17 @@ public class Movimientos extends javax.swing.JFrame {
             Object[] fila = new Object[3];
             fila[0] = transaccion.getTipo();
             fila[1] = transaccion.getFecha();
-            fila[2] = "$ "+transaccion.getMonto();
+            fila[2] = "$ " + transaccion.getMonto();
             modelo.addRow(fila);
-        });    
+        });
     }
-    
+
+    /**
+     * Actualiza los datos de las transacciones filtradas por un período
+     *
+     * @param desde La fecha de inicio del período de filtrado.
+     * @param hasta La fecha de fin del período de filtrado.
+     */
     private void actualizarDatosFiltrados(String desde, String hasta) {
         List<Transaccion> listaTransacciones;
         try {
@@ -371,7 +379,7 @@ public class Movimientos extends javax.swing.JFrame {
             Object[] fila = new Object[3];
             fila[0] = transaccion.getTipo();
             fila[1] = transaccion.getFecha();
-            fila[2] = "$ "+transaccion.getMonto();
+            fila[2] = "$ " + transaccion.getMonto();
             modelo.addRow(fila);
         });
     }

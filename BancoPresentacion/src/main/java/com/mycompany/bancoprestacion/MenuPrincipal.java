@@ -38,7 +38,7 @@ import org.itson.bdavanzadas.excepciones.PersistenciaException;
  * @author Laboratorios
  */
 public class MenuPrincipal extends javax.swing.JFrame {
-    
+
     private DefaultListModel<String> modeloLista = new DefaultListModel<>();
     private Cliente cliente;
     private ICuentaDAO cuentaDAO;
@@ -52,12 +52,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
         this.cliente = cliente;
         this.cuentaDAO = cuentaDAO;
         this.conexion = conexion;
-        
+
         String saludo = txtSaludo.getText().replaceAll("Usuario", cliente.getNombres());
         txtSaludo.setText(saludo);
-        
+
         listarCuentas();
-        
+
         ListTarjetas.addListSelectionListener((ListSelectionEvent e) -> {
             if (!e.getValueIsAdjusting()) {
                 int index = ListTarjetas.getSelectedIndex();
@@ -70,11 +70,16 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
     }
-    
+
+    /**
+     * Lista las cuentas que tiene el cliente en "ListTarjetas"
+     *
+     * @throws PersistenciaException por si falla en accesar a los datos
+     */
     private void listarCuentas() {
-        
+
         List<Cuenta> cuentas = null;
-        
+
         try {
             cuentas = cuentaDAO.consultar(cliente.getId());
         } catch (PersistenciaException pe) {
@@ -82,14 +87,23 @@ public class MenuPrincipal extends javax.swing.JFrame {
             // Manejar la excepción aquí
         }
         for (Cuenta cuenta : cuentas) {
-            if(cuenta.isEsta_activo()){
+            if (cuenta.isEsta_activo()) {
                 modeloLista.addElement(String.valueOf(cuenta.getNumero()));
             }
         }
         ListTarjetas.setModel(modeloLista);
         jScrollPane1.setViewportView(ListTarjetas);
     }
-    
+
+    /**
+     * Consulta la cuenta por medio del numero de cuenta (cuentaNum) y la
+     * devuelve
+     *
+     * @param cuentaNum El número de cuenta usado para encontrar la cuenta;
+     * @return Cuenta respecto al numero de cuenta, o null si no se encuentra
+     * ninguna cuenta.
+     * @throws PersistenciaException por si falla en accesar a los datos
+     */
     private Cuenta consultarCuenta(int cuentaNum) {
         Cuenta cuenta = null;
         try {
@@ -307,7 +321,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         } catch (PersistenciaException ex) {
             Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         modeloLista.removeAllElements();
         listarCuentas();
     }//GEN-LAST:event_btnCrearTarjetasActionPerformed
