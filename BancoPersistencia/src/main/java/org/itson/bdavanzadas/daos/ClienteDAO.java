@@ -1,3 +1,6 @@
+/**
+ * ClienteDAO.java
+ */
 package org.itson.bdavanzadas.daos;
 
 import java.sql.Connection;
@@ -23,10 +26,26 @@ public class ClienteDAO implements IClienteDAO {
     final IConexion conexionDB;
     static final Logger logger = Logger.getLogger(ClienteDAO.class.getName());
 
+    /**
+     * Construye un nuevo objeto CuentaDAO con la conexión especificada.
+     *
+     * @param conexion La conexión a la base de datos que se utilizará para
+     * interactuar con las cuentas.
+     */
     public ClienteDAO(IConexion conexion) {
         this.conexionDB = conexion;
     }
 
+    /**
+     * Agrega un nuevo cliente utilizando los datos proporcionados en un objeto
+     * ClienteNuevoDTO.
+     *
+     * @param clienteNuevo El objeto ClienteNuevoDTO que contiene los datos del
+     * nuevo cliente a agregar.
+     * @return El cliente agregado.
+     * @throws PersistenciaException Si ocurre un error durante la persistencia
+     * de los datos del cliente.
+     */
     @Override
     public Cliente agregar(ClienteNuevoDTO clienteNuevo) throws PersistenciaException {
         String setenciaSQL = """
@@ -62,11 +81,27 @@ public class ClienteDAO implements IClienteDAO {
 
     }
 
+    /**
+     * Consulta todos los clientes almacenados.
+     *
+     * @return Una lista de objetos ClienteDAO que representan todos los
+     * clientes almacenados.
+     * @throws PersistenciaException Si ocurre un error durante la consulta de
+     * los clientes.
+     */
     @Override
     public List<ClienteDAO> consultar() throws PersistenciaException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    /**
+     * Consulta un cliente por su ID de usuario.
+     *
+     * @param usuario El ID del usuario del cliente a consultar.
+     * @return El cliente encontrado.
+     * @throws PersistenciaException Si ocurre un error durante la consulta del
+     * cliente.
+     */
     @Override
     public Cliente consultarCliente(int usuario) throws PersistenciaException {
         String setenciaSQL = """
@@ -100,6 +135,15 @@ public class ClienteDAO implements IClienteDAO {
         }
     }
 
+    /**
+     * Consulta un cliente por su usuario y contraseña.
+     *
+     * @param usuario El nombre de usuario del cliente.
+     * @param contrasenia La contraseña del cliente.
+     * @return El cliente encontrado.
+     * @throws PersistenciaException Si ocurre un error durante la consulta del
+     * cliente.
+     */
     @Override
     public Cliente consultarCliente(String usuario, String contrasenia) throws PersistenciaException {
         String setenciaSQL = """
@@ -134,6 +178,17 @@ public class ClienteDAO implements IClienteDAO {
         }
     }
 
+    /**
+     * Actualiza los datos de un cliente utilizando los datos proporcionados en
+     * un objeto ClienteNuevoDTO.
+     *
+     * @param clienteNuevo El objeto ClienteNuevoDTO que contiene los nuevos
+     * datos del cliente.
+     * @param cliente El cliente existente que se actualizará.
+     * @return El cliente actualizado.
+     * @throws PersistenciaException Si ocurre un error durante la actualización
+     * de los datos del cliente.
+     */
     @Override
     public Cliente actualizar(ClienteNuevoDTO clienteNuevo, Cliente cliente) throws PersistenciaException {
         String setenciaSQL = """
@@ -144,16 +199,16 @@ public class ClienteDAO implements IClienteDAO {
                                 fecha_nacimiento = ?
                             WHERE id = ?
                              """;
-        try (Connection conexion = this.conexionDB.obtenerConexion(); PreparedStatement comando = conexion.prepareStatement( setenciaSQL, Statement.RETURN_GENERATED_KEYS);){
+        try (Connection conexion = this.conexionDB.obtenerConexion(); PreparedStatement comando = conexion.prepareStatement(setenciaSQL, Statement.RETURN_GENERATED_KEYS);) {
             comando.setString(1, clienteNuevo.getNombres());
             comando.setString(2, clienteNuevo.getApellido_materno());
             comando.setString(3, clienteNuevo.getApellido_paterno());
             comando.setString(4, clienteNuevo.getNacimiento());
             comando.setInt(5, cliente.getId());
-            
+
             int numeroRegistrosInsertados = comando.executeUpdate();
             logger.log(Level.INFO, "Se actualizaron {0}", numeroRegistrosInsertados);
-            
+
             Cliente clienteAct = new Cliente(
                     cliente.getId(),
                     cliente.getContrasenia(),
@@ -169,6 +224,14 @@ public class ClienteDAO implements IClienteDAO {
         }
     }
 
+    /**
+     * Elimina un cliente por su ID.
+     *
+     * @param id El ID del cliente a eliminar.
+     * @return El cliente eliminado.
+     * @throws PersistenciaException Si ocurre un error durante la eliminación
+     * del cliente.
+     */
     @Override
     public Cliente eliminar(int id) throws PersistenciaException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

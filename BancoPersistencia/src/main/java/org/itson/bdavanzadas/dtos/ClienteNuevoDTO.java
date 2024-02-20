@@ -5,7 +5,6 @@
 package org.itson.bdavanzadas.dtos;
 
 import org.itson.bdavanzadas.utileria.EncriptarContrasenia;
-import org.mindrot.jbcrypt.BCrypt;
 
 
 

@@ -1,6 +1,5 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
+ * ITransferenciaDAO.java
  */
 package org.itson.bdavanzadas.daos;
 
@@ -10,13 +9,32 @@ import org.itson.bdavanzadas.dtos.TransferenciaNuevaDTO;
 import org.itson.bdavanzadas.excepciones.PersistenciaException;
 
 /**
+ * Esta interfaz proporciona métodos para acceder y manipular datos de
+ * transferencias en una capa de acceso a datos.
  *
- * @author af_da
  */
 public interface ITransferenciaDAO {
 
-    Transferencia agregar(TransferenciaNuevaDTO TransferenciaNueva) throws PersistenciaException;
+    /**
+     * Agrega una nueva transferencia utilizando los datos proporcionados en un
+     * objeto TransferenciaNuevaDTO.
+     *
+     * @param transferenciaNueva El objeto TransferenciaNuevaDTO que contiene
+     * los datos de la nueva transferencia a agregar.
+     * @return La transferencia agregada.
+     * @throws PersistenciaException Si ocurre un error durante la persistencia
+     * de los datos de la transferencia.
+     */
+    Transferencia agregar(TransferenciaNuevaDTO transferenciaNueva) throws PersistenciaException;
 
+    /**
+     * Consulta una transferencia por el número de cuenta.
+     *
+     * @param cuenta El número de cuenta asociado a la transferencia a
+     * consultar.
+     * @return La transferencia encontrada.
+     * @throws PersistenciaException Si ocurre un error durante la consulta de
+     * la transferencia.
+     */
     Transferencia consultarTransferencia(int cuenta) throws PersistenciaException;
-    
 }

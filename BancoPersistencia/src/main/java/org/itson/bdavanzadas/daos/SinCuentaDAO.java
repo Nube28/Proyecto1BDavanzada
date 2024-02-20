@@ -1,6 +1,5 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * SinCuentaDAO.java
  */
 package org.itson.bdavanzadas.daos;
 
@@ -18,18 +17,35 @@ import org.itson.bdavanzadas.dtos.SinCuentaNuevaDTO;
 import org.itson.bdavanzadas.excepciones.PersistenciaException;
 
 /**
+ * Esta clase proporciona métodos para acceder y manipular datos de
+ * transacciones de retiro sin cuenta en una capa de acceso a datos (DAO)
  *
- * @author af_da
  */
 public class SinCuentaDAO implements ISinCuentaDAO {
 
     final IConexion conexionDB;
     static final Logger logger = Logger.getLogger(SinCuentaDAO.class.getName());
 
-    public SinCuentaDAO(IConexion conexionDB) {
-        this.conexionDB = conexionDB;
+    /**
+     * Construye un nuevo objeto CuentaDAO con la conexión especificada.
+     *
+     * @param conexion La conexión a la base de datos que se utilizará para
+     * interactuar con las cuentas.
+     */
+    public SinCuentaDAO(IConexion conexion) {
+        this.conexionDB = conexion;
     }
 
+    /**
+     * Agrega una nueva transacción de retiro sin cuenta utilizando los datos
+     * proporcionados en un objeto SinCuentaNuevaDTO.
+     *
+     * @param sinCuentanNueva El objeto SinCuentaNuevaDTO que contiene los datos
+     * de la nueva transacción de retiro sin cuenta a agregar.
+     * @return La transacción de retiro sin cuenta agregada.
+     * @throws PersistenciaException Si ocurre un error durante la persistencia
+     * de los datos de la transacción de retiro sin cuenta.
+     */
     @Override
     public SinCuenta agregar(SinCuentaNuevaDTO sinCuentanNueva) throws PersistenciaException {
         String setenciaSQL
@@ -59,6 +75,15 @@ public class SinCuentaDAO implements ISinCuentaDAO {
         }
     }
 
+    /**
+     * Consulta una transacción de retiro sin cuenta por su ID de transacción.
+     *
+     * @param id_transaccion El ID de transacción de la transacción de retiro
+     * sin cuenta a consultar.
+     * @return La transacción de retiro sin cuenta encontrada.
+     * @throws PersistenciaException Si ocurre un error durante la consulta de
+     * la transacción de retiro sin cuenta.
+     */
     @Override
     public SinCuenta consultar(int id_transaccion) throws PersistenciaException {
         String setenciaSQL = """
@@ -85,6 +110,16 @@ public class SinCuentaDAO implements ISinCuentaDAO {
         }
     }
 
+    /**
+     * Consulta una transacción de retiro sin cuenta por su folio y contraseña.
+     *
+     * @param folio El folio de la transacción de retiro sin cuenta a consultar.
+     * @param contrasenia La contraseña de la transacción de retiro sin cuenta a
+     * consultar.
+     * @return La transacción de retiro sin cuenta encontrada.
+     * @throws PersistenciaException Si ocurre un error durante la consulta de
+     * la transacción de retiro sin cuenta.
+     */
     @Override
     public SinCuenta consultarSinCuenta(int folio, String contrasenia) throws PersistenciaException {
 

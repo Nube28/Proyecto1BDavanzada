@@ -1,6 +1,5 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * TransferenciaDAO.java
  */
 package org.itson.bdavanzadas.daos;
 
@@ -21,7 +20,8 @@ import org.itson.bdavanzadas.dtos.TransferenciaNuevaDTO;
 import org.itson.bdavanzadas.excepciones.PersistenciaException;
 
 /**
- *
+ * Esta clase proporciona métodos para acceder y manipular datos de
+ * transferencias en una capa de acceso a datos.
  *
  */
 public class TransferenciaDAO implements ITransferenciaDAO {
@@ -33,6 +33,16 @@ public class TransferenciaDAO implements ITransferenciaDAO {
         this.conexionDB = conexion;
     }
 
+    /**
+     * Agrega una nueva transferencia utilizando los datos proporcionados en un
+     * objeto TransferenciaNuevaDTO.
+     *
+     * @param transferenciaNueva El objeto TransferenciaNuevaDTO que contiene
+     * los datos de la nueva transferencia a agregar.
+     * @return La transferencia agregada.
+     * @throws PersistenciaException Si ocurre un error durante la persistencia
+     * de los datos de la transferencia.
+     */
     @Override
     public Transferencia agregar(TransferenciaNuevaDTO TransferenciaNueva) throws PersistenciaException {
         String setenciaSQL
@@ -40,8 +50,7 @@ public class TransferenciaDAO implements ITransferenciaDAO {
                 INSERT INTO Transferencia(id_transaccion, id_cuenta_destino)
                 VALUES(?, ?);
             """;
-        try (Connection conexion = this.conexionDB.obtenerConexion();
-                PreparedStatement comando = conexion.prepareStatement(setenciaSQL, Statement.RETURN_GENERATED_KEYS);) {
+        try (Connection conexion = this.conexionDB.obtenerConexion(); PreparedStatement comando = conexion.prepareStatement(setenciaSQL, Statement.RETURN_GENERATED_KEYS);) {
             comando.setInt(1, TransferenciaNueva.getId_transaccion());
             comando.setInt(2, TransferenciaNueva.getCuenta_destino());
             int numeroRegistrosInsertados = comando.executeUpdate();
@@ -59,6 +68,15 @@ public class TransferenciaDAO implements ITransferenciaDAO {
         }
     }
 
+    /**
+     * Consulta una transferencia por el número de cuenta.
+     *
+     * @param cuenta El número de cuenta asociado a la transferencia a
+     * consultar.
+     * @return La transferencia encontrada.
+     * @throws PersistenciaException Si ocurre un error durante la consulta de
+     * la transferencia.
+     */
     @Override
     public Transferencia consultarTransferencia(int cuenta) throws PersistenciaException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
