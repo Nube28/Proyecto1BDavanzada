@@ -261,6 +261,13 @@ public class PantallaInicial extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_txtUsuarioKeyTyped
+
+    /**
+     * Se encarga de verificar si elcliente existe y la contraseña sea la del cliente
+     *
+     * @return Cliente loggeado o si falla, regresa nulo
+     * @throws PersistenciaException por si falla en accesar a los datos
+     */
     private Cliente login() {
         Cliente cliente = null;
         try {

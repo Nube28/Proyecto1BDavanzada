@@ -347,6 +347,13 @@ public class Movimientos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+
+        actualizarDatosFiltrados(txfDesde.getText(), txfHasta.getText());
+    }                                         
+    /**
+     * Inserta los datos de las transacciones en la Tabla "Tab Movimientos".
+     */
+
         String fechaDesde = txfDesde.getText();
         String fechaHasta = txfHasta.getText();
 
@@ -371,6 +378,7 @@ public class Movimientos extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_txfHastaKeyTyped
+
     private void insertarDatos() {
         List<Transaccion> listaTransacciones;
         try {
@@ -389,6 +397,7 @@ public class Movimientos extends javax.swing.JFrame {
             modelo.addRow(fila);
         });
     }
+
 
     private void actualizarDatosFiltrados(String desde, String hasta) {
         List<Transaccion> listaTransacciones;
