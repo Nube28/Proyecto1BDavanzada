@@ -297,6 +297,9 @@ public class FormRetiroSinCuenta extends javax.swing.JFrame {
         SinCuenta sinCuenta = null;
         try {
             sinCuenta = this.sinCuentaDAO.consultarSinCuenta(Integer.parseInt(txfFolio.getText()), String.valueOf(pasContraseña.getPassword()));
+            if (sinCuenta == null) {
+                return null;
+            }
             if (sinCuenta.getEstado().equalsIgnoreCase("no cobrado") || sinCuenta.getEstado().equalsIgnoreCase("cobrado")) {
                 return null;
             }
