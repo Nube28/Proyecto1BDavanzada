@@ -1,4 +1,4 @@
-/*
+ /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -139,7 +139,37 @@ public class TransaccionDAO implements ITransaccionDAO {
 
     @Override
     public List<Transaccion> consultarPeriodo(int id, String desde, String hasta) throws PersistenciaException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String setenciaSQL = """
+                SELECT * 
+                FROM transacciones
+                WHERE id_cuenta = ? 
+                and fecha <= ?
+                and fecha >= ?
+            """;
+        List<Transaccion> listaTransaccion = new LinkedList<>();
+
+        try (Connection conexion = this.conexionDB.obtenerConexion(); PreparedStatement comando = conexion.prepareStatement(setenciaSQL, Statement.RETURN_GENERATED_KEYS);) {
+            comando.setInt(1, id);
+            comando.setString(2, desde);
+            comando.setString(3, hasta);
+            ResultSet resultados = comando.executeQuery();
+
+            while (resultados.next()) {
+                Transaccion transaccion = new Transaccion(
+                        resultados.getInt("id"),
+                        resultados.getFloat("monto"),
+                        resultados.getString("tipo"),
+                        resultados.getString("fecha"),
+                        resultados.getInt("id_cuenta")
+                );
+                listaTransaccion.add(transaccion);
+            }
+            logger.log(Level.INFO, "Se consulataros {0} Transacciones", listaTransaccion.size());
+            return listaTransaccion;
+        } catch (SQLException ex) {
+            logger.log(Level.INFO, "No Hay transacciones en el periodo", ex);
+            throw new PersistenciaException("No Hay transacciones en el periodo");
+        }
     }
     
    

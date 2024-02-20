@@ -28,6 +28,10 @@ public class Movimientos extends javax.swing.JFrame {
     private final IConexion conexion;
     private ICuentaDAO cuentaDAO;
     private ITransaccionDAO transaccionDAO;
+    
+    
+    private DefaultTableModel modelo;
+    
 
     /**
      * Creates new form Movimientos
@@ -40,6 +44,9 @@ public class Movimientos extends javax.swing.JFrame {
         this.conexion = conexion;
         this.cuentaDAO = cuentaDAO;
         this.transaccionDAO = new TransaccionDAO(conexion);
+        TabMoviemientos.setModel(modelo);
+                
+        modelo = new DefaultTableModel();
         
         String saludo = txtSaludo.getText().replaceAll("Usuario", cliente.getNombres());
         txtSaludo.setText(saludo);
@@ -335,7 +342,7 @@ public class Movimientos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        
+        actualizarDatosFiltrados(txfDesde.getText() , txfHasta.getText());
     }//GEN-LAST:event_btnBuscarActionPerformed
     private void insertarDatos() {
         List<Transaccion> listaTransacciones;
@@ -345,7 +352,24 @@ public class Movimientos extends javax.swing.JFrame {
             listaTransacciones = null;
             Logger.getLogger(Movimientos.class.getName()).log(Level.SEVERE, null, ex);
         }
-        DefaultTableModel modelo = (DefaultTableModel) this.TabMoviemientos.getModel();
+        modelo.setRowCount(0);
+        listaTransacciones.forEach(transaccion -> {
+            Object[] fila = new Object[3];
+            fila[0] = transaccion.getTipo();
+            fila[1] = transaccion.getFecha();
+            fila[2] = "$ "+transaccion.getMonto();
+            modelo.addRow(fila);
+        });    
+    }
+    
+    private void actualizarDatosFiltrados(String desde, String hasta) {
+        List<Transaccion> listaTransacciones;
+        try {
+            listaTransacciones = transaccionDAO.consultarPeriodo(cuenta.getId_cuenta(), desde, hasta);
+        } catch (PersistenciaException ex) {
+            listaTransacciones = null;
+            Logger.getLogger(Movimientos.class.getName()).log(Level.SEVERE, null, ex);
+        }
         modelo.setRowCount(0);
         listaTransacciones.forEach(transaccion -> {
             Object[] fila = new Object[3];
@@ -354,7 +378,6 @@ public class Movimientos extends javax.swing.JFrame {
             fila[2] = "$ "+transaccion.getMonto();
             modelo.addRow(fila);
         });
-}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TabMoviemientos;
     private javax.swing.JButton btnBuscar;
