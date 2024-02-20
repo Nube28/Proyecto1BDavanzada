@@ -9,10 +9,14 @@ import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import org.itson.bdavanzadas.conexion.IConexion;
 import org.itson.bdavanzadas.daos.ClienteDAO;
+import org.itson.bdavanzadas.daos.DomicilioDAO;
 import org.itson.bdavanzadas.daos.IClienteDAO;
+import org.itson.bdavanzadas.daos.IDomicilioDAO;
 import org.itson.bdavanzadas.dominio.Cliente;
+import org.itson.bdavanzadas.dominio.Domicilio;
 import org.itson.bdavanzadas.dtos.ClienteNuevoDTO;
 import org.itson.bdavanzadas.dtos.DireccionNuevaDTO;
+import org.itson.bdavanzadas.dtos.DomicilioNuevoDTO;
 import org.itson.bdavanzadas.excepciones.PersistenciaException;
 
 /**
@@ -23,6 +27,7 @@ public class RegistroCliente extends javax.swing.JFrame {
 
     private final IClienteDAO clienteDAO;
     private final IConexion conexion;
+    private final IDomicilioDAO domicilioDAO;
 
     /**
      * Creates new form RegistroCliente
@@ -32,6 +37,7 @@ public class RegistroCliente extends javax.swing.JFrame {
 
         this.clienteDAO = clienteDAO;
         this.conexion = conexion;
+        this.domicilioDAO = new DomicilioDAO(conexion);
     }
 
     /**
@@ -391,11 +397,17 @@ public class RegistroCliente extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "LAS CONTRASEÑAS NO COINCIDEN.");
             return;
         }
-        DireccionNuevaDTO direccionNuevaDTO = crearDireccion();
+        DomicilioNuevoDTO dom = crearDireccion();
+        
 
         try {
             Cliente cliente = clienteDAO.agregar(clienteNuevoDTO);
-
+            
+            dom.setId_cliente(cliente.getId());
+            
+            Domicilio domicilio = domicilioDAO.agregar(dom);
+            
+            
             JOptionPane.showMessageDialog(this, "Cliente registrado!\nTu numero de cliente es: " + cliente.getId());
 
             PantallaInicial pi = new PantallaInicial(clienteDAO, conexion);
@@ -494,15 +506,16 @@ public class RegistroCliente extends javax.swing.JFrame {
      *
      * @return DireccionNuevaDTO con la información ingresada.
      */
-    private DireccionNuevaDTO crearDireccion() {
-        DireccionNuevaDTO dn = new DireccionNuevaDTO();
+    private DomicilioNuevoDTO crearDireccion() {
+        DomicilioNuevoDTO dn = new DomicilioNuevoDTO();
         dn.setCalle(txfCalle.getText());
-        dn.setCodigo_postal(txfCodigoPostal.getText());
+        dn.setCodigo_postal(Integer.parseInt(txfCodigoPostal.getText()));
         dn.setColonia(txfColonia.getText());
         dn.setNumero_exterior(Integer.valueOf(txfNumExterior.getText()));
         if (!txfNumInterior.getText().equals("")) {
             dn.setNumero_interior(Integer.valueOf(txfNumInterior.getText()));
         }
+        
 
         return dn;
     }

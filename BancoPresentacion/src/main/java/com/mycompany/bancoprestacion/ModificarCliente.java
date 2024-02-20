@@ -4,13 +4,18 @@
  */
 package com.mycompany.bancoprestacion;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.itson.bdavanzadas.conexion.IConexion;
 import org.itson.bdavanzadas.daos.ClienteDAO;
 import org.itson.bdavanzadas.daos.CuentaDAO;
+import org.itson.bdavanzadas.daos.DomicilioDAO;
 import org.itson.bdavanzadas.daos.IClienteDAO;
 import org.itson.bdavanzadas.daos.ICuentaDAO;
+import org.itson.bdavanzadas.daos.IDomicilioDAO;
 import org.itson.bdavanzadas.dominio.Cliente;
+import org.itson.bdavanzadas.dominio.Domicilio;
 import org.itson.bdavanzadas.dtos.ClienteNuevoDTO;
 import org.itson.bdavanzadas.dtos.DireccionNuevaDTO;
 import org.itson.bdavanzadas.excepciones.PersistenciaException;
@@ -25,6 +30,8 @@ public class ModificarCliente extends javax.swing.JFrame {
     private ICuentaDAO cuentaDAO;
     private final IConexion conexion;
     private IClienteDAO clienteDAO;
+    private IDomicilioDAO domicilioDAO;
+    private Domicilio domicilio;
 
     /**
      * Creates new form Modificar
@@ -35,15 +42,22 @@ public class ModificarCliente extends javax.swing.JFrame {
         this.cuentaDAO = cuentaDAO;
         this.conexion = conexion;
         this.clienteDAO = new ClienteDAO(conexion);
+        this.domicilioDAO = new DomicilioDAO(conexion);
+        try {
+            this.domicilio = domicilioDAO.consultar(cliente.getId());
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(ModificarCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         txfApellidoMaterno.setText(cliente.getApellido_materno());
         txfApellidoPaterno.setText(cliente.getApellido_paterno());
         txfNacimiento.setText(cliente.getNacimiento());
         txfNombre.setText(cliente.getNombres());
-        //txfCalle.setText(cliente);
-        //txfCodigoPostal.setText(t);
-        //txfColonia.setText(t);
-        //txfNumExterior.setText(t);
-        //txfNumInterior.setText(t);
+        txfCalle.setText(domicilio.getCalle());
+        txfCodigoPostal.setText(domicilio.getCodigo_postal()+"");
+        txfColonia.setText(domicilio.getColonia());
+        txfNumExterior.setText(domicilio.getNumero_exterior()+"");
+        txfNumInterior.setText(domicilio.getNumero_interioro()+"");
 
     }
 

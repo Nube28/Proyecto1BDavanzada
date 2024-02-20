@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package org.itson.bdavanzadas.daos;
 
 import java.sql.Connection;
@@ -17,8 +13,8 @@ import org.itson.bdavanzadas.dtos.DomicilioNuevoDTO;
 import org.itson.bdavanzadas.excepciones.PersistenciaException;
 
 /**
- *
- * @author af_da
+ * Esta clase implementa la interfaz IDomicilioDAO y proporciona métodos para 
+ * agregar y consultar domicilios en la base de datos.
  */
 public class DomicilioDAO implements IDomicilioDAO {
 

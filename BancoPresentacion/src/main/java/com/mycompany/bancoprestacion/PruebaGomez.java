@@ -28,7 +28,7 @@ public class PruebaGomez {
     public static void main(String[] args) {
         String candenaConexion = "jdbc:mysql://localhost/banco";
         String usuario = "root";
-        String password = "123qweasdzxc";
+        String password = "Goma21345";
         IConexion conexion = new Conexion(candenaConexion, usuario, password);
         IClienteDAO clienteDAO = new ClienteDAO(conexion);
 

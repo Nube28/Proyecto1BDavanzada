@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package org.itson.bdavanzadas.daos;
 
 import org.itson.bdavanzadas.dominio.Domicilio;
@@ -9,12 +5,29 @@ import org.itson.bdavanzadas.dtos.DomicilioNuevoDTO;
 import org.itson.bdavanzadas.excepciones.PersistenciaException;
 
 /**
- *
- * @author af_da
+ * Interfaz que se usa para crear un domicilio al cliente
  */
 public interface IDomicilioDAO {
 
+    /**
+     * Agrega un nuevo domicilio a la base de datos utilizando la información
+     * proporcionada en un objeto DomicilioNuevoDTO.
+     *
+     * @param domicilioNuevo El objeto DomicilioNuevoDTO que contiene la
+     * información del nuevo domicilio a agregar.
+     * @return El objeto Domicilio agregado a la base de datos.
+     * @throws PersistenciaException Si ocurre un error durante la persistencia
+     * del domicilio.
+     */
     Domicilio agregar(DomicilioNuevoDTO domicilioNuevo) throws PersistenciaException;
 
+    /**
+     * Consulta un domicilio en la base de datos utilizando su ID.
+     *
+     * @param id El ID del domicilio que se desea consultar.
+     * @return El objeto Domicilio correspondiente al ID proporcionado.
+     * @throws PersistenciaException Si ocurre un error durante la consulta del
+     * domicilio.
+     */
     Domicilio consultar(int id) throws PersistenciaException;
 }
