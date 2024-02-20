@@ -35,6 +35,16 @@ public class ModificarCliente extends javax.swing.JFrame {
         this.cuentaDAO = cuentaDAO;
         this.conexion = conexion;
         this.clienteDAO = new ClienteDAO(conexion);
+        txfApellidoMaterno.setText(cliente.getApellido_materno());
+        txfApellidoPaterno.setText(cliente.getApellido_paterno());
+        txfNacimiento.setText(cliente.getNacimiento());
+        txfNombre.setText(cliente.getNombres());
+        //txfCalle.setText(cliente);
+        //txfCodigoPostal.setText(t);
+        //txfColonia.setText(t);
+        //txfNumExterior.setText(t);
+        //txfNumInterior.setText(t);
+
     }
 
     /**
