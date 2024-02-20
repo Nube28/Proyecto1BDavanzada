@@ -160,6 +160,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         btnOpciones.setBackground(new java.awt.Color(252, 191, 73));
         btnOpciones.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        btnOpciones.setText("Actualizar cliente");
         btnOpciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOpcionesActionPerformed(evt);
@@ -181,7 +182,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                     .addGroup(panAzulClaroLayout.createSequentialGroup()
                         .addComponent(txtIDdeUsuario)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
                     .addGroup(panAzulClaroLayout.createSequentialGroup()
                         .addComponent(panLogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
