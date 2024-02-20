@@ -34,4 +34,18 @@ public interface IDomicilioDAO {
      * domicilio.
      */
     Domicilio consultar(int id) throws PersistenciaException;
+
+    /**
+     * Actualiza un domicilio existente con los nuevos datos proporcionados en
+     * un objeto DomicilioNuevoDTO.
+     *
+     * @param domicilioNuevo DomicilioNuevoDTO que contiene los nuevos
+     * datos del domicilio.
+     * @param domicilio domicilio existente que se actualizará con los nuevos
+     * datos.
+     * @return domicilio actualizado.
+     * @throws PersistenciaException Si ocurre un error durante la actualización
+     * del domicilio.
+     */
+    Domicilio actualizar(DomicilioNuevoDTO domicilioNuevo, Domicilio domicilio) throws PersistenciaException;
 }

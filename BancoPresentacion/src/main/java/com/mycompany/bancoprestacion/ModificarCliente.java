@@ -341,7 +341,9 @@ public class ModificarCliente extends javax.swing.JFrame {
 
         try {
             Cliente clienteAct = clienteDAO.actualizar(clienteNuevoDTO, cliente);
-
+            
+            Domicilio domicilioAct = domicilioDAO.actualizar(domicilioNuevoDTO, domicilio);
+            
             JOptionPane.showMessageDialog(this, "Actualizacion de datos Correcta!");
 
             MenuPrincipal pi = new MenuPrincipal(cliente, cuentaDAO, conexion);

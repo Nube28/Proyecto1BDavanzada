@@ -116,4 +116,45 @@ public class DomicilioDAO implements IDomicilioDAO {
         }
     }
 
+    @Override
+    public Domicilio actualizar(DomicilioNuevoDTO domicilioNuevo, Domicilio domicilio) throws PersistenciaException {
+        String setenciaSQL = """
+            UPDATE Domicilios
+            SET calle = ?, 
+            numero_exterior = ?,
+            numero_interior = ?, 
+            codigo_postal = ?, 
+            colonia = ?
+            WHERE id_cliente = ?;
+        """;
+
+        try (Connection conexion = this.conexionDB.obtenerConexion(); PreparedStatement comando = conexion.prepareStatement(setenciaSQL, Statement.RETURN_GENERATED_KEYS);) {
+            comando.setString(1, domicilioNuevo.getCalle());
+            comando.setInt(2, domicilioNuevo.getNumero_exterior());
+            comando.setInt(3, domicilioNuevo.getNumero_interior());
+            comando.setString(4, domicilioNuevo.getCodigo_postal() + "");
+            comando.setString(5, domicilioNuevo.getColonia());
+            comando.setInt(6, domicilioNuevo.getId_cliente());
+
+            int numeroRegistrosActualizados = comando.executeUpdate();
+            logger.log(Level.INFO, "Se actualizaron {0} registros", numeroRegistrosActualizados);
+
+            Domicilio domicilioAct = new Domicilio(
+                    domicilio.getId_domicilio(),
+                    domicilioNuevo.getCalle(),
+                    domicilioNuevo.getNumero_exterior(),
+                    domicilioNuevo.getNumero_interior(),
+                    domicilioNuevo.getCodigo_postal(),
+                    domicilioNuevo.getColonia(),
+                    domicilio.getId_cliente()
+            );
+            
+            return domicilioAct;
+
+        } catch (SQLException ex) {
+            logger.log(Level.INFO, "No se pudo actualizar", ex);
+            throw new PersistenciaException("No se pudo actualizar");
+        }
+    }
+
 }
