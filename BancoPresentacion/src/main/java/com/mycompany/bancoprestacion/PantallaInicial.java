@@ -47,6 +47,7 @@ public class PantallaInicial extends javax.swing.JFrame {
         panAzulObscuro = new javax.swing.JPanel();
         panAzulClaro = new javax.swing.JPanel();
         panLogo = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         txtTitulo = new javax.swing.JLabel();
         txtContraseña = new javax.swing.JLabel();
         txtIDdeUsuario = new javax.swing.JLabel();
@@ -63,15 +64,23 @@ public class PantallaInicial extends javax.swing.JFrame {
 
         panAzulClaro.setBackground(new java.awt.Color(33, 158, 188));
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/multimedia/LogoMuyImportante100.png"))); // NOI18N
+
         javax.swing.GroupLayout panLogoLayout = new javax.swing.GroupLayout(panLogo);
         panLogo.setLayout(panLogoLayout);
         panLogoLayout.setHorizontalGroup(
             panLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(panLogoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panLogoLayout.setVerticalGroup(
             panLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panLogoLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addContainerGap())
         );
 
         txtTitulo.setFont(new java.awt.Font("Comic Sans MS", 0, 36)); // NOI18N
@@ -168,7 +177,7 @@ public class PantallaInicial extends javax.swing.JFrame {
                     .addGroup(panAzulClaroLayout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addComponent(txtTitulo)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
                 .addGroup(panAzulClaroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtIDdeUsuario)
                     .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -292,6 +301,7 @@ public class PantallaInicial extends javax.swing.JFrame {
     private javax.swing.JButton btnAcceder;
     private javax.swing.JButton btnRegistrarse;
     private javax.swing.JButton btnRetiroSinCuenta;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel panAzulClaro;
     private javax.swing.JPanel panAzulObscuro;
     private javax.swing.JPanel panLogo;
