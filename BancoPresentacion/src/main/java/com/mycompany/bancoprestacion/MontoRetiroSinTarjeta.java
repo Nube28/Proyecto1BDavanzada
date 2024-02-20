@@ -197,14 +197,13 @@ public class MontoRetiroSinTarjeta extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                         .addComponent(panSaludo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panAzulClaroLayout.createSequentialGroup()
-                        .addComponent(txtIDeTarjeta)
-                        .addContainerGap())
-                    .addGroup(panAzulClaroLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnSalir)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnAceptar)
-                        .addGap(20, 20, 20))))
+                        .addGroup(panAzulClaroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtIDeTarjeta)
+                            .addGroup(panAzulClaroLayout.createSequentialGroup()
+                                .addComponent(btnSalir)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnAceptar)))
+                        .addContainerGap())))
         );
         panAzulClaroLayout.setVerticalGroup(
             panAzulClaroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -258,6 +257,7 @@ public class MontoRetiroSinTarjeta extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     private boolean validarSaldo() {
 
